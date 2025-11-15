@@ -11,7 +11,7 @@ import com.google.android.systemui.smartspace.log.NextClockAlarmControllerLogger
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public final class NextClockAlarmController$observerCallback$1 {
     public final /* synthetic */ NextClockAlarmController this$0;
@@ -25,10 +25,8 @@ public final class NextClockAlarmController$observerCallback$1 {
         NextClockAlarmController nextClockAlarmController = this.this$0;
         NextClockAlarmControllerLogger nextClockAlarmControllerLogger = nextClockAlarmController.logger;
         String documentChangeInfo2 = documentChangeInfo.toString();
-        LogLevel logLevel = LogLevel.DEBUG;
-        NextClockAlarmControllerLogger$$ExternalSyntheticLambda0 nextClockAlarmControllerLogger$$ExternalSyntheticLambda0 = new NextClockAlarmControllerLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = nextClockAlarmControllerLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("NextClockAlarmControllerLog", logLevel, nextClockAlarmControllerLogger$$ExternalSyntheticLambda0, null);
+        LogMessage obtain = logBuffer.obtain("NextClockAlarmControllerLog", LogLevel.DEBUG, new NextClockAlarmControllerLogger$$ExternalSyntheticLambda0(0), null);
         ((LogMessageImpl) obtain).str1 = documentChangeInfo2;
         logBuffer.commit(obtain);
         StandaloneCoroutine standaloneCoroutine = nextClockAlarmController.updateNextAlarmJob;

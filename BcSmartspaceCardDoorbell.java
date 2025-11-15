@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import com.android.internal.util.LatencyTracker;
-import com.android.systemui.plugins.BcSmartspaceDataPlugin;
+import com.android.systemui.plugins.FalsingManager;
 import com.android.wm.shell.R;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +32,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -44,7 +44,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
     public ProgressBar mProgressBar;
     public final Map mUriToDrawable;
 
-    /* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
     public final class DrawableWithUri extends DrawableWrapper {
         public final Path mClipPath;
         public final ContentResolver mContentResolver;
@@ -88,7 +88,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
         }
     }
 
-    /* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
     public final class LatencyInstrumentContext {
         public final LatencyTracker mLatencyTracker;
         public final Set mUriSet = new HashSet();
@@ -106,7 +106,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
         }
     }
 
-    /* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
     public final class LoadUriTask extends AsyncTask {
         public final LatencyInstrumentContext mInstrumentContext;
 
@@ -210,7 +210,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
             float f = getContext().getResources().getDisplayMetrics().density;
             ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
             int i = bundle.getInt(str);
-            BcSmartspaceDataPlugin.IntentStarter intentStarter = BcSmartSpaceUtil.sIntentStarter;
+            FalsingManager falsingManager = BcSmartSpaceUtil.sFalsingManager;
             layoutParams.height = (int) (f * i);
         }
     }
@@ -220,7 +220,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
             float f = getContext().getResources().getDisplayMetrics().density;
             ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
             int i = bundle.getInt(str);
-            BcSmartspaceDataPlugin.IntentStarter intentStarter = BcSmartSpaceUtil.sIntentStarter;
+            FalsingManager falsingManager = BcSmartSpaceUtil.sFalsingManager;
             layoutParams.width = (int) (f * i);
         }
     }
@@ -242,7 +242,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
         BcSmartspaceTemplateDataUtils.updateVisibility(this.mLoadingIcon, 8);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0265  */
+    /* JADX WARN: Removed duplicated region for block: B:54:0x0268  */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardGenericImage, com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -250,7 +250,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
     */
     public final boolean setSmartspaceActions(android.app.smartspace.SmartspaceTarget r13, com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceEventNotifier r14, com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo r15) {
         /*
-            Method dump skipped, instructions count: 619
+            Method dump skipped, instructions count: 622
             To view this dump add '--comments-level debug' option
         */
         throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.smartspace.BcSmartspaceCardDoorbell.setSmartspaceActions(android.app.smartspace.SmartspaceTarget, com.android.systemui.plugins.BcSmartspaceDataPlugin$SmartspaceEventNotifier, com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo):boolean");

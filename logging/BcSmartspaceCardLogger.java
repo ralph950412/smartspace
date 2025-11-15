@@ -2,7 +2,7 @@ package com.google.android.systemui.smartspace.logging;
 
 import android.util.StatsEvent;
 import android.util.StatsLog;
-import com.android.systemui.plugins.BcSmartspaceDataPlugin;
+import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.smartspace.SmartspaceProtoLite$SmartSpaceCardMetadata;
 import com.android.systemui.smartspace.SmartspaceProtoLite$SmartSpaceSubcards;
 import com.android.systemui.smartspace.nano.SmartspaceProto$SmartspaceCardDimensionalInfo;
@@ -12,11 +12,11 @@ import com.google.protobuf.nano.MessageNano;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public abstract class BcSmartspaceCardLogger {
     static {
-        BcSmartspaceDataPlugin.IntentStarter intentStarter = BcSmartSpaceUtil.sIntentStarter;
+        FalsingManager falsingManager = BcSmartSpaceUtil.sFalsingManager;
     }
 
     public static void log(BcSmartspaceEvent bcSmartspaceEvent, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
@@ -38,39 +38,45 @@ public abstract class BcSmartspaceCardLogger {
                 SmartspaceProtoLite$SmartSpaceCardMetadata.Builder newBuilder = SmartspaceProtoLite$SmartSpaceCardMetadata.newBuilder();
                 int i2 = bcSmartspaceCardMetadataLoggingInfo.mInstanceId;
                 newBuilder.copyOnWrite();
-                SmartspaceProtoLite$SmartSpaceCardMetadata.m1093$$Nest$msetInstanceId((SmartspaceProtoLite$SmartSpaceCardMetadata) newBuilder.instance, i2);
+                SmartspaceProtoLite$SmartSpaceCardMetadata.m1140$$Nest$msetInstanceId((SmartspaceProtoLite$SmartSpaceCardMetadata) newBuilder.instance, i2);
+                int i3 = bcSmartspaceCardMetadataLoggingInfo.mCardTypeId;
                 newBuilder.copyOnWrite();
-                SmartspaceProtoLite$SmartSpaceCardMetadata.m1092$$Nest$msetCardTypeId((SmartspaceProtoLite$SmartSpaceCardMetadata) newBuilder.instance, bcSmartspaceCardMetadataLoggingInfo.mCardTypeId);
+                SmartspaceProtoLite$SmartSpaceCardMetadata.m1139$$Nest$msetCardTypeId((SmartspaceProtoLite$SmartSpaceCardMetadata) newBuilder.instance, i3);
                 arrayList.add((SmartspaceProtoLite$SmartSpaceCardMetadata) newBuilder.build());
                 i++;
             }
             SmartspaceProtoLite$SmartSpaceSubcards.Builder newBuilder2 = SmartspaceProtoLite$SmartSpaceSubcards.newBuilder();
-            int i3 = bcSmartspaceSubcardLoggingInfo.mClickedSubcardIndex;
+            int i4 = bcSmartspaceSubcardLoggingInfo.mClickedSubcardIndex;
             newBuilder2.copyOnWrite();
-            SmartspaceProtoLite$SmartSpaceSubcards.m1095$$Nest$msetClickedSubcardIndex((SmartspaceProtoLite$SmartSpaceSubcards) newBuilder2.instance, i3);
+            SmartspaceProtoLite$SmartSpaceSubcards.m1142$$Nest$msetClickedSubcardIndex((SmartspaceProtoLite$SmartSpaceSubcards) newBuilder2.instance, i4);
             newBuilder2.copyOnWrite();
-            SmartspaceProtoLite$SmartSpaceSubcards.m1094$$Nest$maddAllSubcards((SmartspaceProtoLite$SmartSpaceSubcards) newBuilder2.instance, arrayList);
+            SmartspaceProtoLite$SmartSpaceSubcards.m1141$$Nest$maddAllSubcards((SmartspaceProtoLite$SmartSpaceSubcards) newBuilder2.instance, arrayList);
             bArr = ((SmartspaceProtoLite$SmartSpaceSubcards) newBuilder2.build()).toByteArray();
         }
         SmartspaceProto$SmartspaceCardDimensionalInfo smartspaceProto$SmartspaceCardDimensionalInfo = bcSmartspaceCardLoggingInfo.mDimensionalInfo;
         byte[] byteArray = smartspaceProto$SmartspaceCardDimensionalInfo != null ? MessageNano.toByteArray(smartspaceProto$SmartspaceCardDimensionalInfo) : null;
         int id = bcSmartspaceEvent.getId();
-        int i4 = bcSmartspaceCardLoggingInfo.mInstanceId;
-        int i5 = bcSmartspaceCardLoggingInfo.mFeatureType;
+        int i5 = bcSmartspaceCardLoggingInfo.mInstanceId;
+        int i6 = bcSmartspaceCardLoggingInfo.mDisplaySurface;
+        int i7 = bcSmartspaceCardLoggingInfo.mRank;
+        int i8 = bcSmartspaceCardLoggingInfo.mCardinality;
+        int i9 = bcSmartspaceCardLoggingInfo.mFeatureType;
+        int i10 = bcSmartspaceCardLoggingInfo.mUid;
+        int i11 = bcSmartspaceCardLoggingInfo.mReceivedLatency;
         StatsEvent.Builder newBuilder3 = StatsEvent.newBuilder();
         newBuilder3.setAtomId(352);
         newBuilder3.writeInt(id);
-        newBuilder3.writeInt(i4);
-        newBuilder3.writeInt(0);
-        newBuilder3.writeInt(bcSmartspaceCardLoggingInfo.mDisplaySurface);
-        newBuilder3.writeInt(bcSmartspaceCardLoggingInfo.mRank);
-        newBuilder3.writeInt(bcSmartspaceCardLoggingInfo.mCardinality);
         newBuilder3.writeInt(i5);
-        newBuilder3.writeInt(bcSmartspaceCardLoggingInfo.mUid);
+        newBuilder3.writeInt(0);
+        newBuilder3.writeInt(i6);
+        newBuilder3.writeInt(i7);
+        newBuilder3.writeInt(i8);
+        newBuilder3.writeInt(i9);
+        newBuilder3.writeInt(i10);
         newBuilder3.addBooleanAnnotation((byte) 1, true);
         newBuilder3.writeInt(0);
         newBuilder3.writeInt(0);
-        newBuilder3.writeInt(bcSmartspaceCardLoggingInfo.mReceivedLatency);
+        newBuilder3.writeInt(i11);
         if (bArr == null) {
             bArr = new byte[0];
         }

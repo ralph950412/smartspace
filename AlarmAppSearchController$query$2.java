@@ -32,7 +32,7 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 final class AlarmAppSearchController$query$2 extends SuspendLambda implements Function2 {
     int label;
@@ -167,7 +167,7 @@ final class AlarmAppSearchController$query$2 extends SuspendLambda implements Fu
         return new SearchResultsImpl(globalSearchSession.search("", builder2.build()), searchSpec, globalSearchSessionImpl.mExecutor, globalSearchSessionImpl.mContext);
     }
 
-    /* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
     /* renamed from: com.google.android.systemui.smartspace.AlarmAppSearchController$query$2$1, reason: invalid class name */
     public final class AnonymousClass1 implements SearchResults {
         @Override // androidx.appsearch.app.SearchResults

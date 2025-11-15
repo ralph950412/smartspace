@@ -8,7 +8,7 @@ import com.android.wm.shell.R;
 import com.google.android.systemui.smartspace.BcSmartspaceCardSecondary;
 import com.google.android.systemui.smartspace.BcSmartspaceTemplateDataUtils;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public class HeadToHeadTemplateCard extends BcSmartspaceCardSecondary {
     public ImageView mFirstCompetitorIcon;
@@ -163,13 +163,13 @@ public class HeadToHeadTemplateCard extends BcSmartspaceCardSecondary {
             android.app.smartspace.uitemplatedata.TapAction r2 = r0.getHeadToHeadAction()
             if (r2 == 0) goto Lce
             android.app.smartspace.uitemplatedata.TapAction r5 = r0.getHeadToHeadAction()
-            r9 = 0
             java.lang.String r7 = "HeadToHeadTemplateCard"
+            r9 = 0
             r3 = r10
             r4 = r11
             r6 = r12
             r8 = r13
-            com.google.android.systemui.smartspace.BcSmartSpaceUtil.setOnClickListener(r3, r4, r5, r6, r7, r8, r9)
+            com.google.android.systemui.smartspace.BcSmartSpaceUtil.setOnClickListener$1(r3, r4, r5, r6, r7, r8, r9)
         Lce:
             return r1
         */

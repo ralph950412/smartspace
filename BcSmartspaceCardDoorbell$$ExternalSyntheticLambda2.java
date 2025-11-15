@@ -7,7 +7,7 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.function.Function;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class BcSmartspaceCardDoorbell$$ExternalSyntheticLambda2 implements Function {
     public final /* synthetic */ int $r8$classId;
@@ -47,7 +47,6 @@ public final /* synthetic */ class BcSmartspaceCardDoorbell$$ExternalSyntheticLa
                 WeakReference weakReference3 = this.f$4;
                 WeakReference weakReference4 = this.f$5;
                 int i3 = BcSmartspaceCardDoorbell.$r8$clinit;
-                bcSmartspaceCardDoorbell2.getClass();
                 BcSmartspaceCardDoorbell.DrawableWithUri drawableWithUri = new BcSmartspaceCardDoorbell.DrawableWithUri((Uri) obj, contentResolver2, i2, f2, weakReference3, weakReference4);
                 new BcSmartspaceCardDoorbell.LoadUriTask(bcSmartspaceCardDoorbell2.mLatencyInstrumentContext).execute(drawableWithUri);
                 return drawableWithUri;

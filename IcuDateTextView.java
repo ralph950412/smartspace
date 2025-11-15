@@ -19,7 +19,7 @@ import com.android.wm.shell.R;
 import java.util.Locale;
 import java.util.Objects;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public class IcuDateTextView extends DoubleShadowTextView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -29,13 +29,13 @@ public class IcuDateTextView extends DoubleShadowTextView {
     public Handler mHandler;
     public final AnonymousClass2 mIntentReceiver;
     public boolean mIsAodEnabled;
-    public boolean mIsInteractive;
+    public Boolean mIsInteractive;
     public String mText;
     public final IcuDateTextView$$ExternalSyntheticLambda0 mTimeChangedCallback;
     public BcSmartspaceDataPlugin.TimeChangedDelegate mTimeChangedDelegate;
     public boolean mUpdatesOnAod;
 
-    /* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
     public final class DefaultTimeChangedDelegate implements BcSmartspaceDataPlugin.TimeChangedDelegate, Runnable {
         public Handler mHandler;
         public Runnable mTimeChangedCallback;
@@ -122,7 +122,7 @@ public class IcuDateTextView extends DoubleShadowTextView {
         } else {
             z = powerManager.isInteractive();
         }
-        this.mIsInteractive = z;
+        this.mIsInteractive = Boolean.valueOf(z);
         onTimeChanged(true);
     }
 
@@ -180,7 +180,8 @@ public class IcuDateTextView extends DoubleShadowTextView {
         }
         this.mTimeChangedDelegate.unregister();
         boolean z = this.mUpdatesOnAod && this.mIsAodEnabled;
-        if ((this.mIsInteractive || z) && isAggregatedVisible()) {
+        Boolean bool = this.mIsInteractive;
+        if ((bool == null || bool.booleanValue() || z) && isAggregatedVisible()) {
             this.mTimeChangedDelegate.register(this.mTimeChangedCallback);
         }
     }

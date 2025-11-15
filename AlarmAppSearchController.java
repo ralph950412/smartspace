@@ -5,7 +5,7 @@ import androidx.appsearch.platformstorage.GlobalSearchSessionImpl;
 import java.util.concurrent.Executor;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public final class AlarmAppSearchController {
     public static final boolean DEBUG = Log.isLoggable("AlarmAppSearchCtlr", 3);
@@ -19,17 +19,17 @@ public final class AlarmAppSearchController {
     }
 
     /* JADX WARN: Can't wrap try/catch for region: R(11:0|1|(2:3|(8:5|6|7|(1:(2:10|11)(2:19|20))(3:21|22|(1:24)(1:25))|12|(1:14)|16|17))|28|6|7|(0)(0)|12|(0)|16|17) */
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x0033, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:26:0x0034, code lost:
     
         r8 = move-exception;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x0087, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:27:0x0088, code lost:
     
         android.util.Log.e("AlarmAppSearchCtlr", "Failed to create session", r8);
      */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0075 A[Catch: all -> 0x0033, TRY_LEAVE, TryCatch #0 {all -> 0x0033, blocks: (B:11:0x002f, B:12:0x006d, B:14:0x0075, B:22:0x0040), top: B:7:0x0023 }] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x003d  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0025  */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0076 A[Catch: all -> 0x0034, TRY_LEAVE, TryCatch #0 {all -> 0x0034, blocks: (B:11:0x0030, B:12:0x006e, B:14:0x0076, B:22:0x0041), top: B:7:0x0024 }] */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x003e  */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0026  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct add '--show-bad-code' argument
@@ -39,79 +39,79 @@ public final class AlarmAppSearchController {
             r8 = this;
             java.lang.String r0 = "session created="
             boolean r1 = r10 instanceof com.google.android.systemui.smartspace.AlarmAppSearchController$createSearchSession$1
-            if (r1 == 0) goto L15
+            if (r1 == 0) goto L16
             r1 = r10
             com.google.android.systemui.smartspace.AlarmAppSearchController$createSearchSession$1 r1 = (com.google.android.systemui.smartspace.AlarmAppSearchController$createSearchSession$1) r1
             int r2 = r1.label
             r3 = -2147483648(0xffffffff80000000, float:-0.0)
             r4 = r2 & r3
-            if (r4 == 0) goto L15
+            if (r4 == 0) goto L16
             int r2 = r2 - r3
             r1.label = r2
-            goto L1a
-        L15:
+            goto L1b
+        L16:
             com.google.android.systemui.smartspace.AlarmAppSearchController$createSearchSession$1 r1 = new com.google.android.systemui.smartspace.AlarmAppSearchController$createSearchSession$1
             r1.<init>(r8, r10)
-        L1a:
+        L1b:
             java.lang.Object r10 = r1.result
             kotlin.coroutines.intrinsics.CoroutineSingletons r2 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
             int r3 = r1.label
             java.lang.String r4 = "AlarmAppSearchCtlr"
             r5 = 1
-            if (r3 == 0) goto L3d
-            if (r3 != r5) goto L35
+            if (r3 == 0) goto L3e
+            if (r3 != r5) goto L36
             java.lang.Object r8 = r1.L$1
             com.google.android.systemui.smartspace.AlarmAppSearchController r8 = (com.google.android.systemui.smartspace.AlarmAppSearchController) r8
             java.lang.Object r9 = r1.L$0
             com.google.android.systemui.smartspace.AlarmAppSearchController r9 = (com.google.android.systemui.smartspace.AlarmAppSearchController) r9
-            kotlin.ResultKt.throwOnFailure(r10)     // Catch: java.lang.Throwable -> L33
-            goto L6d
-        L33:
+            kotlin.ResultKt.throwOnFailure(r10)     // Catch: java.lang.Throwable -> L34
+            goto L6e
+        L34:
             r8 = move-exception
-            goto L87
-        L35:
+            goto L88
+        L36:
             java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
             java.lang.String r9 = "call to 'resume' before 'invoke' with coroutine"
             r8.<init>(r9)
             throw r8
-        L3d:
+        L3e:
             kotlin.ResultKt.throwOnFailure(r10)
-            r9.getClass()     // Catch: java.lang.Throwable -> L33
-            java.util.concurrent.Executor r10 = androidx.appsearch.platformstorage.PlatformStorage.EXECUTOR     // Catch: java.lang.Throwable -> L33
-            androidx.appsearch.platformstorage.PlatformStorage$GlobalSearchContext r3 = new androidx.appsearch.platformstorage.PlatformStorage$GlobalSearchContext     // Catch: java.lang.Throwable -> L33
-            r3.<init>(r9, r10)     // Catch: java.lang.Throwable -> L33
+            r9.getClass()     // Catch: java.lang.Throwable -> L34
+            java.util.concurrent.Executor r10 = androidx.appsearch.platformstorage.PlatformStorage.EXECUTOR     // Catch: java.lang.Throwable -> L34
+            androidx.appsearch.platformstorage.PlatformStorage$GlobalSearchContext r3 = new androidx.appsearch.platformstorage.PlatformStorage$GlobalSearchContext     // Catch: java.lang.Throwable -> L34
+            r3.<init>(r9, r10)     // Catch: java.lang.Throwable -> L34
             java.lang.Class<android.app.appsearch.AppSearchManager> r6 = android.app.appsearch.AppSearchManager.class
-            java.lang.Object r9 = r9.getSystemService(r6)     // Catch: java.lang.Throwable -> L33
-            android.app.appsearch.AppSearchManager r9 = (android.app.appsearch.AppSearchManager) r9     // Catch: java.lang.Throwable -> L33
-            androidx.concurrent.futures.ResolvableFuture r6 = new androidx.concurrent.futures.ResolvableFuture     // Catch: java.lang.Throwable -> L33
-            r6.<init>()     // Catch: java.lang.Throwable -> L33
-            androidx.appsearch.platformstorage.PlatformStorage$$ExternalSyntheticLambda0 r7 = new androidx.appsearch.platformstorage.PlatformStorage$$ExternalSyntheticLambda0     // Catch: java.lang.Throwable -> L33
-            r7.<init>()     // Catch: java.lang.Throwable -> L33
-            r9.createGlobalSearchSession(r10, r7)     // Catch: java.lang.Throwable -> L33
-            r1.L$0 = r8     // Catch: java.lang.Throwable -> L33
-            r1.L$1 = r8     // Catch: java.lang.Throwable -> L33
-            r1.label = r5     // Catch: java.lang.Throwable -> L33
-            java.lang.Object r10 = androidx.concurrent.futures.ListenableFutureKt.await(r6, r1)     // Catch: java.lang.Throwable -> L33
-            if (r10 != r2) goto L6c
+            java.lang.Object r9 = r9.getSystemService(r6)     // Catch: java.lang.Throwable -> L34
+            android.app.appsearch.AppSearchManager r9 = (android.app.appsearch.AppSearchManager) r9     // Catch: java.lang.Throwable -> L34
+            androidx.concurrent.futures.ResolvableFuture r6 = new androidx.concurrent.futures.ResolvableFuture     // Catch: java.lang.Throwable -> L34
+            r6.<init>()     // Catch: java.lang.Throwable -> L34
+            androidx.appsearch.platformstorage.PlatformStorage$$ExternalSyntheticLambda0 r7 = new androidx.appsearch.platformstorage.PlatformStorage$$ExternalSyntheticLambda0     // Catch: java.lang.Throwable -> L34
+            r7.<init>()     // Catch: java.lang.Throwable -> L34
+            r9.createGlobalSearchSession(r10, r7)     // Catch: java.lang.Throwable -> L34
+            r1.L$0 = r8     // Catch: java.lang.Throwable -> L34
+            r1.L$1 = r8     // Catch: java.lang.Throwable -> L34
+            r1.label = r5     // Catch: java.lang.Throwable -> L34
+            java.lang.Object r10 = androidx.concurrent.futures.ListenableFutureKt.await(r6, r1)     // Catch: java.lang.Throwable -> L34
+            if (r10 != r2) goto L6d
             return r2
-        L6c:
-            r9 = r8
         L6d:
-            androidx.appsearch.platformstorage.GlobalSearchSessionImpl r10 = (androidx.appsearch.platformstorage.GlobalSearchSessionImpl) r10     // Catch: java.lang.Throwable -> L33
-            r8.searchSession = r10     // Catch: java.lang.Throwable -> L33
-            boolean r8 = com.google.android.systemui.smartspace.AlarmAppSearchController.DEBUG     // Catch: java.lang.Throwable -> L33
-            if (r8 == 0) goto L8c
-            androidx.appsearch.platformstorage.GlobalSearchSessionImpl r8 = r9.searchSession     // Catch: java.lang.Throwable -> L33
-            java.lang.StringBuilder r9 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L33
-            r9.<init>(r0)     // Catch: java.lang.Throwable -> L33
-            r9.append(r8)     // Catch: java.lang.Throwable -> L33
-            java.lang.String r8 = r9.toString()     // Catch: java.lang.Throwable -> L33
-            android.util.Log.d(r4, r8)     // Catch: java.lang.Throwable -> L33
-            goto L8c
-        L87:
+            r9 = r8
+        L6e:
+            androidx.appsearch.platformstorage.GlobalSearchSessionImpl r10 = (androidx.appsearch.platformstorage.GlobalSearchSessionImpl) r10     // Catch: java.lang.Throwable -> L34
+            r8.searchSession = r10     // Catch: java.lang.Throwable -> L34
+            boolean r8 = com.google.android.systemui.smartspace.AlarmAppSearchController.DEBUG     // Catch: java.lang.Throwable -> L34
+            if (r8 == 0) goto L8d
+            androidx.appsearch.platformstorage.GlobalSearchSessionImpl r8 = r9.searchSession     // Catch: java.lang.Throwable -> L34
+            java.lang.StringBuilder r9 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L34
+            r9.<init>(r0)     // Catch: java.lang.Throwable -> L34
+            r9.append(r8)     // Catch: java.lang.Throwable -> L34
+            java.lang.String r8 = r9.toString()     // Catch: java.lang.Throwable -> L34
+            android.util.Log.d(r4, r8)     // Catch: java.lang.Throwable -> L34
+            goto L8d
+        L88:
             java.lang.String r9 = "Failed to create session"
             android.util.Log.e(r4, r9, r8)
-        L8c:
+        L8d:
             kotlin.Unit r8 = kotlin.Unit.INSTANCE
             return r8
         */

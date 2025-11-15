@@ -3,13 +3,13 @@ package com.google.android.systemui.smartspace;
 import android.provider.Settings;
 import androidx.viewpager2.widget.ViewPager2;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class BcSmartspaceView$$ExternalSyntheticLambda1 implements Runnable {
+public final /* synthetic */ class BcSmartspaceView$$ExternalSyntheticLambda2 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BcSmartspaceView f$0;
 
-    public /* synthetic */ BcSmartspaceView$$ExternalSyntheticLambda1(BcSmartspaceView bcSmartspaceView, int i) {
+    public /* synthetic */ BcSmartspaceView$$ExternalSyntheticLambda2(BcSmartspaceView bcSmartspaceView, int i) {
         this.$r8$classId = i;
         this.f$0 = bcSmartspaceView;
     }

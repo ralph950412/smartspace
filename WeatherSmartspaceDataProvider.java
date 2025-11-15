@@ -1,7 +1,6 @@
 package com.google.android.systemui.smartspace;
 
 import android.app.smartspace.SmartspaceTarget;
-import android.app.smartspace.SmartspaceTargetEvent;
 import android.os.Debug;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,13 +15,18 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public final class WeatherSmartspaceDataProvider implements BcSmartspaceDataPlugin {
     public static final boolean DEBUG = Log.isLoggable("WeatherSSDataProvider", 3);
     public final Set mSmartspaceTargetListeners = new HashSet();
     public final List mSmartspaceTargets = new ArrayList();
-    public BcSmartspaceDataPlugin.SmartspaceEventNotifier mEventNotifier = null;
+    public final EventNotifierProxy mEventNotifier = new EventNotifierProxy();
+
+    @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
+    public final BcSmartspaceDataPlugin.SmartspaceEventNotifier getEventNotifier() {
+        return this.mEventNotifier;
+    }
 
     /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
@@ -35,14 +39,6 @@ public final class WeatherSmartspaceDataProvider implements BcSmartspaceDataPlug
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
     public final BcSmartspaceDataPlugin.SmartspaceView getView(ViewGroup viewGroup) {
         return (BcSmartspaceDataPlugin.SmartspaceView) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.weather, viewGroup, false);
-    }
-
-    @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
-    public final void notifySmartspaceEvent(SmartspaceTargetEvent smartspaceTargetEvent) {
-        BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier = this.mEventNotifier;
-        if (smartspaceEventNotifier != null) {
-            smartspaceEventNotifier.notifySmartspaceEvent(smartspaceTargetEvent);
-        }
     }
 
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
@@ -77,8 +73,13 @@ public final class WeatherSmartspaceDataProvider implements BcSmartspaceDataPlug
     }
 
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
-    public final void registerSmartspaceEventNotifier(BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier) {
-        this.mEventNotifier = smartspaceEventNotifier;
+    public final void setEventDispatcher(BcSmartspaceDataPlugin.SmartspaceEventDispatcher smartspaceEventDispatcher) {
+        this.mEventNotifier.eventDispatcher = smartspaceEventDispatcher;
+    }
+
+    @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
+    public final void setIntentStarter(BcSmartspaceDataPlugin.IntentStarter intentStarter) {
+        this.mEventNotifier.intentStarterRef = intentStarter;
     }
 
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin

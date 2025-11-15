@@ -13,18 +13,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appsearch.app.DocumentClassFactoryRegistry$$ExternalSyntheticOutline0;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.Constraints$LayoutParams;
+import androidx.constraintlayout.widget.Constraints;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.android.wm.shell.R;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 import java.util.Locale;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
     public static final /* synthetic */ int $r8$clinit = 0;
 
-    /* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
     public interface ItemUpdateFunction {
         void update(View view, int i);
     }
@@ -44,24 +44,24 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
         }
         int i2 = 0;
         while (i2 < 4) {
-            Constraints$LayoutParams constraints$LayoutParams = new Constraints$LayoutParams(-2, 0);
+            Constraints.LayoutParams layoutParams = new Constraints.LayoutParams(-2, 0);
             ConstraintLayout constraintLayout2 = constraintLayoutArr[i2];
             ConstraintLayout constraintLayout3 = i2 > 0 ? constraintLayoutArr[i2 - 1] : null;
             ConstraintLayout constraintLayout4 = i2 < 3 ? constraintLayoutArr[i2 + 1] : null;
             if (i2 == 0) {
-                constraints$LayoutParams.startToStart = 0;
-                constraints$LayoutParams.horizontalChainStyle = 1;
+                layoutParams.startToStart = 0;
+                layoutParams.horizontalChainStyle = 1;
             } else {
-                constraints$LayoutParams.startToEnd = constraintLayout3.getId();
+                layoutParams.startToEnd = constraintLayout3.getId();
             }
             if (i2 == 3) {
-                constraints$LayoutParams.endToEnd = 0;
+                layoutParams.endToEnd = 0;
             } else {
-                constraints$LayoutParams.endToStart = constraintLayout4.getId();
+                layoutParams.endToStart = constraintLayout4.getId();
             }
-            constraints$LayoutParams.topToTop = 0;
-            constraints$LayoutParams.bottomToBottom = 0;
-            addView(constraintLayout2, constraints$LayoutParams);
+            layoutParams.topToTop = 0;
+            layoutParams.bottomToBottom = 0;
+            addView(constraintLayout2, layoutParams);
             i2++;
         }
     }
@@ -69,13 +69,13 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final boolean setSmartspaceActions(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
         boolean z;
-        final int i = 1;
-        final int i2 = 0;
         SmartspaceAction baseAction = smartspaceTarget.getBaseAction();
         Bundle extras = baseAction == null ? null : baseAction.getExtras();
+        final int i = 0;
         if (extras == null) {
             return false;
         }
+        final int i2 = 1;
         if (extras.containsKey("temperatureValues")) {
             final String[] stringArray = extras.getStringArray("temperatureValues");
             if (stringArray == null) {
@@ -84,18 +84,19 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
                 updateFields(new ItemUpdateFunction() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0
                     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast.ItemUpdateFunction
                     public final void update(View view, int i3) {
+                        int i4 = i2;
                         Object[] objArr = stringArray;
-                        switch (i) {
+                        switch (i4) {
                             case 0:
-                                int i4 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                                ((TextView) view).setText(((String[]) objArr)[i3]);
-                                break;
-                            case 1:
                                 int i5 = BcSmartspaceCardWeatherForecast.$r8$clinit;
                                 ((TextView) view).setText(((String[]) objArr)[i3]);
                                 break;
-                            default:
+                            case 1:
                                 int i6 = BcSmartspaceCardWeatherForecast.$r8$clinit;
+                                ((TextView) view).setText(((String[]) objArr)[i3]);
+                                break;
+                            default:
+                                int i7 = BcSmartspaceCardWeatherForecast.$r8$clinit;
                                 ((ImageView) view).setImageBitmap(((Bitmap[]) objArr)[i3]);
                                 break;
                         }
@@ -115,18 +116,19 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
                 updateFields(new ItemUpdateFunction() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0
                     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast.ItemUpdateFunction
                     public final void update(View view, int i32) {
+                        int i4 = i3;
                         Object[] objArr = bitmapArr;
-                        switch (i3) {
+                        switch (i4) {
                             case 0:
-                                int i4 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                                ((TextView) view).setText(((String[]) objArr)[i32]);
-                                break;
-                            case 1:
                                 int i5 = BcSmartspaceCardWeatherForecast.$r8$clinit;
                                 ((TextView) view).setText(((String[]) objArr)[i32]);
                                 break;
-                            default:
+                            case 1:
                                 int i6 = BcSmartspaceCardWeatherForecast.$r8$clinit;
+                                ((TextView) view).setText(((String[]) objArr)[i32]);
+                                break;
+                            default:
+                                int i7 = BcSmartspaceCardWeatherForecast.$r8$clinit;
                                 ((ImageView) view).setImageBitmap(((Bitmap[]) objArr)[i32]);
                                 break;
                         }
@@ -146,18 +148,19 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
         updateFields(new ItemUpdateFunction() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0
             @Override // com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast.ItemUpdateFunction
             public final void update(View view, int i32) {
+                int i4 = i;
                 Object[] objArr = stringArray2;
-                switch (i2) {
+                switch (i4) {
                     case 0:
-                        int i4 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                        ((TextView) view).setText(((String[]) objArr)[i32]);
-                        break;
-                    case 1:
                         int i5 = BcSmartspaceCardWeatherForecast.$r8$clinit;
                         ((TextView) view).setText(((String[]) objArr)[i32]);
                         break;
-                    default:
+                    case 1:
                         int i6 = BcSmartspaceCardWeatherForecast.$r8$clinit;
+                        ((TextView) view).setText(((String[]) objArr)[i32]);
+                        break;
+                    default:
+                        int i7 = BcSmartspaceCardWeatherForecast.$r8$clinit;
                         ((ImageView) view).setImageBitmap(((Bitmap[]) objArr)[i32]);
                         break;
                 }
@@ -172,15 +175,16 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
         updateFields(new ItemUpdateFunction() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2
             @Override // com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast.ItemUpdateFunction
             public final void update(View view, int i3) {
-                int i4 = i;
-                switch (i2) {
+                int i4 = i2;
+                int i5 = i;
+                switch (i4) {
                     case 0:
-                        int i5 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                        ((TextView) view).setTextColor(i4);
+                        int i6 = BcSmartspaceCardWeatherForecast.$r8$clinit;
+                        ((TextView) view).setTextColor(i5);
                         break;
                     default:
-                        int i6 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                        ((TextView) view).setTextColor(i4);
+                        int i7 = BcSmartspaceCardWeatherForecast.$r8$clinit;
+                        ((TextView) view).setTextColor(i5);
                         break;
                 }
             }
@@ -189,15 +193,16 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
         updateFields(new ItemUpdateFunction() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2
             @Override // com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast.ItemUpdateFunction
             public final void update(View view, int i32) {
-                int i4 = i;
-                switch (i3) {
+                int i4 = i3;
+                int i5 = i;
+                switch (i4) {
                     case 0:
-                        int i5 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                        ((TextView) view).setTextColor(i4);
+                        int i6 = BcSmartspaceCardWeatherForecast.$r8$clinit;
+                        ((TextView) view).setTextColor(i5);
                         break;
                     default:
-                        int i6 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                        ((TextView) view).setTextColor(i4);
+                        int i7 = BcSmartspaceCardWeatherForecast.$r8$clinit;
+                        ((TextView) view).setTextColor(i5);
                         break;
                 }
             }

@@ -26,14 +26,13 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceSubcardLogging
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public abstract class BcSmartSpaceUtil {
     public static final Map FEATURE_TYPE_TO_SECONDARY_CARD_RESOURCE_MAP;
     public static FalsingManager sFalsingManager;
-    public static BcSmartspaceDataPlugin.IntentStarter sIntentStarter;
 
-    /* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
     /* renamed from: com.google.android.systemui.smartspace.BcSmartSpaceUtil$2, reason: invalid class name */
     public final class AnonymousClass2 implements BcSmartspaceDataPlugin.IntentStarter {
         public final /* synthetic */ String val$tag;
@@ -151,7 +150,7 @@ public abstract class BcSmartSpaceUtil {
         }
         final boolean z = smartspaceAction.getExtras() != null && smartspaceAction.getExtras().getBoolean("show_on_lockscreen");
         final boolean z2 = smartspaceAction.getIntent() == null && smartspaceAction.getPendingIntent() == null;
-        BcSmartspaceDataPlugin.IntentStarter intentStarter = sIntentStarter;
+        BcSmartspaceDataPlugin.IntentStarter intentStarter = smartspaceEventNotifier != null ? smartspaceEventNotifier.getIntentStarter() : null;
         if (intentStarter == null) {
             intentStarter = new AnonymousClass2(str);
         }
@@ -190,18 +189,20 @@ public abstract class BcSmartSpaceUtil {
         });
     }
 
-    public static void setOnClickListener(View view, final SmartspaceTarget smartspaceTarget, final TapAction tapAction, final BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, final String str, final BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo, final int i) {
-        if (view != null && tapAction != null) {
+    public static void setOnClickListener$1(View view, final SmartspaceTarget smartspaceTarget, final TapAction tapAction, final BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, final String str, final BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo, final int i) {
+        if (view == null || tapAction == null) {
+            Log.e(str, "No tap action can be set up");
+        } else {
             final boolean shouldShowOnLockscreen = tapAction.shouldShowOnLockscreen();
             view.setOnClickListener(new View.OnClickListener() { // from class: com.google.android.systemui.smartspace.BcSmartSpaceUtil$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view2) {
                     BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo2 = BcSmartspaceCardLoggingInfo.this;
                     int i2 = i;
+                    BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier2 = smartspaceEventNotifier;
                     String str2 = str;
                     TapAction tapAction2 = tapAction;
                     boolean z = shouldShowOnLockscreen;
-                    BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier2 = smartspaceEventNotifier;
                     SmartspaceTarget smartspaceTarget2 = smartspaceTarget;
                     FalsingManager falsingManager = BcSmartSpaceUtil.sFalsingManager;
                     if (falsingManager == null || !falsingManager.isFalseTap(1)) {
@@ -212,7 +213,7 @@ public abstract class BcSmartSpaceUtil {
                             }
                             BcSmartspaceCardLogger.log(BcSmartspaceEvent.SMARTSPACE_CARD_CLICK, bcSmartspaceCardLoggingInfo2);
                         }
-                        BcSmartspaceDataPlugin.IntentStarter intentStarter = BcSmartSpaceUtil.sIntentStarter;
+                        BcSmartspaceDataPlugin.IntentStarter intentStarter = smartspaceEventNotifier2 != null ? smartspaceEventNotifier2.getIntentStarter() : null;
                         if (intentStarter == null) {
                             intentStarter = new BcSmartSpaceUtil.AnonymousClass2(str2);
                         }
@@ -227,8 +228,6 @@ public abstract class BcSmartSpaceUtil {
                     }
                 }
             });
-        } else {
-            Log.e(str, "No tap action can be set up");
         }
     }
 }

@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -44,7 +44,7 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
     public final int mImageHeight;
     public ImageView mImageView;
 
-    /* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
     public final class DrawableWrapper {
         public final ContentResolver mContentResolver;
         public Drawable mDrawable;
@@ -60,7 +60,7 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
         }
     }
 
-    /* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
     public final class LoadUriTask extends AsyncTask {
         @Override // android.os.AsyncTask
         public final Object doInBackground(Object[] objArr) {
@@ -200,7 +200,7 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
             }
         }
         if (subImageAction != null) {
-            BcSmartSpaceUtil.setOnClickListener(this, smartspaceTarget, subImageAction, smartspaceEventNotifier, "SubImageTemplateCard", bcSmartspaceCardLoggingInfo, 0);
+            BcSmartSpaceUtil.setOnClickListener$1(this, smartspaceTarget, subImageAction, smartspaceEventNotifier, "SubImageTemplateCard", bcSmartspaceCardLoggingInfo, 0);
         }
         return true;
     }

@@ -9,11 +9,10 @@ import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.util.InitializationChecker;
-import java.util.List;
 import kotlin.coroutines.EmptyCoroutineContext;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public final class KeyguardSmartspaceStartable implements CoreStartable {
     public final InitializationChecker initializationChecker;
@@ -42,11 +41,10 @@ public final class KeyguardSmartspaceStartable implements CoreStartable {
                     }
                     if (KeyguardZenAlarmViewController.this.smartspaceViews.size() == 1) {
                         KeyguardZenAlarmViewController keyguardZenAlarmViewController3 = KeyguardZenAlarmViewController.this;
-                        List list = keyguardZenAlarmViewController3.nextClockAlarmController.changeCallbacks;
+                        NextClockAlarmController nextClockAlarmController = keyguardZenAlarmViewController3.nextClockAlarmController;
                         KeyguardZenAlarmViewController$nextAlarmCallback$1 keyguardZenAlarmViewController$nextAlarmCallback$1 = keyguardZenAlarmViewController3.nextAlarmCallback;
-                        list.add(keyguardZenAlarmViewController$nextAlarmCallback$1);
+                        nextClockAlarmController.changeCallbacks.add(keyguardZenAlarmViewController$nextAlarmCallback$1);
                         KeyguardZenAlarmViewController keyguardZenAlarmViewController4 = keyguardZenAlarmViewController$nextAlarmCallback$1.this$0;
-                        keyguardZenAlarmViewController4.getClass();
                         BuildersKt.launch$default(keyguardZenAlarmViewController4.applicationScope, null, null, new KeyguardZenAlarmViewController$updateNextAlarm$1(keyguardZenAlarmViewController4, null), 3);
                     }
                     KeyguardZenAlarmViewController keyguardZenAlarmViewController5 = KeyguardZenAlarmViewController.this;
@@ -59,14 +57,14 @@ public final class KeyguardSmartspaceStartable implements CoreStartable {
                     KeyguardZenAlarmViewController.this.smartspaceViews.remove((BcSmartspaceDataPlugin.SmartspaceView) view);
                     if (KeyguardZenAlarmViewController.this.smartspaceViews.isEmpty()) {
                         KeyguardZenAlarmViewController keyguardZenAlarmViewController2 = KeyguardZenAlarmViewController.this;
-                        keyguardZenAlarmViewController2.nextClockAlarmController.changeCallbacks.remove(keyguardZenAlarmViewController2.nextAlarmCallback);
+                        NextClockAlarmController nextClockAlarmController = keyguardZenAlarmViewController2.nextClockAlarmController;
+                        nextClockAlarmController.changeCallbacks.remove(keyguardZenAlarmViewController2.nextAlarmCallback);
                     }
                 }
             });
             NextClockAlarmController nextClockAlarmController = keyguardZenAlarmViewController.nextClockAlarmController;
-            boolean isUserUnlocked$1 = nextClockAlarmController.isUserUnlocked$1();
             UserTracker userTracker = nextClockAlarmController.userTracker;
-            if (isUserUnlocked$1) {
+            if (nextClockAlarmController.isUserUnlocked$1()) {
                 nextClockAlarmController.updateSession(((UserTrackerImpl) userTracker).getUserContext());
             }
             nextClockAlarmController.dumpManager.registerNormalDumpable("NextClockAlarmCtlr", nextClockAlarmController);
@@ -79,8 +77,8 @@ public final class KeyguardSmartspaceStartable implements CoreStartable {
                 public final void onViewAttachedToWindow(View view) {
                     KeyguardMediaViewController keyguardMediaViewController2 = KeyguardMediaViewController.this;
                     keyguardMediaViewController2.smartspaceView = (BcSmartspaceDataPlugin.SmartspaceView) view;
-                    KeyguardMediaViewController$mediaListener$1 keyguardMediaViewController$mediaListener$1 = keyguardMediaViewController2.mediaListener;
                     NotificationMediaManager notificationMediaManager = keyguardMediaViewController2.mediaManager;
+                    KeyguardMediaViewController$mediaListener$1 keyguardMediaViewController$mediaListener$1 = keyguardMediaViewController2.mediaListener;
                     notificationMediaManager.mMediaListeners.add(keyguardMediaViewController$mediaListener$1);
                     notificationMediaManager.mBackgroundExecutor.execute(new NotificationMediaManager$$ExternalSyntheticLambda0(0, notificationMediaManager, keyguardMediaViewController$mediaListener$1));
                 }
@@ -89,7 +87,8 @@ public final class KeyguardSmartspaceStartable implements CoreStartable {
                 public final void onViewDetachedFromWindow(View view) {
                     KeyguardMediaViewController keyguardMediaViewController2 = KeyguardMediaViewController.this;
                     keyguardMediaViewController2.smartspaceView = null;
-                    keyguardMediaViewController2.mediaManager.mMediaListeners.remove(keyguardMediaViewController2.mediaListener);
+                    NotificationMediaManager notificationMediaManager = keyguardMediaViewController2.mediaManager;
+                    notificationMediaManager.mMediaListeners.remove(keyguardMediaViewController2.mediaListener);
                 }
             });
         }

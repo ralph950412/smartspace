@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.android.wm.shell.R;
 import java.util.Map;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public abstract class BcSmartspaceTemplateDataUtils {
     public static final Map TEMPLATE_TYPE_TO_SECONDARY_CARD_RES = Map.ofEntries(Map.entry(2, Integer.valueOf(R.layout.smartspace_sub_image_template_card)), Map.entry(3, Integer.valueOf(R.layout.smartspace_sub_list_template_card)), Map.entry(7, Integer.valueOf(R.layout.smartspace_sub_card_template_card)), Map.entry(5, Integer.valueOf(R.layout.smartspace_head_to_head_template_card)), Map.entry(6, Integer.valueOf(R.layout.smartspace_combined_cards_template_card)), Map.entry(4, Integer.valueOf(R.layout.smartspace_carousel_template_card)));

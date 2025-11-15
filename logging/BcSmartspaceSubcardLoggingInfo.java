@@ -1,10 +1,10 @@
 package com.google.android.systemui.smartspace.logging;
 
-import androidx.activity.BackEventCompat$$ExternalSyntheticOutline0;
+import androidx.collection.IntIntPair$$ExternalSyntheticOutline0;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public final class BcSmartspaceSubcardLoggingInfo {
     public int mClickedSubcardIndex;
@@ -29,6 +29,6 @@ public final class BcSmartspaceSubcardLoggingInfo {
         StringBuilder sb = new StringBuilder("BcSmartspaceSubcardLoggingInfo{mSubcards=");
         sb.append(this.mSubcards);
         sb.append(", mClickedSubcardIndex=");
-        return BackEventCompat$$ExternalSyntheticOutline0.m(sb, this.mClickedSubcardIndex, '}');
+        return IntIntPair$$ExternalSyntheticOutline0.m(sb, this.mClickedSubcardIndex, '}');
     }
 }

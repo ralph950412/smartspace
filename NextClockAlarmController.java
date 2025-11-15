@@ -9,6 +9,7 @@ import android.os.UserManager;
 import android.util.Log;
 import androidx.appsearch.platformstorage.GlobalSearchSessionImpl;
 import com.android.systemui.Dumpable;
+import com.android.systemui.ambientcue.ui.viewmodel.AmbientCueViewModel$$ExternalSyntheticOutline0;
 import com.android.systemui.broadcast.ActionReceiver$$ExternalSyntheticOutline0;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.dump.DumpManager;
@@ -29,7 +30,7 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public final class NextClockAlarmController implements CallbackController, Dumpable {
     public final AlarmAppSearchController alarmAppSearchController;
@@ -50,31 +51,28 @@ public final class NextClockAlarmController implements CallbackController, Dumpa
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             Log.d("NextClockAlarmCtlr", "User unlock received");
-            NextClockAlarmControllerLogger nextClockAlarmControllerLogger = NextClockAlarmController.this.logger;
-            LogBuffer.log$default(nextClockAlarmControllerLogger.logBuffer, "NextClockAlarmControllerLog", LogLevel.DEBUG, "User unlock received");
+            NextClockAlarmController.this.logger.logBuffer.log("NextClockAlarmControllerLog", LogLevel.DEBUG, "User unlock received", null);
             NextClockAlarmController.this.broadcastDispatcher.unregisterReceiver(this);
             NextClockAlarmController nextClockAlarmController = NextClockAlarmController.this;
             nextClockAlarmController.updateSession(((UserTrackerImpl) nextClockAlarmController.userTracker).getUserContext());
         }
     };
-    public final NextClockAlarmController$userChangedCallback$1 userChangedCallback = new UserTracker.Callback() { // from class: com.google.android.systemui.smartspace.NextClockAlarmController$userChangedCallback$1
+    public final UserTracker.Callback userChangedCallback = new UserTracker.Callback() { // from class: com.google.android.systemui.smartspace.NextClockAlarmController$userChangedCallback$1
         @Override // com.android.systemui.settings.UserTracker.Callback
         public final void onBeforeUserSwitching(int i) {
             NextClockAlarmController nextClockAlarmController = NextClockAlarmController.this;
+            AlarmAppSearchController alarmAppSearchController = nextClockAlarmController.alarmAppSearchController;
             Context context = nextClockAlarmController.context;
             Log.d("NextClockAlarmCtlr", "onBeforeUserSwitching newUser=" + i + ", oldUser=" + (context != null ? Integer.valueOf(context.getUserId()) : null));
             NextClockAlarmControllerLogger nextClockAlarmControllerLogger = nextClockAlarmController.logger;
             Context context2 = nextClockAlarmController.context;
             Integer valueOf = context2 != null ? Integer.valueOf(context2.getUserId()) : null;
-            LogLevel logLevel = LogLevel.DEBUG;
-            NextClockAlarmControllerLogger$$ExternalSyntheticLambda1 nextClockAlarmControllerLogger$$ExternalSyntheticLambda1 = new NextClockAlarmControllerLogger$$ExternalSyntheticLambda1(i, valueOf, 1);
             LogBuffer logBuffer = nextClockAlarmControllerLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("NextClockAlarmControllerLog", logLevel, nextClockAlarmControllerLogger$$ExternalSyntheticLambda1, null);
+            LogMessage obtain = logBuffer.obtain("NextClockAlarmControllerLog", LogLevel.DEBUG, new NextClockAlarmControllerLogger$$ExternalSyntheticLambda1(i, 1, valueOf), null);
             LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
             logMessageImpl.str1 = String.valueOf(i);
             logMessageImpl.str2 = valueOf != null ? valueOf.toString() : null;
             logBuffer.commit(obtain);
-            AlarmAppSearchController alarmAppSearchController = nextClockAlarmController.alarmAppSearchController;
             NextClockAlarmController$observerCallback$1 nextClockAlarmController$observerCallback$1 = nextClockAlarmController.observerCallback;
             GlobalSearchSessionImpl globalSearchSessionImpl = alarmAppSearchController.searchSession;
             if (globalSearchSessionImpl == null) {
@@ -106,10 +104,8 @@ public final class NextClockAlarmController implements CallbackController, Dumpa
             Context context3 = nextClockAlarmController.context;
             Integer valueOf = context3 != null ? Integer.valueOf(context3.getUserId()) : null;
             String context4 = context.toString();
-            LogLevel logLevel = LogLevel.DEBUG;
-            NextClockAlarmControllerLogger$$ExternalSyntheticLambda1 nextClockAlarmControllerLogger$$ExternalSyntheticLambda1 = new NextClockAlarmControllerLogger$$ExternalSyntheticLambda1(i, valueOf, 0);
             LogBuffer logBuffer = nextClockAlarmControllerLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("NextClockAlarmControllerLog", logLevel, nextClockAlarmControllerLogger$$ExternalSyntheticLambda1, null);
+            LogMessage obtain = logBuffer.obtain("NextClockAlarmControllerLog", LogLevel.DEBUG, new NextClockAlarmControllerLogger$$ExternalSyntheticLambda1(i, 0, valueOf), null);
             LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
             logMessageImpl.str1 = String.valueOf(i);
             logMessageImpl.str2 = valueOf != null ? valueOf.toString() : null;
@@ -123,7 +119,6 @@ public final class NextClockAlarmController implements CallbackController, Dumpa
     public final NextClockAlarmController$observerCallback$1 observerCallback = new NextClockAlarmController$observerCallback$1(this);
 
     /* JADX WARN: Type inference failed for: r1v4, types: [com.google.android.systemui.smartspace.NextClockAlarmController$userUnlockReceiver$1] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.google.android.systemui.smartspace.NextClockAlarmController$userChangedCallback$1] */
     public NextClockAlarmController(UserTracker userTracker, BroadcastDispatcher broadcastDispatcher, DumpManager dumpManager, AlarmAppSearchController alarmAppSearchController, Executor executor, CoroutineScope coroutineScope, CoroutineScope coroutineScope2, NextClockAlarmControllerLogger nextClockAlarmControllerLogger) {
         this.userTracker = userTracker;
         this.broadcastDispatcher = broadcastDispatcher;
@@ -188,10 +183,10 @@ public final class NextClockAlarmController implements CallbackController, Dumpa
             goto L59
         L46:
             kotlin.ResultKt.throwOnFailure(r7)
+            com.google.android.systemui.smartspace.AlarmAppSearchController r7 = r6.alarmAppSearchController
             r0.L$0 = r6
             r0.L$1 = r6
             r0.label = r5
-            com.google.android.systemui.smartspace.AlarmAppSearchController r7 = r6.alarmAppSearchController
             java.lang.Object r7 = r7.query(r0)
             if (r7 != r1) goto L58
             goto L67
@@ -213,24 +208,23 @@ public final class NextClockAlarmController implements CallbackController, Dumpa
             long r0 = r7.longValue()
             long r4 = r6.nextAlarm
             int r7 = (r4 > r0 ? 1 : (r4 == r0 ? 0 : -1))
-            if (r7 == 0) goto L9a
+            if (r7 == 0) goto L97
             r6.nextAlarm = r0
             java.util.List r6 = r6.changeCallbacks
             java.util.Iterator r6 = r6.iterator()
         L7d:
             boolean r7 = r6.hasNext()
-            if (r7 == 0) goto L9a
+            if (r7 == 0) goto L97
             java.lang.Object r7 = r6.next()
             com.google.android.systemui.smartspace.KeyguardZenAlarmViewController$nextAlarmCallback$1 r7 = (com.google.android.systemui.smartspace.KeyguardZenAlarmViewController$nextAlarmCallback$1) r7
             com.google.android.systemui.smartspace.KeyguardZenAlarmViewController r7 = r7.this$0
-            r7.getClass()
-            com.google.android.systemui.smartspace.KeyguardZenAlarmViewController$updateNextAlarm$1 r0 = new com.google.android.systemui.smartspace.KeyguardZenAlarmViewController$updateNextAlarm$1
-            r0.<init>(r7, r3)
-            r1 = 3
-            kotlinx.coroutines.CoroutineScope r7 = r7.applicationScope
-            kotlinx.coroutines.BuildersKt.launch$default(r7, r3, r3, r0, r1)
+            kotlinx.coroutines.CoroutineScope r0 = r7.applicationScope
+            com.google.android.systemui.smartspace.KeyguardZenAlarmViewController$updateNextAlarm$1 r1 = new com.google.android.systemui.smartspace.KeyguardZenAlarmViewController$updateNextAlarm$1
+            r1.<init>(r7, r3)
+            r7 = 3
+            kotlinx.coroutines.BuildersKt.launch$default(r0, r3, r3, r1, r7)
             goto L7d
-        L9a:
+        L97:
             kotlin.Unit r6 = kotlin.Unit.INSTANCE
             return r6
         */
@@ -242,31 +236,27 @@ public final class NextClockAlarmController implements CallbackController, Dumpa
         KeyguardZenAlarmViewController$nextAlarmCallback$1 keyguardZenAlarmViewController$nextAlarmCallback$1 = (KeyguardZenAlarmViewController$nextAlarmCallback$1) obj;
         this.changeCallbacks.add(keyguardZenAlarmViewController$nextAlarmCallback$1);
         KeyguardZenAlarmViewController keyguardZenAlarmViewController = keyguardZenAlarmViewController$nextAlarmCallback$1.this$0;
-        keyguardZenAlarmViewController.getClass();
         BuildersKt.launch$default(keyguardZenAlarmViewController.applicationScope, null, null, new KeyguardZenAlarmViewController$updateNextAlarm$1(keyguardZenAlarmViewController, null), 3);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:94:0x0075, code lost:
-    
-        if (r2 == r6) goto L83;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0093  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0177  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x017f  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0211  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x01be  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x017a  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x027d  */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0095  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0184  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x018c  */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x0210  */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x01c9  */
+    /* JADX WARN: Removed duplicated region for block: B:59:0x0187  */
     /* JADX WARN: Removed duplicated region for block: B:8:0x0030  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0066  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:80:0x0273 -> B:11:0x0274). Please report as a decompilation issue!!! */
+    /* JADX WARN: Removed duplicated region for block: B:90:0x0283  */
+    /* JADX WARN: Removed duplicated region for block: B:96:0x0067  */
+    /* JADX WARN: Unreachable blocks removed: 1, instructions: 1 */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:83:0x0274 -> B:11:0x0279). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct add '--show-bad-code' argument
     */
-    public final java.lang.Object calculateNextClockAlarm(androidx.appsearch.app.SearchResults r23, kotlin.coroutines.jvm.internal.ContinuationImpl r24) {
+    public final java.lang.Object calculateNextClockAlarm(androidx.appsearch.app.SearchResults r24, kotlin.coroutines.jvm.internal.ContinuationImpl r25) {
         /*
-            Method dump skipped, instructions count: 645
+            Method dump skipped, instructions count: 651
             To view this dump add '--comments-level debug' option
         */
         throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.smartspace.NextClockAlarmController.calculateNextClockAlarm(androidx.appsearch.app.SearchResults, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
@@ -274,12 +264,12 @@ public final class NextClockAlarmController implements CallbackController, Dumpa
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        printWriter.println("  userId=" + ((UserTrackerImpl) this.userTracker).getUserId());
+        AmbientCueViewModel$$ExternalSyntheticOutline0.m("  userId=", ((UserTrackerImpl) this.userTracker).getUserId(), printWriter);
         printWriter.println("  context=" + this.context);
         printWriter.println("  alarmAppSearchController=" + this.alarmAppSearchController);
         printWriter.println("  nextClockAlarm=" + this.nextAlarm);
         ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, "  nextAlarmDetailInfo=", this.nextAlarmDetailInfo);
-        printWriter.println("  callback size=" + ((ArrayList) this.changeCallbacks).size());
+        AmbientCueViewModel$$ExternalSyntheticOutline0.m("  callback size=", ((ArrayList) this.changeCallbacks).size(), printWriter);
     }
 
     public final boolean isUserUnlocked$1() {
@@ -287,10 +277,7 @@ public final class NextClockAlarmController implements CallbackController, Dumpa
         if (userManager != null && userManager.isUserUnlocked()) {
             return true;
         }
-        IntentFilter intentFilter = new IntentFilter("android.intent.action.USER_UNLOCKED");
-        Executor executor = this.mainExecutor;
-        UserHandle userHandle = UserHandle.ALL;
-        BroadcastDispatcher.registerReceiver$default(this.broadcastDispatcher, this.userUnlockReceiver, intentFilter, executor, userHandle, 0, 48);
+        BroadcastDispatcher.registerReceiver$default(this.broadcastDispatcher, this.userUnlockReceiver, new IntentFilter("android.intent.action.USER_UNLOCKED"), this.mainExecutor, UserHandle.ALL, 0, null, 48);
         return false;
     }
 

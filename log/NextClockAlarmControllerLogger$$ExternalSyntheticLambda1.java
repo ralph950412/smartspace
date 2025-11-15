@@ -3,14 +3,14 @@ package com.google.android.systemui.smartspace.log;
 import com.android.systemui.log.core.LogMessage;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class NextClockAlarmControllerLogger$$ExternalSyntheticLambda1 implements Function1 {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ int f$0;
     public final /* synthetic */ Integer f$1;
 
-    public /* synthetic */ NextClockAlarmControllerLogger$$ExternalSyntheticLambda1(int i, Integer num, int i2) {
+    public /* synthetic */ NextClockAlarmControllerLogger$$ExternalSyntheticLambda1(int i, int i2, Integer num) {
         this.$r8$classId = i2;
         this.f$0 = i;
         this.f$1 = num;

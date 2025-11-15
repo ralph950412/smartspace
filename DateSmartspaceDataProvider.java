@@ -1,6 +1,5 @@
 package com.google.android.systemui.smartspace;
 
-import android.app.smartspace.SmartspaceTargetEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,31 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public final class DateSmartspaceDataProvider implements BcSmartspaceDataPlugin {
-    public Set mAttachListeners;
-    public BcSmartspaceDataPlugin.SmartspaceEventNotifier mEventNotifier;
-    public AnonymousClass1 mStateChangeListener;
-    public Set mViews;
+    public final Set mViews = new HashSet();
+    public final Set mAttachListeners = new HashSet();
+    public final EventNotifierProxy mEventNotifier = new EventNotifierProxy();
+    public final AnonymousClass1 mStateChangeListener = new View.OnAttachStateChangeListener() { // from class: com.google.android.systemui.smartspace.DateSmartspaceDataProvider.1
+        @Override // android.view.View.OnAttachStateChangeListener
+        public final void onViewAttachedToWindow(View view) {
+            DateSmartspaceDataProvider.this.mViews.add(view);
+            Iterator it = ((HashSet) DateSmartspaceDataProvider.this.mAttachListeners).iterator();
+            while (it.hasNext()) {
+                ((View.OnAttachStateChangeListener) it.next()).onViewAttachedToWindow(view);
+            }
+        }
+
+        @Override // android.view.View.OnAttachStateChangeListener
+        public final void onViewDetachedFromWindow(View view) {
+            DateSmartspaceDataProvider.this.mViews.remove(view);
+            Iterator it = ((HashSet) DateSmartspaceDataProvider.this.mAttachListeners).iterator();
+            while (it.hasNext()) {
+                ((View.OnAttachStateChangeListener) it.next()).onViewDetachedFromWindow(view);
+            }
+        }
+    };
 
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
     public final void addOnAttachStateChangeListener(View.OnAttachStateChangeListener onAttachStateChangeListener) {
@@ -25,6 +42,11 @@ public final class DateSmartspaceDataProvider implements BcSmartspaceDataPlugin 
         while (it.hasNext()) {
             onAttachStateChangeListener.onViewAttachedToWindow((View) it.next());
         }
+    }
+
+    @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
+    public final BcSmartspaceDataPlugin.SmartspaceEventNotifier getEventNotifier() {
+        return this.mEventNotifier;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -45,15 +67,12 @@ public final class DateSmartspaceDataProvider implements BcSmartspaceDataPlugin 
     }
 
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
-    public final void notifySmartspaceEvent(SmartspaceTargetEvent smartspaceTargetEvent) {
-        BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier = this.mEventNotifier;
-        if (smartspaceEventNotifier != null) {
-            smartspaceEventNotifier.notifySmartspaceEvent(smartspaceTargetEvent);
-        }
+    public final void setEventDispatcher(BcSmartspaceDataPlugin.SmartspaceEventDispatcher smartspaceEventDispatcher) {
+        this.mEventNotifier.eventDispatcher = smartspaceEventDispatcher;
     }
 
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
-    public final void registerSmartspaceEventNotifier(BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier) {
-        this.mEventNotifier = smartspaceEventNotifier;
+    public final void setIntentStarter(BcSmartspaceDataPlugin.IntentStarter intentStarter) {
+        this.mEventNotifier.intentStarterRef = intentStarter;
     }
 }

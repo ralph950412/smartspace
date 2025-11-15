@@ -27,7 +27,7 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInf
 import com.google.android.systemui.smartspace.utils.ContentDescriptionUtil;
 import java.util.List;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceDataPlugin.SmartspaceTargetListener, BcSmartspaceDataPlugin.SmartspaceView {
     public static final boolean DEBUG = Log.isLoggable("WeatherSmartspaceView", 3);
@@ -127,12 +127,16 @@ public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceD
                 } else {
                     CharSequence title = headerAction2.getTitle();
                     this.mView.setText(title.toString());
-                    ContentDescriptionUtil.setFormattedContentDescription("WeatherSmartspaceView", this.mView, title, headerAction2.getContentDescription());
+                    this.mView.setCompoundDrawablesRelative(null, null, null, null);
+                    TextUtils.equals(this.mUiSurface, BcSmartspaceDataPlugin.UI_SURFACE_DREAM);
                     this.mIconDrawable.setIcon(BcSmartSpaceUtil.getIconDrawableWithCustomSize(headerAction2.getIcon(), getContext(), this.mIconSize));
                     this.mView.setCompoundDrawablesRelative(this.mIconDrawable, null, null, null);
-                    DoubleShadowTextView doubleShadowTextView = this.mView;
-                    BcSmartspaceDataPlugin bcSmartspaceDataPlugin = this.mDataProvider;
-                    BcSmartSpaceUtil.setOnClickListener(doubleShadowTextView, smartspaceTarget, headerAction2, bcSmartspaceDataPlugin != null ? new DateSmartspaceView$$ExternalSyntheticLambda1(bcSmartspaceDataPlugin) : null, "WeatherSmartspaceView", this.mLoggingInfo, 0);
+                    ContentDescriptionUtil.setFormattedContentDescription("WeatherSmartspaceView", this.mView, title, headerAction2.getContentDescription());
+                    if (!TextUtils.equals(this.mUiSurface, BcSmartspaceDataPlugin.UI_SURFACE_DREAM)) {
+                        DoubleShadowTextView doubleShadowTextView = this.mView;
+                        BcSmartspaceDataPlugin bcSmartspaceDataPlugin = this.mDataProvider;
+                        BcSmartSpaceUtil.setOnClickListener(doubleShadowTextView, smartspaceTarget, headerAction2, bcSmartspaceDataPlugin != null ? bcSmartspaceDataPlugin.getEventNotifier() : null, "WeatherSmartspaceView", this.mLoggingInfo, 0);
+                    }
                 }
             } else if (smartspaceTarget.getTemplateData() != null) {
                 BaseTemplateData.SubItemInfo subtitleItem = smartspaceTarget.getTemplateData().getSubtitleItem();
@@ -141,22 +145,24 @@ public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceD
                 } else {
                     Text text = subtitleItem.getText();
                     BcSmartspaceTemplateDataUtils.setText(this.mView, text);
+                    this.mView.setCompoundDrawablesRelative(null, null, null, null);
                     Icon icon = subtitleItem.getIcon();
+                    TextUtils.equals(this.mUiSurface, BcSmartspaceDataPlugin.UI_SURFACE_DREAM);
                     if (icon != null) {
                         this.mIconDrawable.setIcon(BcSmartSpaceUtil.getIconDrawableWithCustomSize(icon.getIcon(), getContext(), this.mIconSize));
                         this.mView.setCompoundDrawablesRelative(this.mIconDrawable, null, null, null);
                     }
                     ContentDescriptionUtil.setFormattedContentDescription("WeatherSmartspaceView", this.mView, SmartspaceUtils.isEmpty(text) ? "" : text.getText(), icon != null ? icon.getContentDescription() : "");
                     TapAction tapAction = subtitleItem.getTapAction();
-                    if (tapAction != null && isClickable()) {
+                    if (tapAction != null && !TextUtils.equals(this.mUiSurface, BcSmartspaceDataPlugin.UI_SURFACE_DREAM)) {
                         DoubleShadowTextView doubleShadowTextView2 = this.mView;
                         BcSmartspaceDataPlugin bcSmartspaceDataPlugin2 = this.mDataProvider;
-                        BcSmartSpaceUtil.setOnClickListener(doubleShadowTextView2, smartspaceTarget, tapAction, bcSmartspaceDataPlugin2 != null ? new DateSmartspaceView$$ExternalSyntheticLambda1(bcSmartspaceDataPlugin2) : null, "WeatherSmartspaceView", this.mLoggingInfo, 0);
+                        BcSmartSpaceUtil.setOnClickListener$1(doubleShadowTextView2, smartspaceTarget, tapAction, bcSmartspaceDataPlugin2 != null ? bcSmartspaceDataPlugin2.getEventNotifier() : null, "WeatherSmartspaceView", this.mLoggingInfo, 0);
                     }
                 }
             }
             if (this.mRemoveTextDescent) {
-                this.mView.setPaddingRelative(0, 0, 0, this.mTextDescentExtraPadding - ((int) Math.floor(r11.getPaint().getFontMetrics().descent)));
+                this.mView.setPaddingRelative(0, 0, 0, this.mTextDescentExtraPadding - ((int) Math.floor(r12.getPaint().getFontMetrics().descent)));
             }
         }
     }
@@ -183,6 +189,7 @@ public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceD
         int loggingDisplaySurface;
         this.mDozeAmount = f;
         this.mView.setTextColor(ColorUtils.blendARGB(this.mPrimaryTextColor, -1, f));
+        TextUtils.equals(this.mUiSurface, BcSmartspaceDataPlugin.UI_SURFACE_DREAM);
         if (this.mLoggingInfo == null || (loggingDisplaySurface = BcSmartSpaceUtil.getLoggingDisplaySurface(this.mUiSurface, this.mDozeAmount)) == -1) {
             return;
         }
@@ -207,14 +214,10 @@ public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceD
     }
 
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
-    public final void setIntentStarter(BcSmartspaceDataPlugin.IntentStarter intentStarter) {
-        BcSmartSpaceUtil.sIntentStarter = intentStarter;
-    }
-
-    @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setPrimaryTextColor(int i) {
         this.mPrimaryTextColor = i;
         this.mView.setTextColor(ColorUtils.blendARGB(i, -1, this.mDozeAmount));
+        TextUtils.equals(this.mUiSurface, BcSmartspaceDataPlugin.UI_SURFACE_DREAM);
     }
 
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView

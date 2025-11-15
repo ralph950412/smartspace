@@ -1,9 +1,7 @@
 package com.google.android.systemui.smartspace;
 
-import android.R;
 import android.app.smartspace.SmartspaceAction;
 import android.app.smartspace.SmartspaceTarget;
-import android.app.smartspace.SmartspaceTargetEvent;
 import android.app.smartspace.SmartspaceUtils;
 import android.app.smartspace.uitemplatedata.BaseTemplateData;
 import android.content.ComponentName;
@@ -16,52 +14,67 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.RemoteViews;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.internal.graphics.ColorUtils;
-import com.android.keyguard.ClockEventController$listenForDnd$1$1$$ExternalSyntheticOutline0;
-import com.android.launcher3.icons.GraphicsUtils;
+import com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0;
 import com.android.systemui.plugins.BcSmartspaceConfigPlugin;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
+import com.android.wm.shell.R;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggerUtil;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 import com.google.android.systemui.smartspace.uitemplate.BaseTemplateCard;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import kotlin.collections.CollectionsKt;
 import kotlin.enums.EnumEntriesKt;
+import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
-public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implements CardAdapter {
+public final class CardRecyclerViewAdapter extends ListAdapter implements CardAdapter {
     public static final Set legacySecondaryCardResourceIdSet = CollectionsKt.toSet(BcSmartSpaceUtil.FEATURE_TYPE_TO_SECONDARY_CARD_RESOURCE_MAP.values());
     public static final Set templateSecondaryCardResourceIdSet = CollectionsKt.toSet(BcSmartspaceTemplateDataUtils.TEMPLATE_TYPE_TO_SECONDARY_CARD_RES.values());
+    public final List _aodTargets;
+    public float _dozeAmount;
+    public final List _lockscreenTargets;
     public Handler bgHandler;
     public BcSmartspaceConfigPlugin configProvider;
     public int currentTextColor;
     public BcSmartspaceDataPlugin dataProvider;
-    public float dozeAmount;
+    public final int dozeColor;
     public boolean hasAodLockscreenTransition;
     public boolean hasDifferentTargets;
     public boolean keyguardBypassEnabled;
+    public final List mediaTargets;
     public Integer nonRemoteViewsHorizontalPadding;
     public float previousDozeAmount;
     public int primaryTextColor;
     public final BcSmartspaceView root;
+    public List smartspaceTargets;
     public BcSmartspaceDataPlugin.TimeChangedDelegate timeChangedDelegate;
     public TransitionType transitioningTo;
     public String uiSurface;
-    public final SparseArray viewHolders = new SparseArray();
-    public List smartspaceTargets = new ArrayList();
-    public final List _aodTargets = new ArrayList();
-    public final List _lockscreenTargets = new ArrayList();
-    public final List mediaTargets = new ArrayList();
-    public final int dozeColor = -1;
+    public final SparseArray viewHolders;
+
+    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+    public final class DiffUtilItemCallback extends DiffUtil.Callback {
+        @Override // androidx.recyclerview.widget.DiffUtil.Callback
+        public final /* bridge */ /* synthetic */ boolean areContentsTheSame(Object obj, Object obj2) {
+            return false;
+        }
+
+        @Override // androidx.recyclerview.widget.DiffUtil.Callback
+        public final boolean areItemsTheSame(Object obj, Object obj2) {
+            return Intrinsics.areEqual(((SmartspaceTarget) obj).getSmartspaceTargetId(), ((SmartspaceTarget) obj2).getSmartspaceTargetId());
+        }
+    }
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
     public final class TransitionType {
         public static final /* synthetic */ TransitionType[] $VALUES;
         public static final TransitionType NOT_IN_TRANSITION;
@@ -89,7 +102,7 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
         }
     }
 
-    /* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
     public final class ViewHolder extends RecyclerView.ViewHolder {
         public final SmartspaceCard card;
 
@@ -99,13 +112,65 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
         }
     }
 
-    public CardRecyclerViewAdapter(BcSmartspaceView bcSmartspaceView, BcSmartspaceConfigPlugin bcSmartspaceConfigPlugin) {
-        this.root = bcSmartspaceView;
-        int attrColor = GraphicsUtils.getAttrColor(R.attr.textColorPrimary, bcSmartspaceView.getContext());
-        this.primaryTextColor = attrColor;
-        this.currentTextColor = attrColor;
-        this.configProvider = bcSmartspaceConfigPlugin;
-        this.transitioningTo = TransitionType.NOT_IN_TRANSITION;
+    /* JADX WARN: Illegal instructions before constructor call */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+        To view partially-correct add '--show-bad-code' argument
+    */
+    public CardRecyclerViewAdapter(com.google.android.systemui.smartspace.BcSmartspaceView r4, com.android.systemui.plugins.BcSmartspaceConfigPlugin r5) {
+        /*
+            r3 = this;
+            com.google.android.systemui.smartspace.CardRecyclerViewAdapter$DiffUtilItemCallback r0 = new com.google.android.systemui.smartspace.CardRecyclerViewAdapter$DiffUtilItemCallback
+            r0.<init>()
+            java.lang.Object r1 = androidx.recyclerview.widget.AsyncDifferConfig.Builder.sExecutorLock
+            monitor-enter(r1)
+            java.util.concurrent.Executor r2 = androidx.recyclerview.widget.AsyncDifferConfig.Builder.sDiffExecutor     // Catch: java.lang.Throwable -> L14
+            if (r2 != 0) goto L16
+            r2 = 2
+            java.util.concurrent.ExecutorService r2 = java.util.concurrent.Executors.newFixedThreadPool(r2)     // Catch: java.lang.Throwable -> L14
+            androidx.recyclerview.widget.AsyncDifferConfig.Builder.sDiffExecutor = r2     // Catch: java.lang.Throwable -> L14
+            goto L16
+        L14:
+            r3 = move-exception
+            goto L5f
+        L16:
+            monitor-exit(r1)     // Catch: java.lang.Throwable -> L14
+            java.util.concurrent.Executor r1 = androidx.recyclerview.widget.AsyncDifferConfig.Builder.sDiffExecutor
+            androidx.recyclerview.widget.AsyncDifferConfig r2 = new androidx.recyclerview.widget.AsyncDifferConfig
+            r2.<init>(r1, r0)
+            r3.<init>(r2)
+            r3.root = r4
+            android.util.SparseArray r0 = new android.util.SparseArray
+            r0.<init>()
+            r3.viewHolders = r0
+            java.util.ArrayList r0 = new java.util.ArrayList
+            r0.<init>()
+            r3.smartspaceTargets = r0
+            java.util.ArrayList r0 = new java.util.ArrayList
+            r0.<init>()
+            r3._aodTargets = r0
+            java.util.ArrayList r0 = new java.util.ArrayList
+            r0.<init>()
+            r3._lockscreenTargets = r0
+            java.util.ArrayList r0 = new java.util.ArrayList
+            r0.<init>()
+            r3.mediaTargets = r0
+            r0 = -1
+            r3.dozeColor = r0
+            android.content.Context r4 = r4.getContext()
+            r0 = 16842806(0x1010036, float:2.369371E-38)
+            int r4 = com.android.launcher3.icons.GraphicsUtils.getAttrColor(r0, r4)
+            r3.primaryTextColor = r4
+            r3.currentTextColor = r4
+            r3.configProvider = r5
+            com.google.android.systemui.smartspace.CardRecyclerViewAdapter$TransitionType r4 = com.google.android.systemui.smartspace.CardRecyclerViewAdapter.TransitionType.NOT_IN_TRANSITION
+            r3.transitioningTo = r4
+            return
+        L5f:
+            monitor-exit(r1)     // Catch: java.lang.Throwable -> L14
+            throw r3
+        */
+        throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.smartspace.CardRecyclerViewAdapter.<init>(com.google.android.systemui.smartspace.BcSmartspaceView, com.android.systemui.plugins.BcSmartspaceConfigPlugin):void");
     }
 
     public static boolean isTemplateCard(SmartspaceTarget smartspaceTarget) {
@@ -135,7 +200,7 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
 
     @Override // com.google.android.systemui.smartspace.CardAdapter
     public final float getDozeAmount() {
-        return this.dozeAmount;
+        return this._dozeAmount;
     }
 
     @Override // com.google.android.systemui.smartspace.CardAdapter
@@ -149,13 +214,8 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public final int getItemCount() {
-        return this.smartspaceTargets.size();
-    }
-
-    @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public final int getItemViewType(int i) {
-        SmartspaceTarget smartspaceTarget = (SmartspaceTarget) this.smartspaceTargets.get(i);
+        SmartspaceTarget smartspaceTarget = (SmartspaceTarget) this.mDiffer.mReadOnlyList.get(i);
         RemoteViews remoteViews = smartspaceTarget.getRemoteViews();
         BaseTemplateData templateData = smartspaceTarget.getTemplateData();
         if (smartspaceTarget.getRemoteViews() != null) {
@@ -164,18 +224,18 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
         }
         if (!isTemplateCard(smartspaceTarget)) {
             Integer num = (Integer) BcSmartSpaceUtil.FEATURE_TYPE_TO_SECONDARY_CARD_RESOURCE_MAP.get(Integer.valueOf(BcSmartSpaceUtil.getFeatureType(smartspaceTarget)));
-            return num != null ? num.intValue() : com.android.wm.shell.R.layout.smartspace_card;
+            return num != null ? num.intValue() : R.layout.smartspace_card;
         }
         templateData.getClass();
         BaseTemplateData.SubItemInfo primaryItem = templateData.getPrimaryItem();
         if (primaryItem == null) {
-            return com.android.wm.shell.R.layout.smartspace_base_template_card_with_date;
+            return R.layout.smartspace_base_template_card_with_date;
         }
         if (SmartspaceUtils.isEmpty(primaryItem.getText()) && primaryItem.getIcon() == null) {
-            return com.android.wm.shell.R.layout.smartspace_base_template_card_with_date;
+            return R.layout.smartspace_base_template_card_with_date;
         }
         Integer num2 = (Integer) BcSmartspaceTemplateDataUtils.TEMPLATE_TYPE_TO_SECONDARY_CARD_RES.get(Integer.valueOf(templateData.getTemplateType()));
-        return num2 != null ? num2.intValue() : com.android.wm.shell.R.layout.smartspace_base_template_card;
+        return num2 != null ? num2.intValue() : R.layout.smartspace_base_template_card;
     }
 
     @Override // com.google.android.systemui.smartspace.CardAdapter
@@ -210,10 +270,10 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
 
     @Override // com.google.android.systemui.smartspace.CardAdapter
     public final SmartspaceTarget getTargetAtPosition(int i) {
-        if (this.smartspaceTargets.isEmpty() || i < 0 || i >= this.smartspaceTargets.size()) {
+        if (i < 0 || i >= getItemCount()) {
             return null;
         }
-        return (SmartspaceTarget) this.smartspaceTargets.get(i);
+        return (SmartspaceTarget) this.mDiffer.mReadOnlyList.get(i);
     }
 
     @Override // com.google.android.systemui.smartspace.CardAdapter
@@ -234,12 +294,13 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
         ViewHolder viewHolder2 = (ViewHolder) viewHolder;
-        SmartspaceTarget smartspaceTarget = (SmartspaceTarget) this.smartspaceTargets.get(i);
+        SmartspaceTarget smartspaceTarget = (SmartspaceTarget) this.mDiffer.mReadOnlyList.get(i);
+        smartspaceTarget.getClass();
         boolean isTemplateCard = isTemplateCard(smartspaceTarget);
         BcSmartspaceCardLoggingInfo.Builder builder = new BcSmartspaceCardLoggingInfo.Builder();
         builder.mInstanceId = InstanceId.create(smartspaceTarget);
         builder.mFeatureType = smartspaceTarget.getFeatureType();
-        builder.mDisplaySurface = BcSmartSpaceUtil.getLoggingDisplaySurface(this.uiSurface, this.dozeAmount);
+        builder.mDisplaySurface = BcSmartSpaceUtil.getLoggingDisplaySurface(this.uiSurface, this._dozeAmount);
         builder.mRank = i;
         builder.mCardinality = this.smartspaceTargets.size();
         this.root.getContext().getPackageManager();
@@ -271,16 +332,10 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
                 return;
             }
         }
-        smartspaceCard.bindData(smartspaceTarget, this.dataProvider == null ? null : new BcSmartspaceDataPlugin.SmartspaceEventNotifier() { // from class: com.google.android.systemui.smartspace.CardRecyclerViewAdapter$onBindViewHolder$1
-            @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceEventNotifier
-            public final void notifySmartspaceEvent(SmartspaceTargetEvent smartspaceTargetEvent) {
-                BcSmartspaceDataPlugin bcSmartspaceDataPlugin = CardRecyclerViewAdapter.this.dataProvider;
-                bcSmartspaceDataPlugin.getClass();
-                bcSmartspaceDataPlugin.notifySmartspaceEvent(smartspaceTargetEvent);
-            }
-        }, bcSmartspaceCardLoggingInfo, this.smartspaceTargets.size() > 1);
+        BcSmartspaceDataPlugin bcSmartspaceDataPlugin = this.dataProvider;
+        smartspaceCard.bindData(smartspaceTarget, bcSmartspaceDataPlugin != null ? bcSmartspaceDataPlugin.getEventNotifier() : null, bcSmartspaceCardLoggingInfo, this.smartspaceTargets.size() > 1);
         smartspaceCard.setPrimaryTextColor(this.currentTextColor);
-        smartspaceCard.setDozeAmount$1(this.dozeAmount);
+        smartspaceCard.setDozeAmount$1(this._dozeAmount);
         this.viewHolders.put(i, viewHolder2);
     }
 
@@ -292,10 +347,10 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
         BcSmartspaceRemoteViewsCard bcSmartspaceRemoteViewsCard;
         Set set = templateSecondaryCardResourceIdSet;
         Integer num2 = null;
-        if (set.contains(Integer.valueOf(i)) || i == com.android.wm.shell.R.layout.smartspace_base_template_card_with_date || i == com.android.wm.shell.R.layout.smartspace_base_template_card) {
+        if (set.contains(Integer.valueOf(i)) || i == R.layout.smartspace_base_template_card_with_date || i == R.layout.smartspace_base_template_card) {
             if (set.contains(Integer.valueOf(i))) {
                 num = Integer.valueOf(i);
-                i = com.android.wm.shell.R.layout.smartspace_base_template_card;
+                i = R.layout.smartspace_base_template_card;
             } else {
                 num = null;
             }
@@ -339,7 +394,7 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
             }
         } else {
             Set set2 = legacySecondaryCardResourceIdSet;
-            if (!set2.contains(Integer.valueOf(i)) && i != com.android.wm.shell.R.layout.smartspace_card) {
+            if (!set2.contains(Integer.valueOf(i)) && i != R.layout.smartspace_card) {
                 bcSmartspaceRemoteViewsCard = new BcSmartspaceRemoteViewsCard(viewGroup.getContext());
                 bcSmartspaceRemoteViewsCard.mUiSurface = bcSmartspaceRemoteViewsCard.mUiSurface;
                 bcSmartspaceRemoteViewsCard.setLayoutParams(new ViewGroup.LayoutParams(-1, -1));
@@ -347,7 +402,7 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
             }
             if (set2.contains(Integer.valueOf(i))) {
                 num2 = Integer.valueOf(i);
-                i = com.android.wm.shell.R.layout.smartspace_card;
+                i = R.layout.smartspace_card;
             }
             LayoutInflater from2 = LayoutInflater.from(viewGroup.getContext());
             BcSmartspaceCard bcSmartspaceCard = (BcSmartspaceCard) from2.inflate(i, viewGroup, false);
@@ -385,18 +440,18 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
 
     @Override // com.google.android.systemui.smartspace.CardAdapter
     public final void setDozeAmount(float f) {
-        this.dozeAmount = f;
+        this._dozeAmount = f;
         float f2 = this.previousDozeAmount;
         this.transitioningTo = f2 > f ? TransitionType.TO_LOCKSCREEN : f2 < f ? TransitionType.TO_AOD : TransitionType.NOT_IN_TRANSITION;
         this.previousDozeAmount = f;
-        updateTargetVisibility$1();
+        updateTargetVisibility(null, false);
         updateCurrentTextColor$1();
     }
 
     @Override // com.google.android.systemui.smartspace.CardAdapter
     public final void setKeyguardBypassEnabled(boolean z) {
         this.keyguardBypassEnabled = z;
-        updateTargetVisibility$1();
+        updateTargetVisibility(null, false);
     }
 
     @Override // com.google.android.systemui.smartspace.CardAdapter
@@ -405,8 +460,7 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
         if (smartspaceTarget != null) {
             this.mediaTargets.add(smartspaceTarget);
         }
-        updateTargetVisibility$1();
-        notifyDataSetChanged();
+        updateTargetVisibility(null, true);
     }
 
     @Override // com.google.android.systemui.smartspace.CardAdapter
@@ -446,38 +500,7 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
 
     @Override // com.google.android.systemui.smartspace.CardAdapter
     public final void setTargets(List list) {
-        Bundle extras;
-        this._aodTargets.clear();
-        this._lockscreenTargets.clear();
-        this.hasDifferentTargets = false;
-        Iterator it = list.iterator();
-        while (it.hasNext()) {
-            SmartspaceTarget smartspaceTarget = (Parcelable) it.next();
-            if (smartspaceTarget != null) {
-                if (smartspaceTarget.getFeatureType() != 34) {
-                    if ((smartspaceTarget.getRemoteViews() != null) || isTemplateCard(smartspaceTarget) || smartspaceTarget.getFeatureType() != 1) {
-                        SmartspaceAction baseAction = smartspaceTarget.getBaseAction();
-                        int i = (baseAction == null || (extras = baseAction.getExtras()) == null) ? 3 : extras.getInt("SCREEN_EXTRA", 3);
-                        if ((i & 2) != 0) {
-                            this._aodTargets.add(smartspaceTarget);
-                        }
-                        if ((i & 1) != 0) {
-                            this._lockscreenTargets.add(smartspaceTarget);
-                        }
-                        if (i != 3) {
-                            this.hasDifferentTargets = true;
-                        }
-                    }
-                }
-                ClockEventController$listenForDnd$1$1$$ExternalSyntheticOutline0.m("No card can be created for target: ", "SsCardRecyclerViewAdapter", smartspaceTarget.getFeatureType());
-            }
-        }
-        if (!this.configProvider.isDefaultDateWeatherDisabled()) {
-            addDefaultDateCardIfEmpty$1(this._aodTargets);
-            addDefaultDateCardIfEmpty$1(this._lockscreenTargets);
-        }
-        updateTargetVisibility$1();
-        notifyDataSetChanged();
+        setTargets(list, null);
     }
 
     @Override // com.google.android.systemui.smartspace.CardAdapter
@@ -491,32 +514,31 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
     }
 
     public final void updateCurrentTextColor$1() {
-        this.currentTextColor = ColorUtils.blendARGB(this.primaryTextColor, this.dozeColor, this.dozeAmount);
+        this.currentTextColor = ColorUtils.blendARGB(this.primaryTextColor, this.dozeColor, this._dozeAmount);
         int size = this.viewHolders.size();
         for (int i = 0; i < size; i++) {
             SparseArray sparseArray = this.viewHolders;
             ViewHolder viewHolder = (ViewHolder) sparseArray.get(sparseArray.keyAt(i));
             if (viewHolder != null) {
-                int i2 = this.currentTextColor;
                 SmartspaceCard smartspaceCard = viewHolder.card;
-                smartspaceCard.setPrimaryTextColor(i2);
-                smartspaceCard.setDozeAmount$1(this.dozeAmount);
+                smartspaceCard.setPrimaryTextColor(this.currentTextColor);
+                smartspaceCard.setDozeAmount$1(this._dozeAmount);
             }
         }
     }
 
     /* JADX WARN: Removed duplicated region for block: B:14:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0053 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0062  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x006d  */
-    /* JADX WARN: Removed duplicated region for block: B:36:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0057  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0059  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0055  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0068 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x007f  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x008a  */
+    /* JADX WARN: Removed duplicated region for block: B:40:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x005d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct add '--show-bad-code' argument
     */
-    public final void updateTargetVisibility$1() {
+    public final void updateTargetVisibility(java.lang.Runnable r10, boolean r11) {
         /*
             r9 = this;
             java.util.List r0 = r9.mediaTargets
@@ -534,82 +556,126 @@ public final class CardRecyclerViewAdapter extends RecyclerView.Adapter implemen
         L16:
             java.util.List r1 = r9.getLockscreenTargets()
             java.util.List r2 = r9.smartspaceTargets
-            r3 = 0
-            r4 = 1052266988(0x3eb851ec, float:0.36)
-            r5 = 1065353216(0x3f800000, float:1.0)
-            r6 = 1
+            r3 = 1052266988(0x3eb851ec, float:0.36)
+            r4 = 1065353216(0x3f800000, float:1.0)
+            r5 = 1
+            r6 = 0
             if (r2 == r0) goto L38
-            float r7 = r9.dozeAmount
-            int r8 = (r7 > r5 ? 1 : (r7 == r5 ? 0 : -1))
+            float r7 = r9._dozeAmount
+            int r8 = (r7 > r4 ? 1 : (r7 == r4 ? 0 : -1))
             if (r8 != 0) goto L2c
             goto L36
         L2c:
-            int r7 = (r7 > r4 ? 1 : (r7 == r4 ? 0 : -1))
+            int r7 = (r7 > r3 ? 1 : (r7 == r3 ? 0 : -1))
             if (r7 < 0) goto L38
             com.google.android.systemui.smartspace.CardRecyclerViewAdapter$TransitionType r7 = r9.transitioningTo
             com.google.android.systemui.smartspace.CardRecyclerViewAdapter$TransitionType r8 = com.google.android.systemui.smartspace.CardRecyclerViewAdapter.TransitionType.TO_AOD
             if (r7 != r8) goto L38
         L36:
-            r7 = r6
+            r7 = r5
             goto L39
         L38:
-            r7 = r3
+            r7 = r6
         L39:
             if (r2 == r1) goto L50
-            float r2 = r9.dozeAmount
+            float r2 = r9._dozeAmount
             r8 = 0
             int r8 = (r2 > r8 ? 1 : (r2 == r8 ? 0 : -1))
             if (r8 != 0) goto L43
             goto L4e
         L43:
-            float r5 = r5 - r2
-            int r2 = (r5 > r4 ? 1 : (r5 == r4 ? 0 : -1))
+            float r4 = r4 - r2
+            int r2 = (r4 > r3 ? 1 : (r4 == r3 ? 0 : -1))
             if (r2 < 0) goto L50
             com.google.android.systemui.smartspace.CardRecyclerViewAdapter$TransitionType r2 = r9.transitioningTo
-            com.google.android.systemui.smartspace.CardRecyclerViewAdapter$TransitionType r4 = com.google.android.systemui.smartspace.CardRecyclerViewAdapter.TransitionType.TO_LOCKSCREEN
-            if (r2 != r4) goto L50
+            com.google.android.systemui.smartspace.CardRecyclerViewAdapter$TransitionType r3 = com.google.android.systemui.smartspace.CardRecyclerViewAdapter.TransitionType.TO_LOCKSCREEN
+            if (r2 != r3) goto L50
         L4e:
-            r2 = r6
+            r2 = r5
             goto L51
         L50:
-            r2 = r3
+            r2 = r6
         L51:
-            if (r7 != 0) goto L55
-            if (r2 == 0) goto L5f
-        L55:
-            if (r7 == 0) goto L59
-            r2 = r0
-            goto L5a
-        L59:
-            r2 = r1
-        L5a:
-            r9.smartspaceTargets = r2
-            r9.notifyDataSetChanged()
-        L5f:
-            if (r0 == r1) goto L62
-            goto L63
-        L62:
-            r6 = r3
-        L63:
-            r9.hasAodLockscreenTransition = r6
-            com.android.systemui.plugins.BcSmartspaceConfigPlugin r0 = r9.configProvider
-            boolean r0 = r0.isDefaultDateWeatherDisabled()
-            if (r0 == 0) goto L86
-            java.lang.String r0 = r9.uiSurface
-            java.lang.String r1 = "home"
-            boolean r0 = kotlin.text.StringsKt__StringsJVMKt.equals(r0, r1, r3)
-            if (r0 != 0) goto L86
-            java.util.List r0 = r9.smartspaceTargets
-            boolean r0 = r0.isEmpty()
-            if (r0 == 0) goto L81
-            r3 = 8
-        L81:
+            java.lang.String r3 = "SsCardRecyclerViewAdapter"
+            if (r7 == 0) goto L5d
+            java.lang.String r4 = "Updating Smartspace targets to targets for AOD"
+            android.util.Log.d(r3, r4)
+            r9.smartspaceTargets = r0
+            goto L66
+        L5d:
+            if (r2 == 0) goto L66
+            java.lang.String r4 = "Updating Smartspace targets to targets for Lockscreen"
+            android.util.Log.d(r3, r4)
+            r9.smartspaceTargets = r1
+        L66:
+            if (r11 != 0) goto L6c
+            if (r7 != 0) goto L6c
+            if (r2 == 0) goto L7c
+        L6c:
+            android.util.SparseArray r11 = r9.viewHolders
+            r11.clear()
+            java.util.List r11 = r9.smartspaceTargets
+            java.util.List r11 = kotlin.collections.CollectionsKt.toList(r11)
+            androidx.recyclerview.widget.AsyncListDiffer r2 = r9.mDiffer
+            r2.submitList(r11, r10)
+        L7c:
+            if (r0 == r1) goto L7f
+            goto L80
+        L7f:
+            r5 = r6
+        L80:
+            r9.hasAodLockscreenTransition = r5
+            com.android.systemui.plugins.BcSmartspaceConfigPlugin r10 = r9.configProvider
+            boolean r10 = r10.isDefaultDateWeatherDisabled()
+            if (r10 == 0) goto La3
+            java.lang.String r10 = r9.uiSurface
+            java.lang.String r11 = "home"
+            boolean r10 = kotlin.text.StringsKt__StringsJVMKt.equals(r10, r11, r6)
+            if (r10 != 0) goto La3
+            java.util.List r10 = r9.smartspaceTargets
+            boolean r10 = r10.isEmpty()
+            if (r10 == 0) goto L9e
+            r6 = 8
+        L9e:
             com.google.android.systemui.smartspace.BcSmartspaceView r9 = r9.root
-            com.google.android.systemui.smartspace.BcSmartspaceTemplateDataUtils.updateVisibility(r9, r3)
-        L86:
+            com.google.android.systemui.smartspace.BcSmartspaceTemplateDataUtils.updateVisibility(r9, r6)
+        La3:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.smartspace.CardRecyclerViewAdapter.updateTargetVisibility$1():void");
+        throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.smartspace.CardRecyclerViewAdapter.updateTargetVisibility(java.lang.Runnable, boolean):void");
+    }
+
+    public final void setTargets(List list, BcSmartspaceView$$ExternalSyntheticLambda1 bcSmartspaceView$$ExternalSyntheticLambda1) {
+        Bundle extras;
+        this._aodTargets.clear();
+        this._lockscreenTargets.clear();
+        this.hasDifferentTargets = false;
+        Iterator it = list.iterator();
+        while (it.hasNext()) {
+            SmartspaceTarget smartspaceTarget = (Parcelable) it.next();
+            if (smartspaceTarget != null) {
+                if (smartspaceTarget.getFeatureType() == 34 || (smartspaceTarget.getRemoteViews() == null && !isTemplateCard(smartspaceTarget) && smartspaceTarget.getFeatureType() == 1)) {
+                    ClockEventController$$ExternalSyntheticOutline0.m(smartspaceTarget.getFeatureType(), "No card can be created for target: ", "SsCardRecyclerViewAdapter");
+                } else {
+                    SmartspaceAction baseAction = smartspaceTarget.getBaseAction();
+                    int i = (baseAction == null || (extras = baseAction.getExtras()) == null) ? 3 : extras.getInt("SCREEN_EXTRA", 3);
+                    if ((i & 2) != 0) {
+                        this._aodTargets.add(smartspaceTarget);
+                    }
+                    if ((i & 1) != 0) {
+                        this._lockscreenTargets.add(smartspaceTarget);
+                    }
+                    if (i != 3) {
+                        this.hasDifferentTargets = true;
+                    }
+                }
+            }
+        }
+        if (!this.configProvider.isDefaultDateWeatherDisabled()) {
+            addDefaultDateCardIfEmpty$1(this._aodTargets);
+            addDefaultDateCardIfEmpty$1(this._lockscreenTargets);
+        }
+        updateTargetVisibility(bcSmartspaceView$$ExternalSyntheticLambda1, true);
     }
 
     public static /* synthetic */ void getAodTargets$annotations() {

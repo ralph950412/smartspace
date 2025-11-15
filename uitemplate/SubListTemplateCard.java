@@ -19,7 +19,7 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInf
 import java.util.List;
 import java.util.Locale;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public class SubListTemplateCard extends BcSmartspaceCardSecondary {
     public static final int[] LIST_ITEM_TEXT_VIEW_IDS = {R.id.list_item_1, R.id.list_item_2, R.id.list_item_3};
@@ -75,7 +75,7 @@ public class SubListTemplateCard extends BcSmartspaceCardSecondary {
                 TextView textView = this.mListItems[i];
                 if (textView == null) {
                     Locale locale = Locale.US;
-                    RecordingInputConnection$$ExternalSyntheticOutline0.m("Missing list item view to update at row: ", "SubListTemplateCard", i + 1);
+                    RecordingInputConnection$$ExternalSyntheticOutline0.m(i + 1, "Missing list item view to update at row: ", "SubListTemplateCard");
                     break;
                 }
                 if (i < subListTexts.size()) {
@@ -89,7 +89,7 @@ public class SubListTemplateCard extends BcSmartspaceCardSecondary {
             }
         }
         if (templateData.getSubListAction() != null) {
-            BcSmartSpaceUtil.setOnClickListener(this, smartspaceTarget, templateData.getSubListAction(), smartspaceEventNotifier, "SubListTemplateCard", bcSmartspaceCardLoggingInfo, 0);
+            BcSmartSpaceUtil.setOnClickListener$1(this, smartspaceTarget, templateData.getSubListAction(), smartspaceEventNotifier, "SubListTemplateCard", bcSmartspaceCardLoggingInfo, 0);
         }
         return true;
     }
@@ -100,7 +100,7 @@ public class SubListTemplateCard extends BcSmartspaceCardSecondary {
             TextView textView = this.mListItems[i2];
             if (textView == null) {
                 Locale locale = Locale.US;
-                RecordingInputConnection$$ExternalSyntheticOutline0.m("Missing list item view to update at row: ", "SubListTemplateCard", i2 + 1);
+                RecordingInputConnection$$ExternalSyntheticOutline0.m(i2 + 1, "Missing list item view to update at row: ", "SubListTemplateCard");
                 return;
             }
             textView.setTextColor(i);

@@ -13,7 +13,7 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLogger;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public final class BcSmartspaceRemoteViewsCard extends AppWidgetHostView implements SmartspaceCard {
     public BcSmartspaceDataPlugin.SmartspaceEventNotifier mEventNotifier;
@@ -44,25 +44,26 @@ public final class BcSmartspaceRemoteViewsCard extends AppWidgetHostView impleme
             if (Intrinsics.areEqual(this.mUiSurface, BcSmartspaceDataPlugin.UI_SURFACE_LOCK_SCREEN_AOD)) {
                 super.setInteractionHandler(new RemoteViews.InteractionHandler() { // from class: com.google.android.systemui.smartspace.BcSmartSpaceUtil.1
                     public final /* synthetic */ SmartspaceAction val$action;
-                    public final /* synthetic */ BcSmartspaceDataPlugin.SmartspaceEventNotifier val$eventNotifier;
+                    public final /* synthetic */ BcSmartspaceCardLoggingInfo val$loggingInfo;
                     public final /* synthetic */ SmartspaceTarget val$target;
 
-                    public AnonymousClass1(BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier2, SmartspaceTarget smartspaceTarget2, SmartspaceAction headerAction2) {
-                        r2 = smartspaceEventNotifier2;
+                    public AnonymousClass1(BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo2, SmartspaceTarget smartspaceTarget2, SmartspaceAction headerAction2) {
+                        r2 = bcSmartspaceCardLoggingInfo2;
                         r3 = smartspaceTarget2;
                         r4 = headerAction2;
                     }
 
                     public final boolean onInteraction(View view, PendingIntent pendingIntent, RemoteViews.RemoteResponse remoteResponse) {
-                        BcSmartspaceDataPlugin.IntentStarter intentStarter = BcSmartSpaceUtil.sIntentStarter;
+                        BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier2 = BcSmartspaceDataPlugin.SmartspaceEventNotifier.this;
+                        BcSmartspaceDataPlugin.IntentStarter intentStarter = smartspaceEventNotifier2 != null ? smartspaceEventNotifier2.getIntentStarter() : null;
                         if (intentStarter == null) {
                             intentStarter = new AnonymousClass2("BcSmartspaceRemoteViewsCard");
                         }
                         if (pendingIntent != null) {
-                            BcSmartspaceCardLogger.log(BcSmartspaceEvent.SMARTSPACE_CARD_CLICK, BcSmartspaceCardLoggingInfo.this);
-                            BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier2 = r2;
-                            if (smartspaceEventNotifier2 != null) {
-                                smartspaceEventNotifier2.notifySmartspaceEvent(new SmartspaceTargetEvent.Builder(1).setSmartspaceTarget(r3).setSmartspaceActionId(r4.getId()).build());
+                            BcSmartspaceCardLogger.log(BcSmartspaceEvent.SMARTSPACE_CARD_CLICK, r2);
+                            BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier3 = BcSmartspaceDataPlugin.SmartspaceEventNotifier.this;
+                            if (smartspaceEventNotifier3 != null) {
+                                smartspaceEventNotifier3.notifySmartspaceEvent(new SmartspaceTargetEvent.Builder(1).setSmartspaceTarget(r3).setSmartspaceActionId(r4.getId()).build());
                             }
                             intentStarter.startPendingIntent(view, pendingIntent, false);
                         }

@@ -16,7 +16,7 @@ import com.android.systemui.util.concurrency.ExecutorImpl;
 import com.android.wm.shell.R;
 import kotlin.Unit;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public final class KeyguardMediaViewController {
     public CharSequence artist;
@@ -33,9 +33,7 @@ public final class KeyguardMediaViewController {
                     Unit unit;
                     KeyguardMediaViewController keyguardMediaViewController2 = KeyguardMediaViewController.this;
                     MediaMetadata mediaMetadata2 = mediaMetadata;
-                    int i2 = i;
-                    keyguardMediaViewController2.getClass();
-                    if (!NotificationMediaManager.isPlayingState(i2)) {
+                    if (!NotificationMediaManager.isPlayingState(i)) {
                         keyguardMediaViewController2.title = null;
                         keyguardMediaViewController2.artist = null;
                         BcSmartspaceDataPlugin.SmartspaceView smartspaceView = keyguardMediaViewController2.smartspaceView;

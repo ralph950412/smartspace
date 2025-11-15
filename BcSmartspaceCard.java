@@ -4,6 +4,8 @@ import android.app.smartspace.SmartspaceAction;
 import android.app.smartspace.SmartspaceTarget;
 import android.content.Context;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -19,6 +21,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.android.app.animation.Interpolators;
 import com.android.launcher3.icons.GraphicsUtils;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
+import com.android.systemui.plugins.FalsingManager;
 import com.android.wm.shell.R;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardMetadataLoggingInfo;
@@ -28,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/* compiled from: go/retraceme bc8f312991c214754a2e368df4ed1e9dbe6546937b19609896dfc63dbd122911 */
+/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
 /* loaded from: classes2.dex */
 public class BcSmartspaceCard extends ConstraintLayout implements SmartspaceCard {
     public final DoubleShadowIconDrawable mBaseActionIconDrawable;
@@ -74,19 +77,143 @@ public class BcSmartspaceCard extends ConstraintLayout implements SmartspaceCard
         return 0;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:82:0x01df A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x01e0  */
     @Override // com.google.android.systemui.smartspace.SmartspaceCard
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct add '--show-bad-code' argument
-    */
-    public final void bindData(android.app.smartspace.SmartspaceTarget r17, com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceEventNotifier r18, com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo r19, boolean r20) {
-        /*
-            Method dump skipped, instructions count: 519
-            To view this dump add '--comments-level debug' option
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.smartspace.BcSmartspaceCard.bindData(android.app.smartspace.SmartspaceTarget, com.android.systemui.plugins.BcSmartspaceDataPlugin$SmartspaceEventNotifier, com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo, boolean):void");
+    public final void bindData(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo, boolean z) {
+        SmartspaceAction smartspaceAction;
+        Drawable iconDrawableWithCustomSize;
+        int i;
+        this.mLoggingInfo = null;
+        this.mEventNotifier = null;
+        int i2 = 8;
+        BcSmartspaceTemplateDataUtils.updateVisibility(this.mSecondaryCardGroup, 8);
+        this.mIconDrawable.mIconDrawable = null;
+        this.mBaseActionIconDrawable.mIconDrawable = null;
+        setTitle(null, null, false);
+        setSubtitle(null, null, false);
+        DoubleShadowTextView doubleShadowTextView = this.mBaseActionIconSubtitleView;
+        if (doubleShadowTextView == null) {
+            Log.w("BcSmartspaceCard", "No base action icon subtitle view to update");
+        } else {
+            doubleShadowTextView.setText((CharSequence) null);
+            this.mBaseActionIconSubtitleView.setCompoundDrawablesRelative(null, null, null, null);
+            ContentDescriptionUtil.setFormattedContentDescription("BcSmartspaceCard", this.mBaseActionIconSubtitleView, null, null);
+        }
+        updateIconTint();
+        setOnClickListener(null);
+        TextView textView = this.mTitleTextView;
+        if (textView != null) {
+            textView.setOnClickListener(null);
+        }
+        TextView textView2 = this.mSubtitleTextView;
+        if (textView2 != null) {
+            textView2.setOnClickListener(null);
+        }
+        DoubleShadowTextView doubleShadowTextView2 = this.mBaseActionIconSubtitleView;
+        if (doubleShadowTextView2 != null) {
+            doubleShadowTextView2.setOnClickListener(null);
+        }
+        this.mTarget = smartspaceTarget;
+        this.mEventNotifier = smartspaceEventNotifier;
+        SmartspaceAction headerAction = smartspaceTarget.getHeaderAction();
+        SmartspaceAction baseAction = smartspaceTarget.getBaseAction();
+        this.mLoggingInfo = bcSmartspaceCardLoggingInfo;
+        this.mUsePageIndicatorUi = z;
+        this.mValidSecondaryCard = false;
+        ViewGroup viewGroup = this.mTextGroup;
+        if (viewGroup != null) {
+            viewGroup.setTranslationX(0.0f);
+        }
+        if (headerAction != null) {
+            BcSmartspaceCardSecondary bcSmartspaceCardSecondary = this.mSecondaryCard;
+            if (bcSmartspaceCardSecondary != null) {
+                bcSmartspaceCardSecondary.reset(smartspaceTarget.getSmartspaceTargetId());
+                this.mValidSecondaryCard = this.mSecondaryCard.setSmartspaceActions(smartspaceTarget, this.mEventNotifier, bcSmartspaceCardLoggingInfo);
+            }
+            ViewGroup viewGroup2 = this.mSecondaryCardGroup;
+            if (viewGroup2 != null) {
+                viewGroup2.setAlpha(1.0f);
+            }
+            ViewGroup viewGroup3 = this.mSecondaryCardGroup;
+            if (this.mDozeAmount != 1.0f && this.mValidSecondaryCard) {
+                i2 = 0;
+            }
+            BcSmartspaceTemplateDataUtils.updateVisibility(viewGroup3, i2);
+            Icon icon = headerAction.getIcon();
+            Context context = getContext();
+            FalsingManager falsingManager = BcSmartSpaceUtil.sFalsingManager;
+            Drawable iconDrawableWithCustomSize2 = BcSmartSpaceUtil.getIconDrawableWithCustomSize(icon, context, context.getResources().getDimensionPixelSize(R.dimen.enhanced_smartspace_icon_size));
+            boolean z2 = iconDrawableWithCustomSize2 != null;
+            this.mIconDrawable.setIcon(iconDrawableWithCustomSize2);
+            CharSequence title = headerAction.getTitle();
+            CharSequence subtitle = headerAction.getSubtitle();
+            boolean z3 = smartspaceTarget.getFeatureType() == 1 || !TextUtils.isEmpty(title);
+            boolean isEmpty = TextUtils.isEmpty(subtitle);
+            boolean z4 = !isEmpty;
+            if (!z3) {
+                title = subtitle;
+            }
+            setTitle(title, headerAction.getContentDescription(), z3 != z4 && z2);
+            if (!z3 || isEmpty) {
+                subtitle = null;
+            }
+            setSubtitle(subtitle, headerAction.getContentDescription(), z2);
+        }
+        if (baseAction != null) {
+            int i3 = (baseAction.getExtras() == null || baseAction.getExtras().isEmpty()) ? -1 : baseAction.getExtras().getInt("subcardType", -1);
+            if (baseAction.getIcon() == null) {
+                iconDrawableWithCustomSize = null;
+            } else {
+                Icon icon2 = baseAction.getIcon();
+                Context context2 = getContext();
+                FalsingManager falsingManager2 = BcSmartSpaceUtil.sFalsingManager;
+                iconDrawableWithCustomSize = BcSmartSpaceUtil.getIconDrawableWithCustomSize(icon2, context2, context2.getResources().getDimensionPixelSize(R.dimen.enhanced_smartspace_icon_size));
+            }
+            this.mBaseActionIconDrawable.setIcon(iconDrawableWithCustomSize);
+            CharSequence subtitle2 = baseAction.getSubtitle();
+            CharSequence contentDescription = baseAction.getContentDescription();
+            DoubleShadowIconDrawable doubleShadowIconDrawable = this.mBaseActionIconDrawable;
+            DoubleShadowTextView doubleShadowTextView3 = this.mBaseActionIconSubtitleView;
+            if (doubleShadowTextView3 == null) {
+                Log.w("BcSmartspaceCard", "No base action icon subtitle view to update");
+            } else {
+                doubleShadowTextView3.setText(subtitle2);
+                this.mBaseActionIconSubtitleView.setCompoundDrawablesRelative(doubleShadowIconDrawable, null, null, null);
+                ContentDescriptionUtil.setFormattedContentDescription("BcSmartspaceCard", this.mBaseActionIconSubtitleView, subtitle2, contentDescription);
+            }
+            if (i3 != -1) {
+                i = getClickedIndex(bcSmartspaceCardLoggingInfo, i3);
+            } else {
+                Log.d("BcSmartspaceCard", "Subcard expected but missing type. loggingInfo=" + bcSmartspaceCardLoggingInfo.toString() + ", baseAction=" + baseAction.toString());
+                i = 0;
+            }
+            smartspaceAction = baseAction;
+            BcSmartSpaceUtil.setOnClickListener(this.mBaseActionIconSubtitleView, smartspaceTarget, smartspaceAction, this.mEventNotifier, "BcSmartspaceCard", bcSmartspaceCardLoggingInfo, i);
+        } else {
+            smartspaceAction = baseAction;
+        }
+        updateIconTint();
+        if (headerAction != null && (headerAction.getIntent() != null || headerAction.getPendingIntent() != null)) {
+            if (smartspaceTarget.getFeatureType() == 1 && bcSmartspaceCardLoggingInfo.mFeatureType == 39) {
+                getClickedIndex(bcSmartspaceCardLoggingInfo, 1);
+            }
+            setPrimaryOnClickListener(smartspaceTarget, headerAction, bcSmartspaceCardLoggingInfo);
+        } else if (smartspaceAction == null || (smartspaceAction.getIntent() == null && smartspaceAction.getPendingIntent() == null)) {
+            setPrimaryOnClickListener(smartspaceTarget, headerAction, bcSmartspaceCardLoggingInfo);
+        } else {
+            setPrimaryOnClickListener(smartspaceTarget, smartspaceAction, bcSmartspaceCardLoggingInfo);
+        }
+        ViewGroup viewGroup4 = this.mSecondaryCardGroup;
+        if (viewGroup4 == null) {
+            return;
+        }
+        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) viewGroup4.getLayoutParams();
+        if (BcSmartSpaceUtil.getFeatureType(smartspaceTarget) == -2) {
+            layoutParams.matchConstraintMaxWidth = (getWidth() * 3) / 4;
+        } else {
+            layoutParams.matchConstraintMaxWidth = getWidth() / 2;
+        }
+        this.mSecondaryCardGroup.setLayoutParams(layoutParams);
+        this.mTouchDelegateIsDirty = true;
     }
 
     @Override // android.view.View
@@ -165,34 +292,31 @@ public class BcSmartspaceCard extends ConstraintLayout implements SmartspaceCard
         if (this.mTextGroup == null) {
             return;
         }
-        BcSmartspaceTemplateDataUtils.updateVisibility(this.mSecondaryCardGroup, (this.mDozeAmount > 1.0f ? 1 : (this.mDozeAmount == 1.0f ? 0 : -1)) == 0 || !this.mValidSecondaryCard ? 8 : 0);
+        BcSmartspaceTemplateDataUtils.updateVisibility(this.mSecondaryCardGroup, (this.mDozeAmount == 1.0f || !this.mValidSecondaryCard) ? 8 : 0);
         SmartspaceTarget smartspaceTarget2 = this.mTarget;
         if (smartspaceTarget2 == null || smartspaceTarget2.getFeatureType() != 30) {
             ViewGroup viewGroup = this.mSecondaryCardGroup;
             if (viewGroup == null || viewGroup.getVisibility() == 8) {
                 this.mTextGroup.setTranslationX(0.0f);
-            } else {
-                this.mTextGroup.setTranslationX(((PathInterpolator) Interpolators.EMPHASIZED).getInterpolation(this.mDozeAmount) * this.mSecondaryCardGroup.getWidth() * (isRtl$1() ? 1 : -1));
-                this.mSecondaryCardGroup.setAlpha(Math.max(0.0f, Math.min(1.0f, ((1.0f - this.mDozeAmount) * 9.0f) - 6.0f)));
+                return;
             }
+            this.mTextGroup.setTranslationX(((PathInterpolator) Interpolators.EMPHASIZED).getInterpolation(this.mDozeAmount) * this.mSecondaryCardGroup.getWidth() * (isRtl$1() ? 1 : -1));
+            this.mSecondaryCardGroup.setAlpha(Math.max(0.0f, Math.min(1.0f, ((1.0f - this.mDozeAmount) * 9.0f) - 6.0f)));
         }
     }
 
     public final void setPrimaryOnClickListener(SmartspaceTarget smartspaceTarget, SmartspaceAction smartspaceAction, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
-        SmartspaceTarget smartspaceTarget2;
-        SmartspaceAction smartspaceAction2;
         if (smartspaceAction != null) {
+            SmartspaceTarget smartspaceTarget2 = smartspaceTarget;
+            SmartspaceAction smartspaceAction2 = smartspaceAction;
             BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo2 = bcSmartspaceCardLoggingInfo;
-            BcSmartSpaceUtil.setOnClickListener(this, smartspaceTarget, smartspaceAction, this.mEventNotifier, "BcSmartspaceCard", bcSmartspaceCardLoggingInfo2, 0);
+            BcSmartSpaceUtil.setOnClickListener(this, smartspaceTarget2, smartspaceAction2, this.mEventNotifier, "BcSmartspaceCard", bcSmartspaceCardLoggingInfo2, 0);
             TextView textView = this.mTitleTextView;
             if (textView != null) {
-                BcSmartSpaceUtil.setOnClickListener(textView, smartspaceTarget, smartspaceAction, this.mEventNotifier, "BcSmartspaceCard", bcSmartspaceCardLoggingInfo2, 0);
-                smartspaceTarget2 = smartspaceTarget;
-                smartspaceAction2 = smartspaceAction;
+                BcSmartSpaceUtil.setOnClickListener(textView, smartspaceTarget2, smartspaceAction2, this.mEventNotifier, "BcSmartspaceCard", bcSmartspaceCardLoggingInfo2, 0);
+                smartspaceTarget2 = smartspaceTarget2;
+                smartspaceAction2 = smartspaceAction2;
                 bcSmartspaceCardLoggingInfo2 = bcSmartspaceCardLoggingInfo2;
-            } else {
-                smartspaceTarget2 = smartspaceTarget;
-                smartspaceAction2 = smartspaceAction;
             }
             TextView textView2 = this.mSubtitleTextView;
             if (textView2 != null) {
@@ -303,29 +427,26 @@ public class BcSmartspaceCard extends ConstraintLayout implements SmartspaceCard
     }
 
     public final void updateIconTint() {
-        DoubleShadowIconDrawable doubleShadowIconDrawable;
         SmartspaceTarget smartspaceTarget = this.mTarget;
-        if (smartspaceTarget == null || (doubleShadowIconDrawable = this.mIconDrawable) == null) {
+        if (smartspaceTarget == null) {
             return;
         }
-        if (smartspaceTarget.getFeatureType() != 1) {
-            doubleShadowIconDrawable.setTint(this.mIconTintColor);
-        } else {
+        DoubleShadowIconDrawable doubleShadowIconDrawable = this.mIconDrawable;
+        if (smartspaceTarget.getFeatureType() == 1) {
             doubleShadowIconDrawable.setTintList(null);
+        } else {
+            doubleShadowIconDrawable.setTint(this.mIconTintColor);
         }
         DoubleShadowIconDrawable doubleShadowIconDrawable2 = this.mBaseActionIconDrawable;
-        if (doubleShadowIconDrawable2 == null) {
-            return;
-        }
         SmartspaceAction baseAction = this.mTarget.getBaseAction();
         int i = -1;
         if (baseAction != null && baseAction.getExtras() != null && !baseAction.getExtras().isEmpty()) {
             i = baseAction.getExtras().getInt("subcardType", -1);
         }
-        if (i != 1) {
-            doubleShadowIconDrawable2.setTint(this.mIconTintColor);
-        } else {
+        if (i == 1) {
             doubleShadowIconDrawable2.setTintList(null);
+        } else {
+            doubleShadowIconDrawable2.setTint(this.mIconTintColor);
         }
     }
 
