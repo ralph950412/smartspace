@@ -17,16 +17,18 @@ import com.android.wm.shell.R;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 import java.util.List;
 
-/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
 /* loaded from: classes2.dex */
 public class BcSmartspaceCardCombination extends BcSmartspaceCardSecondary {
     public ConstraintLayout mFirstSubCard;
     public ConstraintLayout mSecondSubCard;
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public BcSmartspaceCardCombination(Context context) {
         super(context);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final boolean fillSubCard(ConstraintLayout constraintLayout, SmartspaceTarget smartspaceTarget, SmartspaceAction smartspaceAction, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
         boolean z;
         TextView textView = (TextView) constraintLayout.findViewById(R.id.sub_card_text);
@@ -69,6 +71,7 @@ public class BcSmartspaceCardCombination extends BcSmartspaceCardSecondary {
         return z2;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
@@ -76,12 +79,14 @@ public class BcSmartspaceCardCombination extends BcSmartspaceCardSecondary {
         this.mSecondSubCard = (ConstraintLayout) findViewById(R.id.second_sub_card);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final void resetUi() {
         BcSmartspaceTemplateDataUtils.updateVisibility(this.mFirstSubCard, 8);
         BcSmartspaceTemplateDataUtils.updateVisibility(this.mSecondSubCard, 8);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public boolean setSmartspaceActions(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
         SmartspaceAction smartspaceAction;
@@ -105,6 +110,7 @@ public class BcSmartspaceCardCombination extends BcSmartspaceCardSecondary {
         return z && fillSubCard;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 2 */
     public BcSmartspaceCardCombination(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
     }

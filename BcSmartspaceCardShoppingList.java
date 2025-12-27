@@ -15,7 +15,7 @@ import com.android.wm.shell.R;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 import java.util.Locale;
 
-/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
 /* loaded from: classes2.dex */
 public class BcSmartspaceCardShoppingList extends BcSmartspaceCardSecondary {
     public static final int[] LIST_ITEM_TEXT_VIEW_IDS = {R.id.list_item_1, R.id.list_item_2, R.id.list_item_3};
@@ -25,11 +25,13 @@ public class BcSmartspaceCardShoppingList extends BcSmartspaceCardSecondary {
     public ImageView mListIconView;
     public final TextView[] mListItems;
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public BcSmartspaceCardShoppingList(Context context) {
         super(context);
         this.mListItems = new TextView[3];
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
@@ -42,6 +44,7 @@ public class BcSmartspaceCardShoppingList extends BcSmartspaceCardSecondary {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final void resetUi() {
         BcSmartspaceTemplateDataUtils.updateVisibility(this.mEmptyListMessageView, 8);
@@ -53,6 +56,7 @@ public class BcSmartspaceCardShoppingList extends BcSmartspaceCardSecondary {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final boolean setSmartspaceActions(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
         SmartspaceAction baseAction = smartspaceTarget.getBaseAction();
@@ -119,6 +123,7 @@ public class BcSmartspaceCardShoppingList extends BcSmartspaceCardSecondary {
         return false;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final void setTextColor(int i) {
         this.mCardPromptView.setTextColor(i);

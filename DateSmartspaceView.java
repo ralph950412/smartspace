@@ -20,8 +20,9 @@ import com.android.systemui.plugins.FalsingManager;
 import com.android.wm.shell.R;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLogger;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
+import java.lang.invoke.VarHandle;
 
-/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
 /* loaded from: classes2.dex */
 public class DateSmartspaceView extends LinearLayout implements BcSmartspaceDataPlugin.SmartspaceView {
     public static final boolean DEBUG = Log.isLoggable("DateSmartspaceView", 3);
@@ -43,10 +44,12 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
     public int mPrimaryTextColor;
     public String mUiSurface;
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public DateSmartspaceView(Context context) {
         this(context, null);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.ViewGroup, android.view.View
     public final void onAttachedToWindow() {
         Handler handler;
@@ -60,24 +63,37 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
             if (handler == null) {
                 throw new IllegalStateException("Must set background handler to avoid making binder calls on main thread");
             }
-            handler.post(new DateSmartspaceView$$ExternalSyntheticLambda0(this, 0));
+            DateSmartspaceView$$ExternalSyntheticLambda0 dateSmartspaceView$$ExternalSyntheticLambda0 = new DateSmartspaceView$$ExternalSyntheticLambda0(0);
+            dateSmartspaceView$$ExternalSyntheticLambda0.f$0 = this;
+            VarHandle.storeStoreFence();
+            handler.post(dateSmartspaceView$$ExternalSyntheticLambda0);
             Context context = getContext();
             this.mIsAodEnabled = Settings.Secure.getIntForUser(context.getContentResolver(), "doze_always_on", 0, context.getUserId()) == 1;
         }
-        BcSmartspaceCardLoggingInfo.Builder builder = new BcSmartspaceCardLoggingInfo.Builder();
-        builder.mInstanceId = InstanceId.create(this.mDateTarget);
-        builder.mFeatureType = this.mDateTarget.getFeatureType();
-        builder.mDisplaySurface = BcSmartSpaceUtil.getLoggingDisplaySurface(this.mUiSurface, this.mDozeAmount);
+        int create = InstanceId.create(this.mDateTarget);
+        int featureType = this.mDateTarget.getFeatureType();
+        int loggingDisplaySurface = BcSmartSpaceUtil.getLoggingDisplaySurface(this.mUiSurface, this.mDozeAmount);
         getContext().getPackageManager();
-        builder.mUid = -1;
-        this.mLoggingInfo = new BcSmartspaceCardLoggingInfo(builder);
+        BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo = new BcSmartspaceCardLoggingInfo();
+        bcSmartspaceCardLoggingInfo.mInstanceId = create;
+        bcSmartspaceCardLoggingInfo.mDisplaySurface = loggingDisplaySurface;
+        bcSmartspaceCardLoggingInfo.mRank = 0;
+        bcSmartspaceCardLoggingInfo.mCardinality = 0;
+        bcSmartspaceCardLoggingInfo.mFeatureType = featureType;
+        bcSmartspaceCardLoggingInfo.mReceivedLatency = 0;
+        bcSmartspaceCardLoggingInfo.mUid = -1;
+        bcSmartspaceCardLoggingInfo.mSubcardInfo = null;
+        bcSmartspaceCardLoggingInfo.mDimensionalInfo = null;
+        VarHandle.storeStoreFence();
+        this.mLoggingInfo = bcSmartspaceCardLoggingInfo;
         IcuDateTextView icuDateTextView = this.mDateView;
         SmartspaceTarget smartspaceTarget = this.mDateTarget;
         SmartspaceAction smartspaceAction = this.mDateAction;
         BcSmartspaceDataPlugin bcSmartspaceDataPlugin = this.mDataProvider;
-        BcSmartSpaceUtil.setOnClickListener(icuDateTextView, smartspaceTarget, smartspaceAction, bcSmartspaceDataPlugin == null ? null : bcSmartspaceDataPlugin.getEventNotifier(), "DateSmartspaceView", this.mLoggingInfo, 0);
+        BcSmartSpaceUtil.setOnClickListener(icuDateTextView, smartspaceTarget, smartspaceAction, bcSmartspaceDataPlugin != null ? bcSmartspaceDataPlugin.getEventNotifier() : null, "DateSmartspaceView", this.mLoggingInfo, 0);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.ViewGroup, android.view.View
     public final void onDetachedFromWindow() {
         super.onDetachedFromWindow();
@@ -85,9 +101,13 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         if (handler == null) {
             throw new IllegalStateException("Must set background handler to avoid making binder calls on main thread");
         }
-        handler.post(new DateSmartspaceView$$ExternalSyntheticLambda0(this, 1));
+        DateSmartspaceView$$ExternalSyntheticLambda0 dateSmartspaceView$$ExternalSyntheticLambda0 = new DateSmartspaceView$$ExternalSyntheticLambda0(1);
+        dateSmartspaceView$$ExternalSyntheticLambda0.f$0 = this;
+        VarHandle.storeStoreFence();
+        handler.post(dateSmartspaceView$$ExternalSyntheticLambda0);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
@@ -96,17 +116,20 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         this.mDndImageView = (ImageView) findViewById(R.id.dnd_icon);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void registerDataProvider(BcSmartspaceDataPlugin bcSmartspaceDataPlugin) {
         this.mDataProvider = bcSmartspaceDataPlugin;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setBgHandler(Handler handler) {
         this.mBgHandler = handler;
         this.mDateView.mBgHandler = handler;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setDnd(Drawable drawable, String str) {
         if (drawable == null) {
@@ -120,6 +143,7 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         updateColorForExtras();
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setDozeAmount(float f) {
         int loggingDisplaySurface;
@@ -135,31 +159,49 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
             if (DEBUG) {
                 Log.d("DateSmartspaceView", "@" + Integer.toHexString(hashCode()) + ", setDozeAmount: Logging SMARTSPACE_CARD_SEEN, loggingSurface = " + loggingDisplaySurface);
             }
-            BcSmartspaceCardLoggingInfo.Builder builder = new BcSmartspaceCardLoggingInfo.Builder();
             BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo = this.mLoggingInfo;
-            builder.mInstanceId = bcSmartspaceCardLoggingInfo.mInstanceId;
-            builder.mFeatureType = bcSmartspaceCardLoggingInfo.mFeatureType;
-            builder.mDisplaySurface = loggingDisplaySurface;
-            builder.mUid = bcSmartspaceCardLoggingInfo.mUid;
-            BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo2 = new BcSmartspaceCardLoggingInfo(builder);
+            int i = bcSmartspaceCardLoggingInfo.mInstanceId;
+            int i2 = bcSmartspaceCardLoggingInfo.mFeatureType;
+            int i3 = bcSmartspaceCardLoggingInfo.mUid;
+            BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo2 = new BcSmartspaceCardLoggingInfo();
+            bcSmartspaceCardLoggingInfo2.mInstanceId = i;
+            bcSmartspaceCardLoggingInfo2.mDisplaySurface = loggingDisplaySurface;
+            bcSmartspaceCardLoggingInfo2.mRank = 0;
+            bcSmartspaceCardLoggingInfo2.mCardinality = 0;
+            bcSmartspaceCardLoggingInfo2.mFeatureType = i2;
+            bcSmartspaceCardLoggingInfo2.mReceivedLatency = 0;
+            bcSmartspaceCardLoggingInfo2.mUid = i3;
+            bcSmartspaceCardLoggingInfo2.mSubcardInfo = null;
+            bcSmartspaceCardLoggingInfo2.mDimensionalInfo = null;
+            VarHandle.storeStoreFence();
             BcSmartspaceEvent bcSmartspaceEvent = BcSmartspaceEvent.SMARTSPACE_CARD_SEEN;
             BcSmartspaceCardLogger.log(bcSmartspaceEvent, bcSmartspaceCardLoggingInfo2);
             if (this.mNextAlarmData.mImage != null) {
-                BcSmartspaceCardLoggingInfo.Builder builder2 = new BcSmartspaceCardLoggingInfo.Builder();
-                builder2.mInstanceId = InstanceId.create("upcoming_alarm_card_94510_12684");
-                builder2.mFeatureType = 23;
-                builder2.mDisplaySurface = loggingDisplaySurface;
-                builder2.mUid = this.mLoggingInfo.mUid;
-                BcSmartspaceCardLogger.log(bcSmartspaceEvent, new BcSmartspaceCardLoggingInfo(builder2));
+                int create = InstanceId.create("upcoming_alarm_card_94510_12684");
+                int i4 = this.mLoggingInfo.mUid;
+                BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo3 = new BcSmartspaceCardLoggingInfo();
+                bcSmartspaceCardLoggingInfo3.mInstanceId = create;
+                bcSmartspaceCardLoggingInfo3.mDisplaySurface = loggingDisplaySurface;
+                bcSmartspaceCardLoggingInfo3.mRank = 0;
+                bcSmartspaceCardLoggingInfo3.mCardinality = 0;
+                bcSmartspaceCardLoggingInfo3.mFeatureType = 23;
+                bcSmartspaceCardLoggingInfo3.mReceivedLatency = 0;
+                bcSmartspaceCardLoggingInfo3.mUid = i4;
+                bcSmartspaceCardLoggingInfo3.mSubcardInfo = null;
+                bcSmartspaceCardLoggingInfo3.mDimensionalInfo = null;
+                VarHandle.storeStoreFence();
+                BcSmartspaceCardLogger.log(bcSmartspaceEvent, bcSmartspaceCardLoggingInfo3);
             }
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setFalsingManager(FalsingManager falsingManager) {
         BcSmartSpaceUtil.sFalsingManager = falsingManager;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setNextAlarm(Drawable drawable, String str) {
         BcNextAlarmData bcNextAlarmData = this.mNextAlarmData;
@@ -191,18 +233,24 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
             BcSmartspaceDataPlugin.SmartspaceEventNotifier eventNotifier = bcSmartspaceDataPlugin == null ? null : bcSmartspaceDataPlugin.getEventNotifier();
             int loggingDisplaySurface = BcSmartSpaceUtil.getLoggingDisplaySurface(this.mUiSurface, this.mDozeAmount);
             bcNextAlarmData3.getClass();
-            BcNextAlarmData.setOnClickListener(doubleShadowTextView2, eventNotifier, loggingDisplaySurface);
-            BcNextAlarmData bcNextAlarmData4 = this.mNextAlarmData;
-            DoubleShadowTextView doubleShadowTextView3 = this.mNextAlarmTextView;
-            BcSmartspaceDataPlugin bcSmartspaceDataPlugin2 = this.mDataProvider;
-            BcSmartspaceDataPlugin.SmartspaceEventNotifier eventNotifier2 = bcSmartspaceDataPlugin2 != null ? bcSmartspaceDataPlugin2.getEventNotifier() : null;
-            int loggingDisplaySurface2 = BcSmartSpaceUtil.getLoggingDisplaySurface(this.mUiSurface, this.mDozeAmount);
-            bcNextAlarmData4.getClass();
-            BcNextAlarmData.setOnClickListener(doubleShadowTextView3, eventNotifier2, loggingDisplaySurface2);
+            int create = InstanceId.create("upcoming_alarm_card_94510_12684");
+            BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo = new BcSmartspaceCardLoggingInfo();
+            bcSmartspaceCardLoggingInfo.mInstanceId = create;
+            bcSmartspaceCardLoggingInfo.mDisplaySurface = loggingDisplaySurface;
+            bcSmartspaceCardLoggingInfo.mRank = 0;
+            bcSmartspaceCardLoggingInfo.mCardinality = 0;
+            bcSmartspaceCardLoggingInfo.mFeatureType = 23;
+            bcSmartspaceCardLoggingInfo.mReceivedLatency = 0;
+            bcSmartspaceCardLoggingInfo.mUid = 0;
+            bcSmartspaceCardLoggingInfo.mSubcardInfo = null;
+            bcSmartspaceCardLoggingInfo.mDimensionalInfo = null;
+            VarHandle.storeStoreFence();
+            BcSmartSpaceUtil.setOnClickListener(doubleShadowTextView2, null, BcNextAlarmData.SHOW_ALARMS_ACTION, eventNotifier, "BcNextAlarmData", bcSmartspaceCardLoggingInfo, 0);
         }
         updateColorForExtras();
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setPrimaryTextColor(int i) {
         this.mPrimaryTextColor = i;
@@ -212,6 +260,7 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         updateColorForExtras();
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setScreenOn(boolean z) {
         IcuDateTextView icuDateTextView = this.mDateView;
@@ -221,6 +270,7 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setTimeChangedDelegate(BcSmartspaceDataPlugin.TimeChangedDelegate timeChangedDelegate) {
         IcuDateTextView icuDateTextView = this.mDateView;
@@ -232,6 +282,7 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setUiSurface(String str) {
         if (isAttachedToWindow()) {
@@ -247,6 +298,7 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void updateColorForExtras() {
         DoubleShadowTextView doubleShadowTextView = this.mNextAlarmTextView;
         if (doubleShadowTextView != null) {
@@ -261,6 +313,7 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         imageView.invalidate();
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 2 */
     public DateSmartspaceView(Context context, AttributeSet attributeSet) {
         this(context, attributeSet, 0);
     }
@@ -274,6 +327,7 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         this.mDateAction = new SmartspaceAction.Builder("dateId", "Date").setIntent(BcSmartSpaceUtil.getOpenCalendarIntent()).build();
         this.mNextAlarmData = new BcNextAlarmData();
         this.mAodSettingsObserver = new ContentObserver(new Handler()) { // from class: com.google.android.systemui.smartspace.DateSmartspaceView.1
+            /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
             @Override // android.database.ContentObserver
             public final void onChange(boolean z) {
                 DateSmartspaceView dateSmartspaceView = DateSmartspaceView.this;

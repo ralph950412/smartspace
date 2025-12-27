@@ -28,6 +28,7 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggerUtil
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.invoke.VarHandle;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
 /* loaded from: classes2.dex */
 public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -44,24 +45,18 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
     public final int mImageHeight;
     public ImageView mImageView;
 
-    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
     public final class DrawableWrapper {
-        public final ContentResolver mContentResolver;
+        public ContentResolver mContentResolver;
         public Drawable mDrawable;
-        public final int mHeightInPx;
-        public final SubImageTemplateCard$$ExternalSyntheticLambda0 mListener;
-        public final Uri mUri;
-
-        public DrawableWrapper(Uri uri, ContentResolver contentResolver, int i, SubImageTemplateCard$$ExternalSyntheticLambda0 subImageTemplateCard$$ExternalSyntheticLambda0) {
-            this.mUri = uri;
-            this.mHeightInPx = i;
-            this.mContentResolver = contentResolver;
-            this.mListener = subImageTemplateCard$$ExternalSyntheticLambda0;
-        }
+        public int mHeightInPx;
+        public SubImageTemplateCard$$ExternalSyntheticLambda0 mListener;
+        public Uri mUri;
     }
 
-    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
     public final class LoadUriTask extends AsyncTask {
+        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // android.os.AsyncTask
         public final Object doInBackground(Object[] objArr) {
             DrawableWrapper[] drawableWrapperArr = (DrawableWrapper[]) objArr;
@@ -72,18 +67,14 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
             DrawableWrapper drawableWrapper = drawableWrapperArr[0];
             try {
                 InputStream openInputStream = drawableWrapper.mContentResolver.openInputStream(drawableWrapper.mUri);
-                final int i = drawableWrapper.mHeightInPx;
+                int i = drawableWrapper.mHeightInPx;
                 int i2 = SubImageTemplateCard.$r8$clinit;
                 try {
-                    drawable = ImageDecoder.decodeDrawable(ImageDecoder.createSource((Resources) null, openInputStream), new ImageDecoder.OnHeaderDecodedListener() { // from class: com.google.android.systemui.smartspace.uitemplate.SubImageTemplateCard$$ExternalSyntheticLambda3
-                        @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
-                        public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source) {
-                            int i3 = i;
-                            int i4 = SubImageTemplateCard.$r8$clinit;
-                            imageDecoder.setAllocator(3);
-                            imageDecoder.setTargetSize((int) (i3 * (imageInfo.getSize().getHeight() != 0 ? r2.getWidth() / r2.getHeight() : 0.0f)), i3);
-                        }
-                    });
+                    ImageDecoder.Source createSource = ImageDecoder.createSource((Resources) null, openInputStream);
+                    SubImageTemplateCard$$ExternalSyntheticLambda3 subImageTemplateCard$$ExternalSyntheticLambda3 = new SubImageTemplateCard$$ExternalSyntheticLambda3();
+                    subImageTemplateCard$$ExternalSyntheticLambda3.f$0 = i;
+                    VarHandle.storeStoreFence();
+                    drawable = ImageDecoder.decodeDrawable(createSource, subImageTemplateCard$$ExternalSyntheticLambda3);
                 } catch (IOException e) {
                     Log.e("SubImageTemplateCard", "Unable to decode stream: " + e);
                 }
@@ -94,6 +85,7 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
             return drawableWrapper;
         }
 
+        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // android.os.AsyncTask
         public final void onPostExecute(Object obj) {
             DrawableWrapper drawableWrapper = (DrawableWrapper) obj;
@@ -101,16 +93,19 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public SubImageTemplateCard(Context context) {
         this(context, null);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
         this.mImageView = (ImageView) findViewById(R.id.image_view);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final void resetUi() {
         Map map = this.mIconDrawableCache;
@@ -126,6 +121,7 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
         this.mImageView.setBackgroundTintList(null);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final boolean setSmartspaceActions(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
         String sb;
@@ -153,13 +149,12 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
         if (subImageAction != null && subImageAction.getExtras() != null) {
             i = subImageAction.getExtras().getInt("GifFrameDurationMillis", 200);
         }
-        int i2 = i;
         ContentResolver contentResolver = getContext().getApplicationContext().getContentResolver();
         TreeMap treeMap = new TreeMap();
         WeakReference weakReference = new WeakReference(this.mImageView);
         String str = this.mPrevSmartspaceTargetId;
-        for (int i3 = 0; i3 < subImages.size(); i3++) {
-            Icon icon = (Icon) subImages.get(i3);
+        for (int i2 = 0; i2 < subImages.size(); i2++) {
+            Icon icon = (Icon) subImages.get(i2);
             if (icon != null && icon.getIcon() != null) {
                 android.graphics.drawable.Icon icon2 = icon.getIcon();
                 Map map = BcSmartspaceTemplateDataUtils.TEMPLATE_TYPE_TO_SECONDARY_CARD_RES;
@@ -188,12 +183,28 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
                         sb = sb2.toString();
                         break;
                 }
-                String str2 = sb;
-                SubImageTemplateCard$$ExternalSyntheticLambda0 subImageTemplateCard$$ExternalSyntheticLambda0 = new SubImageTemplateCard$$ExternalSyntheticLambda0(this, str, str2, treeMap, i3, subImages, i2, weakReference);
-                if (this.mIconDrawableCache.containsKey(str2) && this.mIconDrawableCache.get(str2) != null) {
-                    subImageTemplateCard$$ExternalSyntheticLambda0.onDrawableLoaded((Drawable) this.mIconDrawableCache.get(str2));
+                SubImageTemplateCard$$ExternalSyntheticLambda0 subImageTemplateCard$$ExternalSyntheticLambda0 = new SubImageTemplateCard$$ExternalSyntheticLambda0();
+                subImageTemplateCard$$ExternalSyntheticLambda0.f$0 = this;
+                subImageTemplateCard$$ExternalSyntheticLambda0.f$1 = str;
+                subImageTemplateCard$$ExternalSyntheticLambda0.f$2 = sb;
+                subImageTemplateCard$$ExternalSyntheticLambda0.f$3 = treeMap;
+                subImageTemplateCard$$ExternalSyntheticLambda0.f$4 = i2;
+                subImageTemplateCard$$ExternalSyntheticLambda0.f$5 = subImages;
+                subImageTemplateCard$$ExternalSyntheticLambda0.f$6 = i;
+                subImageTemplateCard$$ExternalSyntheticLambda0.f$7 = weakReference;
+                VarHandle.storeStoreFence();
+                if (this.mIconDrawableCache.containsKey(sb) && this.mIconDrawableCache.get(sb) != null) {
+                    subImageTemplateCard$$ExternalSyntheticLambda0.onDrawableLoaded((Drawable) this.mIconDrawableCache.get(sb));
                 } else if (icon2.getType() == 4) {
-                    new LoadUriTask().execute(new DrawableWrapper(icon2.getUri(), contentResolver, this.mImageHeight, subImageTemplateCard$$ExternalSyntheticLambda0));
+                    Uri uri = icon2.getUri();
+                    int i3 = this.mImageHeight;
+                    DrawableWrapper drawableWrapper = new DrawableWrapper();
+                    drawableWrapper.mUri = uri;
+                    drawableWrapper.mHeightInPx = i3;
+                    drawableWrapper.mContentResolver = contentResolver;
+                    drawableWrapper.mListener = subImageTemplateCard$$ExternalSyntheticLambda0;
+                    VarHandle.storeStoreFence();
+                    new LoadUriTask().execute(drawableWrapper);
                 } else {
                     icon2.loadDrawableAsync(getContext(), subImageTemplateCard$$ExternalSyntheticLambda0, this.mHandler);
                 }
@@ -205,6 +216,7 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
         return true;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 2 */
     public SubImageTemplateCard(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mIconDrawableCache = new HashMap();

@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.core.graphics.ColorUtils;
 import com.android.wm.shell.R;
 
-/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
 /* loaded from: classes2.dex */
 public class DoubleShadowTextView extends TextView {
     public final float mAmbientShadowBlur;
@@ -18,10 +18,12 @@ public class DoubleShadowTextView extends TextView {
     public final float mKeyShadowOffsetX;
     public final float mKeyShadowOffsetY;
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public DoubleShadowTextView(Context context) {
         this(context, null);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.widget.TextView, android.view.View
     public final void onDraw(Canvas canvas) {
         if (!this.mDrawShadow) {
@@ -38,12 +40,14 @@ public class DoubleShadowTextView extends TextView {
         canvas.restore();
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.widget.TextView
     public final void setTextColor(int i) {
         super.setTextColor(i);
         this.mDrawShadow = ColorUtils.calculateLuminance(i) > 0.5d;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 2 */
     public DoubleShadowTextView(Context context, AttributeSet attributeSet) {
         this(context, attributeSet, 0);
     }

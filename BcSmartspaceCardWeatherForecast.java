@@ -9,30 +9,31 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import androidx.appsearch.app.DocumentClassFactoryRegistry$$ExternalSyntheticOutline0;
+import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalSyntheticOutline0;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Constraints;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.android.wm.shell.R;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
+import java.lang.invoke.VarHandle;
 import java.util.Locale;
 
-/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
 /* loaded from: classes2.dex */
 public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
     public static final /* synthetic */ int $r8$clinit = 0;
 
-    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
     public interface ItemUpdateFunction {
         void update(View view, int i);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public BcSmartspaceCardWeatherForecast(Context context) {
         super(context);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
@@ -66,157 +67,78 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final boolean setSmartspaceActions(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
         boolean z;
         SmartspaceAction baseAction = smartspaceTarget.getBaseAction();
         Bundle extras = baseAction == null ? null : baseAction.getExtras();
-        final int i = 0;
         if (extras == null) {
             return false;
         }
-        final int i2 = 1;
         if (extras.containsKey("temperatureValues")) {
-            final String[] stringArray = extras.getStringArray("temperatureValues");
+            String[] stringArray = extras.getStringArray("temperatureValues");
             if (stringArray == null) {
                 Log.w("BcSmartspaceCardWeatherForecast", "Temperature values array is null.");
             } else {
-                updateFields(new ItemUpdateFunction() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0
-                    @Override // com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast.ItemUpdateFunction
-                    public final void update(View view, int i3) {
-                        int i4 = i2;
-                        Object[] objArr = stringArray;
-                        switch (i4) {
-                            case 0:
-                                int i5 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                                ((TextView) view).setText(((String[]) objArr)[i3]);
-                                break;
-                            case 1:
-                                int i6 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                                ((TextView) view).setText(((String[]) objArr)[i3]);
-                                break;
-                            default:
-                                int i7 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                                ((ImageView) view).setImageBitmap(((Bitmap[]) objArr)[i3]);
-                                break;
-                        }
-                    }
-                }, stringArray.length, R.id.temperature_value, "temperature value");
+                BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0 bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0 = new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0(1);
+                bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0.f$0 = stringArray;
+                VarHandle.storeStoreFence();
+                updateFields(bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0, stringArray.length, R.id.temperature_value, "temperature value");
             }
             z = true;
         } else {
             z = false;
         }
         if (extras.containsKey("weatherIcons")) {
-            final Bitmap[] bitmapArr = (Bitmap[]) extras.get("weatherIcons");
+            Bitmap[] bitmapArr = (Bitmap[]) extras.get("weatherIcons");
             if (bitmapArr == null) {
                 Log.w("BcSmartspaceCardWeatherForecast", "Weather icons array is null.");
             } else {
-                final int i3 = 2;
-                updateFields(new ItemUpdateFunction() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0
-                    @Override // com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast.ItemUpdateFunction
-                    public final void update(View view, int i32) {
-                        int i4 = i3;
-                        Object[] objArr = bitmapArr;
-                        switch (i4) {
-                            case 0:
-                                int i5 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                                ((TextView) view).setText(((String[]) objArr)[i32]);
-                                break;
-                            case 1:
-                                int i6 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                                ((TextView) view).setText(((String[]) objArr)[i32]);
-                                break;
-                            default:
-                                int i7 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                                ((ImageView) view).setImageBitmap(((Bitmap[]) objArr)[i32]);
-                                break;
-                        }
-                    }
-                }, bitmapArr.length, R.id.weather_icon, "weather icon");
+                BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0 bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda02 = new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0(2);
+                bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda02.f$0 = bitmapArr;
+                VarHandle.storeStoreFence();
+                updateFields(bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda02, bitmapArr.length, R.id.weather_icon, "weather icon");
             }
             z = true;
         }
         if (!extras.containsKey("timestamps")) {
             return z;
         }
-        final String[] stringArray2 = extras.getStringArray("timestamps");
+        String[] stringArray2 = extras.getStringArray("timestamps");
         if (stringArray2 == null) {
             Log.w("BcSmartspaceCardWeatherForecast", "Timestamps array is null.");
             return true;
         }
-        updateFields(new ItemUpdateFunction() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0
-            @Override // com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast.ItemUpdateFunction
-            public final void update(View view, int i32) {
-                int i4 = i;
-                Object[] objArr = stringArray2;
-                switch (i4) {
-                    case 0:
-                        int i5 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                        ((TextView) view).setText(((String[]) objArr)[i32]);
-                        break;
-                    case 1:
-                        int i6 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                        ((TextView) view).setText(((String[]) objArr)[i32]);
-                        break;
-                    default:
-                        int i7 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                        ((ImageView) view).setImageBitmap(((Bitmap[]) objArr)[i32]);
-                        break;
-                }
-            }
-        }, stringArray2.length, R.id.timestamp, "timestamp");
+        BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0 bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda03 = new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0(0);
+        bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda03.f$0 = stringArray2;
+        VarHandle.storeStoreFence();
+        updateFields(bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda03, stringArray2.length, R.id.timestamp, "timestamp");
         return true;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
-    public final void setTextColor(final int i) {
-        final int i2 = 0;
-        updateFields(new ItemUpdateFunction() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2
-            @Override // com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast.ItemUpdateFunction
-            public final void update(View view, int i3) {
-                int i4 = i2;
-                int i5 = i;
-                switch (i4) {
-                    case 0:
-                        int i6 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                        ((TextView) view).setTextColor(i5);
-                        break;
-                    default:
-                        int i7 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                        ((TextView) view).setTextColor(i5);
-                        break;
-                }
-            }
-        }, 4, R.id.temperature_value, "temperature value");
-        final int i3 = 1;
-        updateFields(new ItemUpdateFunction() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2
-            @Override // com.google.android.systemui.smartspace.BcSmartspaceCardWeatherForecast.ItemUpdateFunction
-            public final void update(View view, int i32) {
-                int i4 = i3;
-                int i5 = i;
-                switch (i4) {
-                    case 0:
-                        int i6 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                        ((TextView) view).setTextColor(i5);
-                        break;
-                    default:
-                        int i7 = BcSmartspaceCardWeatherForecast.$r8$clinit;
-                        ((TextView) view).setTextColor(i5);
-                        break;
-                }
-            }
-        }, 4, R.id.timestamp, "timestamp");
+    public final void setTextColor(int i) {
+        BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2 bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2 = new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2(0);
+        bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2.f$0 = i;
+        VarHandle.storeStoreFence();
+        updateFields(bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2, 4, R.id.temperature_value, "temperature value");
+        BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2 bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda22 = new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2(1);
+        bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda22.f$0 = i;
+        VarHandle.storeStoreFence();
+        updateFields(bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda22, 4, R.id.timestamp, "timestamp");
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void updateFields(ItemUpdateFunction itemUpdateFunction, int i, int i2, String str) {
         if (getChildCount() < 4) {
-            Log.w("BcSmartspaceCardWeatherForecast", String.format(Locale.US, DocumentClassFactoryRegistry$$ExternalSyntheticOutline0.m("Missing %d ", str, " view(s) to update."), Integer.valueOf(4 - getChildCount())));
+            Log.w("BcSmartspaceCardWeatherForecast", String.format(Locale.US, ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Missing %d ", str, " view(s) to update."), Integer.valueOf(4 - getChildCount())));
             return;
         }
         if (i < 4) {
             int i3 = 4 - i;
-            Log.w("BcSmartspaceCardWeatherForecast", String.format(Locale.US, DocumentClassFactoryRegistry$$ExternalSyntheticOutline0.m("Missing %d ", str, "(s). Hiding incomplete columns."), Integer.valueOf(i3)));
+            Log.w("BcSmartspaceCardWeatherForecast", String.format(Locale.US, ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Missing %d ", str, "(s). Hiding incomplete columns."), Integer.valueOf(i3)));
             if (getChildCount() < 4) {
                 Log.w("BcSmartspaceCardWeatherForecast", "Missing " + (4 - getChildCount()) + " columns to update.");
             } else {
@@ -233,13 +155,14 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
         for (int i6 = 0; i6 < min; i6++) {
             View findViewById = getChildAt(i6).findViewById(i2);
             if (findViewById == null) {
-                Log.w("BcSmartspaceCardWeatherForecast", String.format(Locale.US, DocumentClassFactoryRegistry$$ExternalSyntheticOutline0.m("Missing ", str, " view to update at column: %d."), Integer.valueOf(i6 + 1)));
+                Log.w("BcSmartspaceCardWeatherForecast", String.format(Locale.US, ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Missing ", str, " view to update at column: %d."), Integer.valueOf(i6 + 1)));
                 return;
             }
             itemUpdateFunction.update(findViewById, i6);
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 2 */
     public BcSmartspaceCardWeatherForecast(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
     }

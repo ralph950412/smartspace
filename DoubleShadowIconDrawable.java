@@ -16,7 +16,7 @@ import android.graphics.drawable.InsetDrawable;
 import com.android.internal.graphics.ColorUtils;
 import com.android.wm.shell.R;
 
-/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
 /* loaded from: classes2.dex */
 public final class DoubleShadowIconDrawable extends Drawable {
     public final int mAmbientShadowRadius;
@@ -29,10 +29,12 @@ public final class DoubleShadowIconDrawable extends Drawable {
     public final int mKeyShadowRadius;
     public boolean mShowShadow;
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public DoubleShadowIconDrawable(Context context) {
         this(context.getResources().getDimensionPixelSize(R.dimen.enhanced_smartspace_icon_size), context.getResources().getDimensionPixelSize(R.dimen.enhanced_smartspace_icon_inset), context);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Drawable
     public final void draw(Canvas canvas) {
         RenderNode renderNode;
@@ -53,21 +55,25 @@ public final class DoubleShadowIconDrawable extends Drawable {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Drawable
     public final int getIntrinsicHeight() {
         return this.mCanvasSize;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Drawable
     public final int getIntrinsicWidth() {
         return this.mCanvasSize;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Drawable
     public final int getOpacity() {
         return -2;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Drawable
     public final void setAlpha(int i) {
         InsetDrawable insetDrawable = this.mIconDrawable;
@@ -76,6 +82,7 @@ public final class DoubleShadowIconDrawable extends Drawable {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Drawable
     public final void setColorFilter(ColorFilter colorFilter) {
         InsetDrawable insetDrawable = this.mIconDrawable;
@@ -84,6 +91,7 @@ public final class DoubleShadowIconDrawable extends Drawable {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void setIcon(Drawable drawable) {
         RenderNode renderNode = null;
         if (drawable == null) {
@@ -116,6 +124,7 @@ public final class DoubleShadowIconDrawable extends Drawable {
         this.mDoubleShadowNode = renderNode;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Drawable
     public final void setTint(int i) {
         InsetDrawable insetDrawable = this.mIconDrawable;

@@ -1,15 +1,18 @@
 package com.google.android.systemui.smartspace;
 
+import android.app.smartspace.SmartspaceAction;
 import android.app.smartspace.SmartspaceTarget;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ImageDecoder;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
 import android.net.Uri;
@@ -21,18 +24,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable21;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import com.android.internal.util.LatencyTracker;
+import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.wm.shell.R;
+import com.google.android.systemui.smartspace.BcSmartspaceCardDoorbell;
+import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.invoke.VarHandle;
 import java.lang.ref.WeakReference;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
 /* loaded from: classes2.dex */
 public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -44,30 +62,19 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
     public ProgressBar mProgressBar;
     public final Map mUriToDrawable;
 
-    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
     public final class DrawableWithUri extends DrawableWrapper {
-        public final Path mClipPath;
-        public final ContentResolver mContentResolver;
+        public Path mClipPath;
+        public ContentResolver mContentResolver;
         public Drawable mDrawable;
-        public final int mHeightInPx;
-        public final WeakReference mImageViewWeakReference;
-        public final WeakReference mLoadingScreenWeakReference;
-        public final float mScaledCornerRadius;
-        public final RectF mTempRect;
-        public final Uri mUri;
+        public int mHeightInPx;
+        public WeakReference mImageViewWeakReference;
+        public WeakReference mLoadingScreenWeakReference;
+        public float mScaledCornerRadius;
+        public RectF mTempRect;
+        public Uri mUri;
 
-        public DrawableWithUri(Uri uri, ContentResolver contentResolver, int i, float f, WeakReference weakReference, WeakReference weakReference2) {
-            super(new ColorDrawable(0));
-            this.mTempRect = new RectF();
-            this.mClipPath = new Path();
-            this.mScaledCornerRadius = f;
-            this.mUri = uri;
-            this.mHeightInPx = i;
-            this.mContentResolver = contentResolver;
-            this.mImageViewWeakReference = weakReference;
-            this.mLoadingScreenWeakReference = weakReference2;
-        }
-
+        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
         public final void draw(Canvas canvas) {
             int save = canvas.save();
@@ -76,6 +83,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
             canvas.restoreToCount(save);
         }
 
+        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
         public final void onBoundsChange(Rect rect) {
             this.mTempRect.set(getBounds());
@@ -88,15 +96,12 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
         }
     }
 
-    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
     public final class LatencyInstrumentContext {
-        public final LatencyTracker mLatencyTracker;
-        public final Set mUriSet = new HashSet();
+        public LatencyTracker mLatencyTracker;
+        public Set mUriSet;
 
-        public LatencyInstrumentContext(Context context) {
-            this.mLatencyTracker = LatencyTracker.getInstance(context);
-        }
-
+        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         public final void cancelInstrument() {
             if (this.mUriSet.isEmpty()) {
                 return;
@@ -106,14 +111,11 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
         }
     }
 
-    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
     public final class LoadUriTask extends AsyncTask {
-        public final LatencyInstrumentContext mInstrumentContext;
+        public LatencyInstrumentContext mInstrumentContext;
 
-        public LoadUriTask(LatencyInstrumentContext latencyInstrumentContext) {
-            this.mInstrumentContext = latencyInstrumentContext;
-        }
-
+        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // android.os.AsyncTask
         public final Object doInBackground(Object[] objArr) {
             DrawableWithUri[] drawableWithUriArr = (DrawableWithUri[]) objArr;
@@ -125,18 +127,14 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
             try {
                 InputStream openInputStream = drawableWithUri.mContentResolver.openInputStream(drawableWithUri.mUri);
                 try {
-                    final int i = drawableWithUri.mHeightInPx;
+                    int i = drawableWithUri.mHeightInPx;
                     int i2 = BcSmartspaceCardDoorbell.$r8$clinit;
                     try {
-                        drawable = ImageDecoder.decodeDrawable(ImageDecoder.createSource((Resources) null, openInputStream), new ImageDecoder.OnHeaderDecodedListener() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardDoorbell$$ExternalSyntheticLambda0
-                            @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
-                            public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source) {
-                                int i3 = i;
-                                int i4 = BcSmartspaceCardDoorbell.$r8$clinit;
-                                imageDecoder.setAllocator(3);
-                                imageDecoder.setTargetSize((int) (i3 * (imageInfo.getSize().getHeight() != 0 ? r2.getWidth() / r2.getHeight() : 0.0f)), i3);
-                            }
-                        });
+                        ImageDecoder.Source createSource = ImageDecoder.createSource((Resources) null, openInputStream);
+                        BcSmartspaceCardDoorbell$$ExternalSyntheticLambda0 bcSmartspaceCardDoorbell$$ExternalSyntheticLambda0 = new BcSmartspaceCardDoorbell$$ExternalSyntheticLambda0();
+                        bcSmartspaceCardDoorbell$$ExternalSyntheticLambda0.f$0 = i;
+                        VarHandle.storeStoreFence();
+                        drawable = ImageDecoder.decodeDrawable(createSource, bcSmartspaceCardDoorbell$$ExternalSyntheticLambda0);
                     } catch (IOException e) {
                         Log.e("BcSmartspaceCardBell", "Unable to decode stream: " + e);
                     }
@@ -152,11 +150,13 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
             return drawableWithUri;
         }
 
+        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // android.os.AsyncTask
         public final void onCancelled() {
             this.mInstrumentContext.cancelInstrument();
         }
 
+        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // android.os.AsyncTask
         public final void onPostExecute(Object obj) {
             DrawableWithUri drawableWithUri = (DrawableWithUri) obj;
@@ -190,10 +190,12 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public BcSmartspaceCardDoorbell(Context context) {
         this(context, null);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void maybeResetImageView(SmartspaceTarget smartspaceTarget) {
         boolean equals = smartspaceTarget.getSmartspaceTargetId().equals(this.mPreviousTargetId);
         this.mPreviousTargetId = smartspaceTarget.getSmartspaceTargetId();
@@ -205,6 +207,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
         this.mUriToDrawable.clear();
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void maybeUpdateLayoutHeight(Bundle bundle, View view, String str) {
         if (bundle.containsKey(str)) {
             float f = getContext().getResources().getDisplayMetrics().density;
@@ -215,6 +218,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void maybeUpdateLayoutWidth(Bundle bundle, View view, String str) {
         if (bundle.containsKey(str)) {
             float f = getContext().getResources().getDisplayMetrics().density;
@@ -225,6 +229,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardGenericImage, android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
@@ -233,6 +238,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
         this.mLoadingIcon = (ImageView) findViewById(R.id.loading_screen_icon);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardGenericImage, com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final void resetUi() {
         super.resetUi();
@@ -242,24 +248,181 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
         BcSmartspaceTemplateDataUtils.updateVisibility(this.mLoadingIcon, 8);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0268  */
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x0276  */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardGenericImage, com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct add '--show-bad-code' argument
     */
-    public final boolean setSmartspaceActions(android.app.smartspace.SmartspaceTarget r13, com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceEventNotifier r14, com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo r15) {
-        /*
-            Method dump skipped, instructions count: 622
-            To view this dump add '--comments-level debug' option
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.smartspace.BcSmartspaceCardDoorbell.setSmartspaceActions(android.app.smartspace.SmartspaceTarget, com.android.systemui.plugins.BcSmartspaceDataPlugin$SmartspaceEventNotifier, com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo):boolean");
+    public final boolean setSmartspaceActions(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
+        boolean z;
+        if (!getContext().getPackageName().equals("com.android.systemui")) {
+            return false;
+        }
+        SmartspaceAction baseAction = smartspaceTarget.getBaseAction();
+        Bundle extras = baseAction == null ? null : baseAction.getExtras();
+        final int i = 1;
+        List list = (List) smartspaceTarget.getIconGrid().stream().filter(new Predicate() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardDoorbell$$ExternalSyntheticLambda3
+            /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
+            @Override // java.util.function.Predicate
+            public final boolean test(Object obj) {
+                switch (i) {
+                    case 0:
+                        return Objects.nonNull((BcSmartspaceCardDoorbell.DrawableWithUri) obj);
+                    default:
+                        int i2 = BcSmartspaceCardDoorbell.$r8$clinit;
+                        return ((SmartspaceAction) obj).getExtras().containsKey("imageUri");
+                }
+            }
+        }).map(new Function() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardDoorbell$$ExternalSyntheticLambda5
+            /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
+            @Override // java.util.function.Function
+            public final Object apply(Object obj) {
+                switch (r1) {
+                    case 0:
+                        int i2 = BcSmartspaceCardDoorbell.$r8$clinit;
+                        return ((SmartspaceAction) obj).getExtras().getString("imageUri");
+                    default:
+                        return Uri.parse((String) obj);
+                }
+            }
+        }).map(new Function() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardDoorbell$$ExternalSyntheticLambda5
+            /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
+            @Override // java.util.function.Function
+            public final Object apply(Object obj) {
+                switch (i) {
+                    case 0:
+                        int i2 = BcSmartspaceCardDoorbell.$r8$clinit;
+                        return ((SmartspaceAction) obj).getExtras().getString("imageUri");
+                    default:
+                        return Uri.parse((String) obj);
+                }
+            }
+        }).collect(Collectors.toList());
+        if (!list.isEmpty()) {
+            if (extras != null && extras.containsKey("frameDurationMs")) {
+                this.mGifFrameDurationInMs = extras.getInt("frameDurationMs");
+            }
+            LatencyInstrumentContext latencyInstrumentContext = this.mLatencyInstrumentContext;
+            Stream stream = list.stream();
+            BcSmartspaceCardDoorbell$$ExternalSyntheticLambda1 bcSmartspaceCardDoorbell$$ExternalSyntheticLambda1 = new BcSmartspaceCardDoorbell$$ExternalSyntheticLambda1();
+            bcSmartspaceCardDoorbell$$ExternalSyntheticLambda1.f$0 = this;
+            VarHandle.storeStoreFence();
+            Collection collection = (Collection) stream.filter(bcSmartspaceCardDoorbell$$ExternalSyntheticLambda1).collect(Collectors.toSet());
+            if (collection != null) {
+                latencyInstrumentContext.getClass();
+                if (!collection.isEmpty()) {
+                    latencyInstrumentContext.mUriSet.addAll(collection);
+                }
+            }
+            if (!latencyInstrumentContext.mUriSet.isEmpty()) {
+                latencyInstrumentContext.mLatencyTracker.onActionStart(22);
+            }
+            maybeResetImageView(smartspaceTarget);
+            BcSmartspaceTemplateDataUtils.updateVisibility(this.mImageView, 0);
+            ContentResolver contentResolver = getContext().getApplicationContext().getContentResolver();
+            int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.enhanced_smartspace_card_height);
+            float dimension = getResources().getDimension(R.dimen.enhanced_smartspace_secondary_card_corner_radius);
+            WeakReference weakReference = new WeakReference(this.mImageView);
+            WeakReference weakReference2 = new WeakReference(this.mLoadingScreenView);
+            Stream stream2 = list.stream();
+            BcSmartspaceCardDoorbell$$ExternalSyntheticLambda2 bcSmartspaceCardDoorbell$$ExternalSyntheticLambda2 = new BcSmartspaceCardDoorbell$$ExternalSyntheticLambda2(0);
+            bcSmartspaceCardDoorbell$$ExternalSyntheticLambda2.f$0 = this;
+            bcSmartspaceCardDoorbell$$ExternalSyntheticLambda2.f$1 = contentResolver;
+            bcSmartspaceCardDoorbell$$ExternalSyntheticLambda2.f$2 = dimensionPixelSize;
+            bcSmartspaceCardDoorbell$$ExternalSyntheticLambda2.f$3 = dimension;
+            bcSmartspaceCardDoorbell$$ExternalSyntheticLambda2.f$4 = weakReference;
+            bcSmartspaceCardDoorbell$$ExternalSyntheticLambda2.f$5 = weakReference2;
+            VarHandle.storeStoreFence();
+            List list2 = (List) stream2.map(bcSmartspaceCardDoorbell$$ExternalSyntheticLambda2).filter(new Predicate() { // from class: com.google.android.systemui.smartspace.BcSmartspaceCardDoorbell$$ExternalSyntheticLambda3
+                /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
+                @Override // java.util.function.Predicate
+                public final boolean test(Object obj) {
+                    switch (r1) {
+                        case 0:
+                            return Objects.nonNull((BcSmartspaceCardDoorbell.DrawableWithUri) obj);
+                        default:
+                            int i2 = BcSmartspaceCardDoorbell.$r8$clinit;
+                            return ((SmartspaceAction) obj).getExtras().containsKey("imageUri");
+                    }
+                }
+            }).collect(Collectors.toList());
+            AnimationDrawable animationDrawable = new AnimationDrawable();
+            Iterator it = list2.iterator();
+            while (it.hasNext()) {
+                animationDrawable.addFrame((Drawable) it.next(), this.mGifFrameDurationInMs);
+            }
+            this.mImageView.setImageDrawable(animationDrawable);
+            animationDrawable.start();
+            Log.d("BcSmartspaceCardBell", "imageUri is set");
+            return true;
+        }
+        if (extras != null && extras.containsKey("imageBitmap")) {
+            Bitmap bitmap = (Bitmap) extras.get("imageBitmap");
+            maybeResetImageView(smartspaceTarget);
+            BcSmartspaceTemplateDataUtils.updateVisibility(this.mImageView, 0);
+            if (bitmap != null) {
+                if (bitmap.getHeight() != 0) {
+                    int dimension2 = (int) getResources().getDimension(R.dimen.enhanced_smartspace_card_height);
+                    bitmap = Bitmap.createScaledBitmap(bitmap, (int) (dimension2 * (bitmap.getWidth() / bitmap.getHeight())), dimension2, true);
+                }
+                RoundedBitmapDrawable21 create = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+                create.setCornerRadius(getResources().getDimension(R.dimen.enhanced_smartspace_secondary_card_corner_radius));
+                this.mImageView.setImageDrawable(create);
+                Log.d("BcSmartspaceCardBell", "imageBitmap is set");
+            }
+            return true;
+        }
+        if (extras == null || !extras.containsKey("loadingScreenState")) {
+            return false;
+        }
+        int i2 = extras.getInt("loadingScreenState");
+        String dimensionRatio = BcSmartSpaceUtil.getDimensionRatio(extras);
+        if (dimensionRatio == null) {
+            return false;
+        }
+        maybeResetImageView(smartspaceTarget);
+        BcSmartspaceTemplateDataUtils.updateVisibility(this.mImageView, 8);
+        ((ConstraintLayout.LayoutParams) this.mLoadingScreenView.getLayoutParams()).dimensionRatio = dimensionRatio;
+        this.mLoadingScreenView.setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(R.color.smartspace_button_background)));
+        BcSmartspaceTemplateDataUtils.updateVisibility(this.mLoadingScreenView, 0);
+        maybeUpdateLayoutWidth(extras, this.mProgressBar, "progressBarWidth");
+        maybeUpdateLayoutHeight(extras, this.mProgressBar, "progressBarHeight");
+        this.mProgressBar.setIndeterminateTintList(ColorStateList.valueOf(getContext().getColor(R.color.smartspace_button_text)));
+        BcSmartspaceTemplateDataUtils.updateVisibility(this.mProgressBar, i2 == 1 ? true : i2 == 4 ? extras.getBoolean("progressBarVisible", true) : false ? 0 : 8);
+        if (i2 == 2) {
+            this.mLoadingIcon.setImageDrawable(getContext().getDrawable(R.drawable.videocam));
+        } else if (i2 == 3) {
+            this.mLoadingIcon.setImageDrawable(getContext().getDrawable(R.drawable.videocam_off));
+        } else {
+            if (i2 != 4 || !extras.containsKey("loadingScreenIcon")) {
+                z = false;
+                maybeUpdateLayoutWidth(extras, this.mLoadingIcon, "loadingIconWidth");
+                maybeUpdateLayoutHeight(extras, this.mLoadingIcon, "loadingIconHeight");
+                BcSmartspaceTemplateDataUtils.updateVisibility(this.mLoadingIcon, z ? 0 : 8);
+                return true;
+            }
+            this.mLoadingIcon.setImageBitmap((Bitmap) extras.get("loadingScreenIcon"));
+            if (extras.getBoolean("tintLoadingIcon", false)) {
+                this.mLoadingIcon.setColorFilter(getContext().getColor(R.color.smartspace_button_text));
+            }
+        }
+        z = true;
+        maybeUpdateLayoutWidth(extras, this.mLoadingIcon, "loadingIconWidth");
+        maybeUpdateLayoutHeight(extras, this.mLoadingIcon, "loadingIconHeight");
+        BcSmartspaceTemplateDataUtils.updateVisibility(this.mLoadingIcon, z ? 0 : 8);
+        return true;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 2 */
     public BcSmartspaceCardDoorbell(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mUriToDrawable = new HashMap();
         this.mGifFrameDurationInMs = 200;
-        this.mLatencyInstrumentContext = new LatencyInstrumentContext(context);
+        LatencyInstrumentContext latencyInstrumentContext = new LatencyInstrumentContext();
+        latencyInstrumentContext.mUriSet = new HashSet();
+        latencyInstrumentContext.mLatencyTracker = LatencyTracker.getInstance(context);
+        VarHandle.storeStoreFence();
+        this.mLatencyInstrumentContext = latencyInstrumentContext;
     }
 }

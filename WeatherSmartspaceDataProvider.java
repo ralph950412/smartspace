@@ -1,6 +1,7 @@
 package com.google.android.systemui.smartspace;
 
 import android.app.smartspace.SmartspaceTarget;
+import android.content.Context;
 import android.os.Debug;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,14 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.android.wm.shell.R;
+import java.lang.invoke.VarHandle;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 
-/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
 /* loaded from: classes2.dex */
 public final class WeatherSmartspaceDataProvider implements BcSmartspaceDataPlugin {
     public static final boolean DEBUG = Log.isLoggable("WeatherSSDataProvider", 3);
@@ -23,24 +24,29 @@ public final class WeatherSmartspaceDataProvider implements BcSmartspaceDataPlug
     public final List mSmartspaceTargets = new ArrayList();
     public final EventNotifierProxy mEventNotifier = new EventNotifierProxy();
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
     public final BcSmartspaceDataPlugin.SmartspaceEventNotifier getEventNotifier() {
         return this.mEventNotifier;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
+    /* JADX DEBUG: Multi-variable search result rejected for r2v2, resolved type: android.view.View */
     /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
-    public final BcSmartspaceDataPlugin.SmartspaceView getLargeClockView(ViewGroup viewGroup) {
-        View inflate = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.weather_large, viewGroup, false);
+    public final BcSmartspaceDataPlugin.SmartspaceView getLargeClockView(Context context) {
+        View inflate = LayoutInflater.from(context).inflate(R.layout.weather_large, (ViewGroup) null, false);
         inflate.setId(R.id.weather_smartspace_view_large);
         return (BcSmartspaceDataPlugin.SmartspaceView) inflate;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
-    public final BcSmartspaceDataPlugin.SmartspaceView getView(ViewGroup viewGroup) {
-        return (BcSmartspaceDataPlugin.SmartspaceView) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.weather, viewGroup, false);
+    public final BcSmartspaceDataPlugin.SmartspaceView getView(Context context) {
+        return (BcSmartspaceDataPlugin.SmartspaceView) LayoutInflater.from(context).inflate(R.layout.weather, (ViewGroup) null, false);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
     public final void onTargetsAvailable(List list) {
         if (DEBUG) {
@@ -58,30 +64,33 @@ public final class WeatherSmartspaceDataProvider implements BcSmartspaceDataPlug
                 this.mSmartspaceTargets.add(smartspaceTarget);
             }
         }
-        this.mSmartspaceTargetListeners.forEach(new Consumer() { // from class: com.google.android.systemui.smartspace.WeatherSmartspaceDataProvider$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((BcSmartspaceDataPlugin.SmartspaceTargetListener) obj).onSmartspaceTargetsUpdated(WeatherSmartspaceDataProvider.this.mSmartspaceTargets);
-            }
-        });
+        Set set = this.mSmartspaceTargetListeners;
+        WeatherSmartspaceDataProvider$$ExternalSyntheticLambda0 weatherSmartspaceDataProvider$$ExternalSyntheticLambda0 = new WeatherSmartspaceDataProvider$$ExternalSyntheticLambda0();
+        weatherSmartspaceDataProvider$$ExternalSyntheticLambda0.f$0 = this;
+        VarHandle.storeStoreFence();
+        set.forEach(weatherSmartspaceDataProvider$$ExternalSyntheticLambda0);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
     public final void registerListener(BcSmartspaceDataPlugin.SmartspaceTargetListener smartspaceTargetListener) {
         this.mSmartspaceTargetListeners.add(smartspaceTargetListener);
         smartspaceTargetListener.onSmartspaceTargetsUpdated(this.mSmartspaceTargets);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
     public final void setEventDispatcher(BcSmartspaceDataPlugin.SmartspaceEventDispatcher smartspaceEventDispatcher) {
         this.mEventNotifier.eventDispatcher = smartspaceEventDispatcher;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
     public final void setIntentStarter(BcSmartspaceDataPlugin.IntentStarter intentStarter) {
         this.mEventNotifier.intentStarterRef = intentStarter;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
     public final void unregisterListener(BcSmartspaceDataPlugin.SmartspaceTargetListener smartspaceTargetListener) {
         this.mSmartspaceTargetListeners.remove(smartspaceTargetListener);

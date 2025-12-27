@@ -14,30 +14,35 @@ import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.android.wm.shell.R;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 
-/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
 /* loaded from: classes2.dex */
 public class BcSmartspaceCardGenericImage extends BcSmartspaceCardSecondary {
     public ImageView mImageView;
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public BcSmartspaceCardGenericImage(Context context) {
         super(context);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public void onFinishInflate() {
         super.onFinishInflate();
         this.mImageView = (ImageView) findViewById(R.id.image_view);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public void resetUi() {
         this.mImageView.setImageBitmap(null);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public void setImageBitmap(Bitmap bitmap) {
         this.mImageView.setImageBitmap(bitmap);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public boolean setSmartspaceActions(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
         SmartspaceAction baseAction = smartspaceTarget.getBaseAction();
@@ -67,6 +72,7 @@ public class BcSmartspaceCardGenericImage extends BcSmartspaceCardSecondary {
         return true;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 2 */
     public BcSmartspaceCardGenericImage(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
     }

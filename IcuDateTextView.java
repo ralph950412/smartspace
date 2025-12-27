@@ -8,18 +8,17 @@ import android.database.ContentObserver;
 import android.icu.text.DateFormat;
 import android.icu.text.DisplayContext;
 import android.os.Handler;
-import android.os.PowerManager;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.TextView;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.android.wm.shell.R;
+import java.lang.invoke.VarHandle;
 import java.util.Locale;
 import java.util.Objects;
 
-/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
 /* loaded from: classes2.dex */
 public class IcuDateTextView extends DoubleShadowTextView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,11 +34,12 @@ public class IcuDateTextView extends DoubleShadowTextView {
     public BcSmartspaceDataPlugin.TimeChangedDelegate mTimeChangedDelegate;
     public boolean mUpdatesOnAod;
 
-    /* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
     public final class DefaultTimeChangedDelegate implements BcSmartspaceDataPlugin.TimeChangedDelegate, Runnable {
         public Handler mHandler;
         public Runnable mTimeChangedCallback;
 
+        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.TimeChangedDelegate
         public final void register(Runnable runnable) {
             if (this.mTimeChangedCallback != null) {
@@ -49,6 +49,7 @@ public class IcuDateTextView extends DoubleShadowTextView {
             run();
         }
 
+        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // java.lang.Runnable
         public final void run() {
             Runnable runnable = this.mTimeChangedCallback;
@@ -61,6 +62,7 @@ public class IcuDateTextView extends DoubleShadowTextView {
             }
         }
 
+        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.TimeChangedDelegate
         public final void unregister() {
             this.mHandler.removeCallbacks(this);
@@ -68,14 +70,15 @@ public class IcuDateTextView extends DoubleShadowTextView {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public IcuDateTextView(Context context) {
         this(context, null);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.widget.TextView, android.view.View
     public final void onAttachedToWindow() {
         super.onAttachedToWindow();
-        boolean z = false;
         if (this.mUpdatesOnAod) {
             try {
                 Handler handler = this.mBgHandler;
@@ -83,7 +86,10 @@ public class IcuDateTextView extends DoubleShadowTextView {
                     Log.wtf("IcuDateTextView", "Must set background handler when mUpdatesOnAod is set to avoid making binder calls on main thread");
                     getContext().getContentResolver().registerContentObserver(Settings.Secure.getUriFor("doze_always_on"), false, this.mAodSettingsObserver, -1);
                 } else {
-                    handler.post(new IcuDateTextView$$ExternalSyntheticLambda0(this, 3));
+                    IcuDateTextView$$ExternalSyntheticLambda0 icuDateTextView$$ExternalSyntheticLambda0 = new IcuDateTextView$$ExternalSyntheticLambda0(3);
+                    icuDateTextView$$ExternalSyntheticLambda0.f$0 = this;
+                    VarHandle.storeStoreFence();
+                    handler.post(icuDateTextView$$ExternalSyntheticLambda0);
                 }
             } catch (Exception e) {
                 Log.w("IcuDateTextView", "Unable to register DOZE_ALWAYS_ON content observer: ", e);
@@ -92,7 +98,7 @@ public class IcuDateTextView extends DoubleShadowTextView {
             this.mIsAodEnabled = Settings.Secure.getIntForUser(context.getContentResolver(), "doze_always_on", 0, context.getUserId()) == 1;
         }
         this.mHandler = new Handler();
-        final IntentFilter intentFilter = new IntentFilter();
+        IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.TIME_SET");
         intentFilter.addAction("android.intent.action.TIMEZONE_CHANGED");
         Handler handler2 = this.mBgHandler;
@@ -100,15 +106,11 @@ public class IcuDateTextView extends DoubleShadowTextView {
             Log.w("IcuDateTextView", "mBgHandler is not set! Fallback to make binder calls on main thread.");
             getContext().registerReceiver(this.mIntentReceiver, intentFilter);
         } else {
-            handler2.post(new Runnable() { // from class: com.google.android.systemui.smartspace.IcuDateTextView$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    IcuDateTextView icuDateTextView = IcuDateTextView.this;
-                    IntentFilter intentFilter2 = intentFilter;
-                    int i = IcuDateTextView.$r8$clinit;
-                    icuDateTextView.getContext().registerReceiver(icuDateTextView.mIntentReceiver, intentFilter2);
-                }
-            });
+            IcuDateTextView$$ExternalSyntheticLambda4 icuDateTextView$$ExternalSyntheticLambda4 = new IcuDateTextView$$ExternalSyntheticLambda4();
+            icuDateTextView$$ExternalSyntheticLambda4.f$0 = this;
+            icuDateTextView$$ExternalSyntheticLambda4.f$1 = intentFilter;
+            VarHandle.storeStoreFence();
+            handler2.post(icuDateTextView$$ExternalSyntheticLambda4);
         }
         if (this.mTimeChangedDelegate == null) {
             Handler handler3 = this.mHandler;
@@ -116,16 +118,10 @@ public class IcuDateTextView extends DoubleShadowTextView {
             defaultTimeChangedDelegate.mHandler = handler3;
             this.mTimeChangedDelegate = defaultTimeChangedDelegate;
         }
-        PowerManager powerManager = (PowerManager) ((TextView) this).mContext.getSystemService(PowerManager.class);
-        if (powerManager == null) {
-            Log.w("IcuDateTextView", "PowerManager is null. Fallback isInteractive as false");
-        } else {
-            z = powerManager.isInteractive();
-        }
-        this.mIsInteractive = Boolean.valueOf(z);
         onTimeChanged(true);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void onDetachedFromWindow() {
         super.onDetachedFromWindow();
@@ -135,45 +131,52 @@ public class IcuDateTextView extends DoubleShadowTextView {
                 Log.w("IcuDateTextView", "mBgHandler is not set! Fallback to make binder calls on main thread.");
                 getContext().unregisterReceiver(this.mIntentReceiver);
             } else {
-                handler.post(new IcuDateTextView$$ExternalSyntheticLambda0(this, 0));
+                IcuDateTextView$$ExternalSyntheticLambda0 icuDateTextView$$ExternalSyntheticLambda0 = new IcuDateTextView$$ExternalSyntheticLambda0(0);
+                icuDateTextView$$ExternalSyntheticLambda0.f$0 = this;
+                VarHandle.storeStoreFence();
+                handler.post(icuDateTextView$$ExternalSyntheticLambda0);
             }
             this.mTimeChangedDelegate.unregister();
             this.mHandler = null;
         }
         if (this.mUpdatesOnAod) {
             Handler handler2 = this.mBgHandler;
-            if (handler2 != null) {
-                handler2.post(new IcuDateTextView$$ExternalSyntheticLambda0(this, 1));
-            } else {
+            if (handler2 == null) {
                 Log.wtf("IcuDateTextView", "Must set background handler when mUpdatesOnAod is set to avoid making binder calls on main thread");
                 getContext().getContentResolver().unregisterContentObserver(this.mAodSettingsObserver);
+            } else {
+                IcuDateTextView$$ExternalSyntheticLambda0 icuDateTextView$$ExternalSyntheticLambda02 = new IcuDateTextView$$ExternalSyntheticLambda0(1);
+                icuDateTextView$$ExternalSyntheticLambda02.f$0 = this;
+                VarHandle.storeStoreFence();
+                handler2.post(icuDateTextView$$ExternalSyntheticLambda02);
             }
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void onTimeChanged(boolean z) {
         if (this.mFormatter == null || z) {
             DateFormat instanceForSkeleton = DateFormat.getInstanceForSkeleton(getContext().getString(R.string.smartspace_icu_date_pattern), Locale.getDefault());
             this.mFormatter = instanceForSkeleton;
             instanceForSkeleton.setContext(DisplayContext.CAPITALIZATION_FOR_BEGINNING_OF_SENTENCE);
         }
-        if (isShown()) {
-            String format = this.mFormatter.format(Long.valueOf(System.currentTimeMillis()));
-            if (Objects.equals(this.mText, format)) {
-                return;
-            }
-            this.mText = format;
-            setText(format);
-            setContentDescription(format);
+        String format = this.mFormatter.format(Long.valueOf(System.currentTimeMillis()));
+        if (Objects.equals(this.mText, format)) {
+            return;
         }
+        this.mText = format;
+        setText(format);
+        setContentDescription(format);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.widget.TextView, android.view.View
     public final void onVisibilityAggregated(boolean z) {
         super.onVisibilityAggregated(z);
         rescheduleTicker();
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void rescheduleTicker() {
         if (this.mHandler == null) {
             return;
@@ -186,11 +189,13 @@ public class IcuDateTextView extends DoubleShadowTextView {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 2 */
     /* JADX WARN: Type inference failed for: r2v1, types: [com.google.android.systemui.smartspace.IcuDateTextView$1] */
     /* JADX WARN: Type inference failed for: r2v2, types: [com.google.android.systemui.smartspace.IcuDateTextView$2] */
     public IcuDateTextView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet, 0);
         this.mAodSettingsObserver = new ContentObserver(new Handler()) { // from class: com.google.android.systemui.smartspace.IcuDateTextView.1
+            /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
             @Override // android.database.ContentObserver
             public final void onChange(boolean z) {
                 Context context2 = IcuDateTextView.this.getContext();
@@ -204,6 +209,7 @@ public class IcuDateTextView extends DoubleShadowTextView {
             }
         };
         this.mIntentReceiver = new BroadcastReceiver() { // from class: com.google.android.systemui.smartspace.IcuDateTextView.2
+            /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
                 boolean z = "android.intent.action.TIMEZONE_CHANGED".equals(intent.getAction()) || "android.intent.action.TIME_SET".equals(intent.getAction());
@@ -212,6 +218,9 @@ public class IcuDateTextView extends DoubleShadowTextView {
                 icuDateTextView.onTimeChanged(z);
             }
         };
-        this.mTimeChangedCallback = new IcuDateTextView$$ExternalSyntheticLambda0(this, 2);
+        IcuDateTextView$$ExternalSyntheticLambda0 icuDateTextView$$ExternalSyntheticLambda0 = new IcuDateTextView$$ExternalSyntheticLambda0(2);
+        icuDateTextView$$ExternalSyntheticLambda0.f$0 = this;
+        VarHandle.storeStoreFence();
+        this.mTimeChangedCallback = icuDateTextView$$ExternalSyntheticLambda0;
     }
 }

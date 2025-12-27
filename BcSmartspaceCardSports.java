@@ -13,7 +13,7 @@ import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.android.wm.shell.R;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 
-/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
 /* loaded from: classes2.dex */
 public class BcSmartspaceCardSports extends BcSmartspaceCardSecondary {
     public ImageView mFirstCompetitorLogo;
@@ -22,10 +22,12 @@ public class BcSmartspaceCardSports extends BcSmartspaceCardSecondary {
     public TextView mSecondCompetitorScore;
     public TextView mSummaryView;
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public BcSmartspaceCardSports(Context context) {
         super(context);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
@@ -36,6 +38,7 @@ public class BcSmartspaceCardSports extends BcSmartspaceCardSecondary {
         this.mSecondCompetitorLogo = (ImageView) findViewById(R.id.second_competitor_logo);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final void resetUi() {
         BcSmartspaceTemplateDataUtils.updateVisibility(this.mSummaryView, 4);
@@ -45,6 +48,7 @@ public class BcSmartspaceCardSports extends BcSmartspaceCardSecondary {
         BcSmartspaceTemplateDataUtils.updateVisibility(this.mSecondCompetitorLogo, 4);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final boolean setSmartspaceActions(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
         boolean z;
@@ -113,6 +117,7 @@ public class BcSmartspaceCardSports extends BcSmartspaceCardSecondary {
         return true;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final void setTextColor(int i) {
         this.mSummaryView.setTextColor(i);
@@ -120,6 +125,7 @@ public class BcSmartspaceCardSports extends BcSmartspaceCardSecondary {
         this.mSecondCompetitorScore.setTextColor(i);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 2 */
     public BcSmartspaceCardSports(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
     }

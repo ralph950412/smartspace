@@ -13,17 +13,19 @@ import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.android.wm.shell.R;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 
-/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
 /* loaded from: classes2.dex */
 public class BcSmartspaceCardLoyalty extends BcSmartspaceCardGenericImage {
     public TextView mCardPromptView;
     public ImageView mLoyaltyProgramLogoView;
     public TextView mLoyaltyProgramNameView;
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public BcSmartspaceCardLoyalty(Context context) {
         super(context);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardGenericImage, android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
@@ -32,6 +34,7 @@ public class BcSmartspaceCardLoyalty extends BcSmartspaceCardGenericImage {
         this.mCardPromptView = (TextView) findViewById(R.id.card_prompt);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardGenericImage, com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final void resetUi() {
         super.resetUi();
@@ -41,12 +44,14 @@ public class BcSmartspaceCardLoyalty extends BcSmartspaceCardGenericImage {
         BcSmartspaceTemplateDataUtils.updateVisibility(this.mCardPromptView, 8);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardGenericImage
     public final void setImageBitmap(Bitmap bitmap) {
         super.setImageBitmap(bitmap);
         this.mLoyaltyProgramLogoView.setImageBitmap(bitmap);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardGenericImage, com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final boolean setSmartspaceActions(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
         super.setSmartspaceActions(smartspaceTarget, smartspaceEventNotifier, bcSmartspaceCardLoggingInfo);
@@ -90,12 +95,14 @@ public class BcSmartspaceCardLoyalty extends BcSmartspaceCardGenericImage {
         return true;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardGenericImage, com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final void setTextColor(int i) {
         this.mLoyaltyProgramNameView.setTextColor(i);
         this.mCardPromptView.setTextColor(i);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 2 */
     public BcSmartspaceCardLoyalty(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
     }

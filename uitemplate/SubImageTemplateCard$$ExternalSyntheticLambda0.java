@@ -5,35 +5,25 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.util.Log;
 import android.widget.ImageView;
+import java.lang.invoke.VarHandle;
 import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-/* compiled from: go/retraceme 2166bc0b1982ea757f433cb54b93594e68249d3d6a2375aeffa96b8ec4684c84 */
+/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class SubImageTemplateCard$$ExternalSyntheticLambda0 implements Icon.OnDrawableLoadedListener {
-    public final /* synthetic */ SubImageTemplateCard f$0;
-    public final /* synthetic */ String f$1;
-    public final /* synthetic */ String f$2;
-    public final /* synthetic */ Map f$3;
-    public final /* synthetic */ int f$4;
-    public final /* synthetic */ List f$5;
-    public final /* synthetic */ int f$6;
-    public final /* synthetic */ WeakReference f$7;
+    public /* synthetic */ SubImageTemplateCard f$0;
+    public /* synthetic */ String f$1;
+    public /* synthetic */ String f$2;
+    public /* synthetic */ Map f$3;
+    public /* synthetic */ int f$4;
+    public /* synthetic */ List f$5;
+    public /* synthetic */ int f$6;
+    public /* synthetic */ WeakReference f$7;
 
-    public /* synthetic */ SubImageTemplateCard$$ExternalSyntheticLambda0(SubImageTemplateCard subImageTemplateCard, String str, String str2, Map map, int i, List list, int i2, WeakReference weakReference) {
-        this.f$0 = subImageTemplateCard;
-        this.f$1 = str;
-        this.f$2 = str2;
-        this.f$3 = map;
-        this.f$4 = i;
-        this.f$5 = list;
-        this.f$6 = i2;
-        this.f$7 = weakReference;
-    }
-
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Icon.OnDrawableLoadedListener
     public final void onDrawableLoaded(Drawable drawable) {
         SubImageTemplateCard subImageTemplateCard = this.f$0;
@@ -42,7 +32,7 @@ public final /* synthetic */ class SubImageTemplateCard$$ExternalSyntheticLambda
         Map map = this.f$3;
         int i = this.f$4;
         List list = this.f$5;
-        final int i2 = this.f$6;
+        int i2 = this.f$6;
         WeakReference weakReference = this.f$7;
         int i3 = SubImageTemplateCard.$r8$clinit;
         if (!str.equals(subImageTemplateCard.mPrevSmartspaceTargetId)) {
@@ -52,7 +42,7 @@ public final /* synthetic */ class SubImageTemplateCard$$ExternalSyntheticLambda
         subImageTemplateCard.mIconDrawableCache.put(str2, drawable);
         map.put(Integer.valueOf(i), drawable);
         if (map.size() == list.size()) {
-            final AnimationDrawable animationDrawable = new AnimationDrawable();
+            AnimationDrawable animationDrawable = new AnimationDrawable();
             List list2 = (List) map.values().stream().filter(new SubImageTemplateCard$$ExternalSyntheticLambda1()).collect(Collectors.toList());
             if (list2.isEmpty()) {
                 Log.w("SubImageTemplateCard", "All images are failed to load. Reset imageView");
@@ -65,15 +55,11 @@ public final /* synthetic */ class SubImageTemplateCard$$ExternalSyntheticLambda
                 subImageTemplateCard.mImageView.setBackgroundTintList(null);
                 return;
             }
-            list2.forEach(new Consumer() { // from class: com.google.android.systemui.smartspace.uitemplate.SubImageTemplateCard$$ExternalSyntheticLambda2
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    AnimationDrawable animationDrawable2 = animationDrawable;
-                    int i4 = i2;
-                    int i5 = SubImageTemplateCard.$r8$clinit;
-                    animationDrawable2.addFrame((Drawable) obj, i4);
-                }
-            });
+            SubImageTemplateCard$$ExternalSyntheticLambda2 subImageTemplateCard$$ExternalSyntheticLambda2 = new SubImageTemplateCard$$ExternalSyntheticLambda2();
+            subImageTemplateCard$$ExternalSyntheticLambda2.f$0 = animationDrawable;
+            subImageTemplateCard$$ExternalSyntheticLambda2.f$1 = i2;
+            VarHandle.storeStoreFence();
+            list2.forEach(subImageTemplateCard$$ExternalSyntheticLambda2);
             ImageView imageView2 = (ImageView) weakReference.get();
             imageView2.setImageDrawable(animationDrawable);
             int intrinsicWidth = animationDrawable.getIntrinsicWidth();
