@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalSyntheticOutline0;
+import androidx.compose.foundation.gestures.MouseWheelScrollingLogic$$ExternalSyntheticOutline0;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Constraints;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
@@ -18,12 +18,12 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInf
 import java.lang.invoke.VarHandle;
 import java.util.Locale;
 
-/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
 /* loaded from: classes2.dex */
 public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
     public static final /* synthetic */ int $r8$clinit = 0;
 
-    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
     public interface ItemUpdateFunction {
         void update(View view, int i);
     }
@@ -133,12 +133,12 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void updateFields(ItemUpdateFunction itemUpdateFunction, int i, int i2, String str) {
         if (getChildCount() < 4) {
-            Log.w("BcSmartspaceCardWeatherForecast", String.format(Locale.US, ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Missing %d ", str, " view(s) to update."), Integer.valueOf(4 - getChildCount())));
+            Log.w("BcSmartspaceCardWeatherForecast", String.format(Locale.US, MouseWheelScrollingLogic$$ExternalSyntheticOutline0.m("Missing %d ", str, " view(s) to update."), Integer.valueOf(4 - getChildCount())));
             return;
         }
         if (i < 4) {
             int i3 = 4 - i;
-            Log.w("BcSmartspaceCardWeatherForecast", String.format(Locale.US, ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Missing %d ", str, "(s). Hiding incomplete columns."), Integer.valueOf(i3)));
+            Log.w("BcSmartspaceCardWeatherForecast", String.format(Locale.US, MouseWheelScrollingLogic$$ExternalSyntheticOutline0.m("Missing %d ", str, "(s). Hiding incomplete columns."), Integer.valueOf(i3)));
             if (getChildCount() < 4) {
                 Log.w("BcSmartspaceCardWeatherForecast", "Missing " + (4 - getChildCount()) + " columns to update.");
             } else {
@@ -155,14 +155,13 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
         for (int i6 = 0; i6 < min; i6++) {
             View findViewById = getChildAt(i6).findViewById(i2);
             if (findViewById == null) {
-                Log.w("BcSmartspaceCardWeatherForecast", String.format(Locale.US, ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Missing ", str, " view to update at column: %d."), Integer.valueOf(i6 + 1)));
+                Log.w("BcSmartspaceCardWeatherForecast", String.format(Locale.US, MouseWheelScrollingLogic$$ExternalSyntheticOutline0.m("Missing ", str, " view to update at column: %d."), Integer.valueOf(i6 + 1)));
                 return;
             }
             itemUpdateFunction.update(findViewById, i6);
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 2 */
     public BcSmartspaceCardWeatherForecast(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
     }

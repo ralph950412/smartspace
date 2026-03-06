@@ -12,7 +12,7 @@ import com.google.protobuf.nano.MessageNano;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
 /* loaded from: classes2.dex */
 public abstract class BcSmartspaceCardLogger {
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
@@ -20,6 +20,7 @@ public abstract class BcSmartspaceCardLogger {
         FalsingManager falsingManager = BcSmartSpaceUtil.sFalsingManager;
     }
 
+    /* JADX DEBUG: Class process forced to load method for inline: com.android.systemui.smartspace.SmartspaceProtoLite$SmartSpaceCardMetadata.-$$Nest$msetInstanceId(com.android.systemui.smartspace.SmartspaceProtoLite$SmartSpaceCardMetadata, int):void */
     /* JADX DEBUG: Class process forced to load method for inline: com.android.systemui.smartspace.SmartspaceProtoLite$SmartSpaceSubcards.-$$Nest$msetClickedSubcardIndex(com.android.systemui.smartspace.SmartspaceProtoLite$SmartSpaceSubcards, int):void */
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static void log(BcSmartspaceEvent bcSmartspaceEvent, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
@@ -41,19 +42,19 @@ public abstract class BcSmartspaceCardLogger {
                 SmartspaceProtoLite$SmartSpaceCardMetadata.Builder newBuilder = SmartspaceProtoLite$SmartSpaceCardMetadata.newBuilder();
                 int i2 = bcSmartspaceCardMetadataLoggingInfo.mInstanceId;
                 newBuilder.copyOnWrite();
-                SmartspaceProtoLite$SmartSpaceCardMetadata.m1270$$Nest$msetInstanceId((SmartspaceProtoLite$SmartSpaceCardMetadata) newBuilder.instance, i2);
+                SmartspaceProtoLite$SmartSpaceCardMetadata.m1352$$Nest$msetInstanceId((SmartspaceProtoLite$SmartSpaceCardMetadata) newBuilder.instance, i2);
                 int i3 = bcSmartspaceCardMetadataLoggingInfo.mCardTypeId;
                 newBuilder.copyOnWrite();
-                SmartspaceProtoLite$SmartSpaceCardMetadata.m1269$$Nest$msetCardTypeId((SmartspaceProtoLite$SmartSpaceCardMetadata) newBuilder.instance, i3);
+                SmartspaceProtoLite$SmartSpaceCardMetadata.m1351$$Nest$msetCardTypeId((SmartspaceProtoLite$SmartSpaceCardMetadata) newBuilder.instance, i3);
                 arrayList.add((SmartspaceProtoLite$SmartSpaceCardMetadata) newBuilder.build());
                 i++;
             }
             SmartspaceProtoLite$SmartSpaceSubcards.Builder newBuilder2 = SmartspaceProtoLite$SmartSpaceSubcards.newBuilder();
             int i4 = bcSmartspaceSubcardLoggingInfo.mClickedSubcardIndex;
             newBuilder2.copyOnWrite();
-            SmartspaceProtoLite$SmartSpaceSubcards.m1272$$Nest$msetClickedSubcardIndex((SmartspaceProtoLite$SmartSpaceSubcards) newBuilder2.instance, i4);
+            SmartspaceProtoLite$SmartSpaceSubcards.m1354$$Nest$msetClickedSubcardIndex((SmartspaceProtoLite$SmartSpaceSubcards) newBuilder2.instance, i4);
             newBuilder2.copyOnWrite();
-            SmartspaceProtoLite$SmartSpaceSubcards.m1271$$Nest$maddAllSubcards((SmartspaceProtoLite$SmartSpaceSubcards) newBuilder2.instance, arrayList);
+            SmartspaceProtoLite$SmartSpaceSubcards.m1353$$Nest$maddAllSubcards((SmartspaceProtoLite$SmartSpaceSubcards) newBuilder2.instance, arrayList);
             bArr = ((SmartspaceProtoLite$SmartSpaceSubcards) newBuilder2.build()).toByteArray();
         }
         SmartspaceProto$SmartspaceCardDimensionalInfo smartspaceProto$SmartspaceCardDimensionalInfo = bcSmartspaceCardLoggingInfo.mDimensionalInfo;

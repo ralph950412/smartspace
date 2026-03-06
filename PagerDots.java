@@ -6,11 +6,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import com.android.wm.shell.R;
 
-/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
 /* loaded from: classes2.dex */
 public final class PagerDots extends View {
     public final float activeDotSize;
@@ -51,6 +50,7 @@ public final class PagerDots extends View {
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void onDraw(Canvas canvas) {
+        float f;
         if (this.numPages < 2) {
             return;
         }
@@ -58,37 +58,41 @@ public final class PagerDots extends View {
         try {
             canvas.scale(isLayoutRtl() ? -1.0f : 1.0f, 1.0f, canvas.getWidth() * 0.5f, 0.0f);
             canvas.translate(getPaddingStart(), getPaddingTop());
-            float f = this.activeDotSize;
-            float f2 = this.dotSize;
-            float f3 = this.currentPositionOffset;
-            float f4 = (f - f2) * f3;
+            float f2 = this.activeDotSize;
+            float f3 = this.dotSize;
+            float f4 = this.currentPositionOffset;
+            float f5 = (f2 - f3) * f4;
             int i = (this.primaryColor >> 24) & 255;
             int i2 = (int) (i * 0.4f);
-            int i3 = (int) ((i - i2) * f3);
+            int i3 = (int) ((i - i2) * f4);
             RectF rectF = this.tempRectF;
             rectF.top = 0.0f;
-            rectF.bottom = f2;
+            rectF.bottom = f3;
             rectF.left = 0.0f;
             int i4 = this.numPages;
             int i5 = 0;
             while (i5 < i4) {
                 int i6 = this.currentPositionIndex;
-                float f5 = i5 == i6 ? this.activeDotSize - f4 : i5 == i6 + 1 ? this.dotSize + f4 : this.dotSize;
-                int i7 = i5 == i6 ? i - i3 : i5 == i6 + 1 ? i2 + i3 : i2;
+                if (i5 == i6) {
+                    f = this.activeDotSize - f5;
+                } else {
+                    int i7 = i6 + 1;
+                    float f6 = this.dotSize;
+                    f = i5 == i7 ? f6 + f5 : f6;
+                }
+                int i8 = i5 == i6 ? i - i3 : i5 == i6 + 1 ? i2 + i3 : i2;
                 RectF rectF2 = this.tempRectF;
-                rectF2.right = rectF2.left + f5;
-                this.paint.setAlpha(i7);
+                rectF2.right = rectF2.left + f;
+                this.paint.setAlpha(i8);
                 RectF rectF3 = this.tempRectF;
-                float f6 = this.dotRadius;
-                canvas.drawRoundRect(rectF3, f6, f6, this.paint);
+                float f7 = this.dotRadius;
+                canvas.drawRoundRect(rectF3, f7, f7, this.paint);
                 RectF rectF4 = this.tempRectF;
                 rectF4.left = rectF4.right + this.dotMargin;
                 i5++;
             }
+        } finally {
             canvas.restoreToCount(save);
-        } catch (Throwable th) {
-            canvas.restoreToCount(save);
-            throw th;
         }
     }
 
@@ -104,7 +108,6 @@ public final class PagerDots extends View {
             return;
         }
         if (i <= 0) {
-            Log.w("SsPagerDots", "Total number of pages invalid: " + i + ". Assuming 1 page.");
             this.numPages = 1;
         } else {
             this.numPages = i;
@@ -138,13 +141,13 @@ public final class PagerDots extends View {
         setContentDescription(getContext().getString(R.string.accessibility_smartspace_page, Integer.valueOf(this.currentPageIndex + 1), Integer.valueOf(this.numPages)));
     }
 
-    public PagerDots(Context context) {
-        this(context, null);
-    }
-
     public static /* synthetic */ void getNumPages$annotations() {
     }
 
     public static /* synthetic */ void getPaint$annotations() {
+    }
+
+    public PagerDots(Context context) {
+        this(context, null);
     }
 }

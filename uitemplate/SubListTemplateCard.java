@@ -1,6 +1,7 @@
 package com.google.android.systemui.smartspace.uitemplate;
 
 import android.app.smartspace.SmartspaceTarget;
+import android.app.smartspace.uitemplatedata.Icon;
 import android.app.smartspace.uitemplatedata.SubListTemplateData;
 import android.app.smartspace.uitemplatedata.Text;
 import android.content.Context;
@@ -19,7 +20,7 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInf
 import java.util.List;
 import java.util.Locale;
 
-/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
 /* loaded from: classes2.dex */
 public class SubListTemplateCard extends BcSmartspaceCardSecondary {
     public static final int[] LIST_ITEM_TEXT_VIEW_IDS = {R.id.list_item_1, R.id.list_item_2, R.id.list_item_3};
@@ -60,11 +61,13 @@ public class SubListTemplateCard extends BcSmartspaceCardSecondary {
             Log.w("SubListTemplateCard", "SubListTemplateData is null or contains invalid template type");
             return false;
         }
-        if (templateData.getSubListIcon() != null) {
-            BcSmartspaceTemplateDataUtils.setIcon(this.mListIconView, templateData.getSubListIcon());
+        Icon subListIcon = templateData.getSubListIcon();
+        ImageView imageView = this.mListIconView;
+        if (subListIcon != null) {
+            BcSmartspaceTemplateDataUtils.setIcon(imageView, templateData.getSubListIcon());
             BcSmartspaceTemplateDataUtils.updateVisibility(this.mListIconView, 0);
         } else {
-            BcSmartspaceTemplateDataUtils.updateVisibility(this.mListIconView, 8);
+            BcSmartspaceTemplateDataUtils.updateVisibility(imageView, 8);
         }
         if (templateData.getSubListTexts() != null) {
             List subListTexts = templateData.getSubListTexts();

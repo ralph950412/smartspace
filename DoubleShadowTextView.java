@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.core.graphics.ColorUtils;
 import com.android.wm.shell.R;
 
-/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
 /* loaded from: classes2.dex */
 public class DoubleShadowTextView extends TextView {
     public final float mAmbientShadowBlur;
@@ -19,8 +19,15 @@ public class DoubleShadowTextView extends TextView {
     public final float mKeyShadowOffsetY;
 
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
-    public DoubleShadowTextView(Context context) {
-        this(context, null);
+    public DoubleShadowTextView(Context context, AttributeSet attributeSet, int i) {
+        super(context, attributeSet, i);
+        this.mDrawShadow = ColorUtils.calculateLuminance(getCurrentTextColor()) > 0.5d;
+        this.mKeyShadowBlur = context.getResources().getDimensionPixelSize(R.dimen.key_text_shadow_radius);
+        this.mKeyShadowOffsetX = context.getResources().getDimensionPixelSize(R.dimen.key_text_shadow_dx);
+        this.mKeyShadowOffsetY = context.getResources().getDimensionPixelSize(R.dimen.key_text_shadow_dy);
+        this.mKeyShadowColor = context.getResources().getColor(R.color.key_text_shadow_color);
+        this.mAmbientShadowBlur = context.getResources().getDimensionPixelSize(R.dimen.ambient_text_shadow_radius);
+        this.mAmbientShadowColor = context.getResources().getColor(R.color.ambient_text_shadow_color);
     }
 
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
@@ -47,19 +54,11 @@ public class DoubleShadowTextView extends TextView {
         this.mDrawShadow = ColorUtils.calculateLuminance(i) > 0.5d;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 2 */
     public DoubleShadowTextView(Context context, AttributeSet attributeSet) {
         this(context, attributeSet, 0);
     }
 
-    public DoubleShadowTextView(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
-        this.mDrawShadow = ColorUtils.calculateLuminance(getCurrentTextColor()) > 0.5d;
-        this.mKeyShadowBlur = context.getResources().getDimensionPixelSize(R.dimen.key_text_shadow_radius);
-        this.mKeyShadowOffsetX = context.getResources().getDimensionPixelSize(R.dimen.key_text_shadow_dx);
-        this.mKeyShadowOffsetY = context.getResources().getDimensionPixelSize(R.dimen.key_text_shadow_dy);
-        this.mKeyShadowColor = context.getResources().getColor(R.color.key_text_shadow_color);
-        this.mAmbientShadowBlur = context.getResources().getDimensionPixelSize(R.dimen.ambient_text_shadow_radius);
-        this.mAmbientShadowColor = context.getResources().getColor(R.color.ambient_text_shadow_color);
+    public DoubleShadowTextView(Context context) {
+        this(context, null);
     }
 }

@@ -4,7 +4,6 @@ import android.app.ActivityManager;
 import android.text.format.DateFormat;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import java.util.Iterator;
-import java.util.concurrent.TimeUnit;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
@@ -13,8 +12,10 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.flow.StateFlowImpl;
+import okio.Buffer$$ExternalSyntheticBUOutline0;
 
-/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
 /* loaded from: classes2.dex */
 final class KeyguardZenAlarmViewController$showAlarm$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Long $alarm;
@@ -42,8 +43,8 @@ final class KeyguardZenAlarmViewController$showAlarm$1 extends SuspendLambda imp
     }
 
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0099 A[LOOP:1: B:23:0x0093->B:25:0x0099, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0040  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x00a4 A[LOOP:1: B:24:0x009e->B:26:0x00a4, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x003f  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -60,13 +61,17 @@ final class KeyguardZenAlarmViewController$showAlarm$1 extends SuspendLambda imp
                 longValue = l.longValue();
                 if (longValue > 0) {
                     this.this$0.getClass();
-                    if (longValue <= TimeUnit.HOURS.toMillis(12L) + System.currentTimeMillis()) {
+                    if (longValue <= System.currentTimeMillis() + 43200000) {
                         String obj2 = DateFormat.format(DateFormat.is24HourFormat(this.this$0.context, ActivityManager.getCurrentUser()) ? "HH:mm" : "h:mm", longValue).toString();
                         KeyguardZenAlarmViewController keyguardZenAlarmViewController = this.this$0;
                         Iterator it2 = keyguardZenAlarmViewController.smartspaceViews.iterator();
                         while (it2.hasNext()) {
                             ((BcSmartspaceDataPlugin.SmartspaceView) it2.next()).setNextAlarm(keyguardZenAlarmViewController.alarmImage, obj2);
                         }
+                        StateFlowImpl stateFlowImpl = this.this$0.zenModeInteractor.zenModeRepository.hasNextAlarm;
+                        Boolean bool = Boolean.TRUE;
+                        stateFlowImpl.getClass();
+                        stateFlowImpl.updateState(null, bool);
                         return Unit.INSTANCE;
                     }
                 }
@@ -74,6 +79,10 @@ final class KeyguardZenAlarmViewController$showAlarm$1 extends SuspendLambda imp
                 while (it.hasNext()) {
                     ((BcSmartspaceDataPlugin.SmartspaceView) it.next()).setNextAlarm(null, null);
                 }
+                StateFlowImpl stateFlowImpl2 = this.this$0.zenModeInteractor.zenModeRepository.hasNextAlarm;
+                Boolean bool2 = Boolean.FALSE;
+                stateFlowImpl2.getClass();
+                stateFlowImpl2.updateState(null, bool2);
                 return Unit.INSTANCE;
             }
             KeyguardZenAlarmViewController keyguardZenAlarmViewController2 = this.this$0;
@@ -84,7 +93,8 @@ final class KeyguardZenAlarmViewController$showAlarm$1 extends SuspendLambda imp
             }
         } else {
             if (i != 1) {
-                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                Buffer$$ExternalSyntheticBUOutline0.m$1("call to 'resume' before 'invoke' with coroutine");
+                return null;
             }
             ResultKt.throwOnFailure(obj);
         }
@@ -94,6 +104,10 @@ final class KeyguardZenAlarmViewController$showAlarm$1 extends SuspendLambda imp
         it = this.this$0.smartspaceViews.iterator();
         while (it.hasNext()) {
         }
+        StateFlowImpl stateFlowImpl22 = this.this$0.zenModeInteractor.zenModeRepository.hasNextAlarm;
+        Boolean bool22 = Boolean.FALSE;
+        stateFlowImpl22.getClass();
+        stateFlowImpl22.updateState(null, bool22);
         return Unit.INSTANCE;
     }
 }

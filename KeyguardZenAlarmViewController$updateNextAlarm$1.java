@@ -1,6 +1,5 @@
 package com.google.android.systemui.smartspace;
 
-import java.util.concurrent.TimeUnit;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
@@ -9,8 +8,9 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
+import okio.Buffer$$ExternalSyntheticBUOutline0;
 
-/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
 /* loaded from: classes2.dex */
 final class KeyguardZenAlarmViewController$updateNextAlarm$1 extends SuspendLambda implements Function2 {
     int label;
@@ -52,16 +52,17 @@ final class KeyguardZenAlarmViewController$updateNextAlarm$1 extends SuspendLamb
             }
         } else {
             if (i != 1) {
-                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                Buffer$$ExternalSyntheticBUOutline0.m$1("call to 'resume' before 'invoke' with coroutine");
+                return null;
             }
             ResultKt.throwOnFailure(obj);
         }
         long longValue = ((Number) obj).longValue();
         if (longValue > 0) {
-            long millis = longValue - TimeUnit.HOURS.toMillis(12L);
-            if (millis > 0) {
+            long j = longValue - 43200000;
+            if (j > 0) {
                 KeyguardZenAlarmViewController keyguardZenAlarmViewController3 = this.this$0;
-                keyguardZenAlarmViewController3.alarmManager.setExact(1, millis, "lock_screen_next_alarm", keyguardZenAlarmViewController3.showNextAlarm, keyguardZenAlarmViewController3.handler);
+                keyguardZenAlarmViewController3.alarmManager.setExact(1, j, "lock_screen_next_alarm", keyguardZenAlarmViewController3.showNextAlarm, keyguardZenAlarmViewController3.handler);
             }
         }
         this.this$0.showAlarm(new Long(longValue));

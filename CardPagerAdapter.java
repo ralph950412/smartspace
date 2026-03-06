@@ -2,21 +2,16 @@ package com.google.android.systemui.smartspace;
 
 import android.app.smartspace.SmartspaceAction;
 import android.app.smartspace.SmartspaceTarget;
-import android.app.smartspace.SmartspaceUtils;
 import android.app.smartspace.uitemplatedata.BaseTemplateData;
 import android.content.ComponentName;
+import android.database.DataSetObservable;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import androidx.compose.foundation.text.input.internal.RecordingInputConnection$$ExternalSyntheticOutline0;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import com.android.internal.graphics.ColorUtils;
 import com.android.systemui.plugins.BcSmartspaceConfigPlugin;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
@@ -35,10 +30,11 @@ import java.util.stream.IntStream;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsJVMKt;
+import okio.Buffer$$ExternalSyntheticBUOutline0;
 
-/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
 /* loaded from: classes2.dex */
-public final class CardPagerAdapter extends PagerAdapter implements CardAdapter {
+public final class CardPagerAdapter implements CardAdapter {
     public static final Companion Companion = new Companion();
     public List _aodTargets;
     public List _lockscreenTargets;
@@ -53,6 +49,8 @@ public final class CardPagerAdapter extends PagerAdapter implements CardAdapter 
     public boolean hasAodLockscreenTransition;
     public boolean hasDifferentTargets;
     public boolean keyguardBypassEnabled;
+    public DataSetObservable mObservable;
+    public DataSetObserver mViewPagerObserver;
     public List mediaTargets;
     public Integer nonRemoteViewsHorizontalPadding;
     public float previousDozeAmount;
@@ -67,7 +65,7 @@ public final class CardPagerAdapter extends PagerAdapter implements CardAdapter 
     public String uiSurface;
     public SparseArray viewHolders;
 
-    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
     public final class Companion {
         /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         public static boolean useRecycledViewForAction(SmartspaceAction smartspaceAction, SmartspaceAction smartspaceAction2) {
@@ -151,7 +149,7 @@ public final class CardPagerAdapter extends PagerAdapter implements CardAdapter 
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
     public final class TransitionType {
         public static final /* synthetic */ TransitionType[] $VALUES;
         public static final TransitionType NOT_IN_TRANSITION;
@@ -182,7 +180,7 @@ public final class CardPagerAdapter extends PagerAdapter implements CardAdapter 
         }
     }
 
-    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
     public final class ViewHolder {
         public final BaseTemplateCard card;
         public final BcSmartspaceCard legacyCard;
@@ -219,8 +217,7 @@ public final class CardPagerAdapter extends PagerAdapter implements CardAdapter 
     }
 
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
-    @Override // androidx.viewpager.widget.PagerAdapter
-    public final void destroyItem(ViewPager viewPager, int i, Object obj) {
+    public final void destroyItem(ViewGroup viewGroup, int i, Object obj) {
         LazyServerFlagLoader lazyServerFlagLoader = this.enableCardRecycling;
         ViewHolder viewHolder = (ViewHolder) obj;
         BcSmartspaceCard bcSmartspaceCard = viewHolder.legacyCard;
@@ -230,14 +227,14 @@ public final class CardPagerAdapter extends PagerAdapter implements CardAdapter 
             if (smartspaceTarget != null && lazyServerFlagLoader.get()) {
                 this.recycledLegacyCards.put(BcSmartSpaceUtil.getFeatureType(smartspaceTarget), bcSmartspaceCard);
             }
-            viewPager.removeView(bcSmartspaceCard);
+            viewGroup.removeView(bcSmartspaceCard);
         }
         if (baseTemplateCard != null) {
             SmartspaceTarget smartspaceTarget2 = baseTemplateCard.mTarget;
             if (smartspaceTarget2 != null && lazyServerFlagLoader.get()) {
                 this.recycledCards.put(smartspaceTarget2.getFeatureType(), baseTemplateCard);
             }
-            viewPager.removeView(baseTemplateCard);
+            viewGroup.removeView(baseTemplateCard);
         }
         BcSmartspaceRemoteViewsCard bcSmartspaceRemoteViewsCard = viewHolder.remoteViewsCard;
         if (bcSmartspaceRemoteViewsCard != null) {
@@ -246,7 +243,7 @@ public final class CardPagerAdapter extends PagerAdapter implements CardAdapter 
                 this.recycledRemoteViewsCards.put(BcSmartSpaceUtil.getFeatureType(viewHolder.target), bcSmartspaceRemoteViewsCard);
             }
             Log.d("SsCardPagerAdapter", "[rmv] Removing RemoteViews card");
-            viewPager.removeView(bcSmartspaceRemoteViewsCard);
+            viewGroup.removeView(bcSmartspaceRemoteViewsCard);
         }
         if (this.viewHolders.get(i) == viewHolder) {
             this.viewHolders.remove(i);
@@ -266,7 +263,7 @@ public final class CardPagerAdapter extends PagerAdapter implements CardAdapter 
     }
 
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
-    @Override // androidx.viewpager.widget.PagerAdapter
+    @Override // com.google.android.systemui.smartspace.CardAdapter
     public final int getCount() {
         return this.smartspaceTargets.size();
     }
@@ -287,22 +284,6 @@ public final class CardPagerAdapter extends PagerAdapter implements CardAdapter 
     @Override // com.google.android.systemui.smartspace.CardAdapter
     public final boolean getHasDifferentTargets() {
         return this.hasDifferentTargets;
-    }
-
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
-    @Override // androidx.viewpager.widget.PagerAdapter
-    public final int getItemPosition(Object obj) {
-        ViewHolder viewHolder = (ViewHolder) obj;
-        SmartspaceTarget targetAtPosition = getTargetAtPosition(viewHolder.position);
-        if (viewHolder.target == targetAtPosition) {
-            return -1;
-        }
-        if (targetAtPosition == null || BcSmartSpaceUtil.getFeatureType(targetAtPosition) != BcSmartSpaceUtil.getFeatureType(viewHolder.target) || !Intrinsics.areEqual(targetAtPosition.getSmartspaceTargetId(), viewHolder.target.getSmartspaceTargetId())) {
-            return -2;
-        }
-        viewHolder.target = targetAtPosition;
-        onBindViewHolder(viewHolder);
-        return -1;
     }
 
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
@@ -363,121 +344,18 @@ public final class CardPagerAdapter extends PagerAdapter implements CardAdapter 
     }
 
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
-    @Override // androidx.viewpager.widget.PagerAdapter
-    public final Object instantiateItem(ViewPager viewPager, int i) {
-        BcSmartspaceCard bcSmartspaceCard;
-        ViewHolder viewHolder;
-        int i2;
-        Integer num;
-        BaseTemplateData.SubItemLoggingInfo loggingInfo;
-        LazyServerFlagLoader lazyServerFlagLoader = this.enableReducedCardRecycling;
-        LazyServerFlagLoader lazyServerFlagLoader2 = this.enableCardRecycling;
-        SmartspaceTarget smartspaceTarget = (SmartspaceTarget) this.smartspaceTargets.get(i);
-        BcSmartspaceCard bcSmartspaceCard2 = null;
-        if (smartspaceTarget.getRemoteViews() != null) {
-            Log.i("SsCardPagerAdapter", "[rmv] Use RemoteViews for the feature: " + smartspaceTarget.getFeatureType());
-            BcSmartspaceRemoteViewsCard bcSmartspaceRemoteViewsCard = lazyServerFlagLoader2.get() ? (BcSmartspaceRemoteViewsCard) this.recycledRemoteViewsCards.removeReturnOld(BcSmartSpaceUtil.getFeatureType(smartspaceTarget)) : null;
-            if (bcSmartspaceRemoteViewsCard == null) {
-                bcSmartspaceRemoteViewsCard = new BcSmartspaceRemoteViewsCard(viewPager.getContext());
-                bcSmartspaceRemoteViewsCard.mUiSurface = this.uiSurface;
-                bcSmartspaceRemoteViewsCard.setLayoutParams(new ViewGroup.LayoutParams(-1, -1));
-            }
-            BcSmartspaceRemoteViewsCard bcSmartspaceRemoteViewsCard2 = bcSmartspaceRemoteViewsCard;
-            i2 = i;
-            viewHolder = new ViewHolder(i2, null, smartspaceTarget, null, bcSmartspaceRemoteViewsCard2);
-            viewPager.addView(bcSmartspaceRemoteViewsCard2);
-        } else {
-            boolean containsValidTemplateType = BcSmartspaceCardLoggerUtil.containsValidTemplateType(smartspaceTarget.getTemplateData());
-            Companion companion = Companion;
-            if (containsValidTemplateType) {
-                Log.i("SsCardPagerAdapter", "Use UI template for the feature: " + smartspaceTarget.getFeatureType());
-                BaseTemplateCard baseTemplateCard = lazyServerFlagLoader2.get() ? (BaseTemplateCard) this.recycledCards.removeReturnOld(smartspaceTarget.getFeatureType()) : null;
-                if (baseTemplateCard == null || (lazyServerFlagLoader.get() && !companion.useRecycledViewForNewTarget(smartspaceTarget, baseTemplateCard.mTarget))) {
-                    BaseTemplateData templateData = smartspaceTarget.getTemplateData();
-                    BaseTemplateData.SubItemInfo primaryItem = templateData != null ? templateData.getPrimaryItem() : null;
-                    int i3 = (primaryItem == null || (SmartspaceUtils.isEmpty(primaryItem.getText()) && primaryItem.getIcon() == null) || ((loggingInfo = primaryItem.getLoggingInfo()) != null && loggingInfo.getFeatureType() == 1)) ? R.layout.smartspace_base_template_card_with_date : R.layout.smartspace_base_template_card;
-                    LayoutInflater from = LayoutInflater.from(viewPager.getContext());
-                    baseTemplateCard = (BaseTemplateCard) from.inflate(i3, (ViewGroup) viewPager, false);
-                    String str = this.uiSurface;
-                    baseTemplateCard.mUiSurface = str;
-                    if (baseTemplateCard.mDateView != null && TextUtils.equals(str, BcSmartspaceDataPlugin.UI_SURFACE_LOCK_SCREEN_AOD)) {
-                        IcuDateTextView icuDateTextView = baseTemplateCard.mDateView;
-                        if (icuDateTextView.isAttachedToWindow()) {
-                            throw new IllegalStateException("Must call before attaching view to window.");
-                        }
-                        icuDateTextView.mUpdatesOnAod = true;
-                    }
-                    Integer num2 = this.nonRemoteViewsHorizontalPadding;
-                    if (num2 != null) {
-                        int intValue = num2.intValue();
-                        baseTemplateCard.setPaddingRelative(intValue, baseTemplateCard.getPaddingTop(), intValue, baseTemplateCard.getPaddingBottom());
-                    }
-                    Handler handler = this.bgHandler;
-                    Handler handler2 = handler != null ? handler : null;
-                    baseTemplateCard.mBgHandler = handler2;
-                    IcuDateTextView icuDateTextView2 = baseTemplateCard.mDateView;
-                    if (icuDateTextView2 != null) {
-                        icuDateTextView2.mBgHandler = handler2;
-                    }
-                    BcSmartspaceDataPlugin.TimeChangedDelegate timeChangedDelegate = this.timeChangedDelegate;
-                    if (icuDateTextView2 != null) {
-                        if (icuDateTextView2.isAttachedToWindow()) {
-                            throw new IllegalStateException("Must call before attaching view to window.");
-                        }
-                        icuDateTextView2.mTimeChangedDelegate = timeChangedDelegate;
-                    }
-                    if (templateData != null && (num = (Integer) BcSmartspaceTemplateDataUtils.TEMPLATE_TYPE_TO_SECONDARY_CARD_RES.get(Integer.valueOf(templateData.getTemplateType()))) != null) {
-                        BcSmartspaceCardSecondary bcSmartspaceCardSecondary = (BcSmartspaceCardSecondary) from.inflate(num.intValue(), (ViewGroup) baseTemplateCard, false);
-                        Log.i("SsCardPagerAdapter", "Secondary card is found");
-                        baseTemplateCard.setSecondaryCard(bcSmartspaceCardSecondary);
-                    }
+    public final void notifyDataSetChanged() {
+        synchronized (this) {
+            try {
+                DataSetObserver dataSetObserver = this.mViewPagerObserver;
+                if (dataSetObserver != null) {
+                    dataSetObserver.onChanged();
                 }
-                BaseTemplateCard baseTemplateCard2 = baseTemplateCard;
-                i2 = i;
-                viewHolder = new ViewHolder(i2, null, smartspaceTarget, baseTemplateCard2, null);
-                viewPager.addView(baseTemplateCard2);
-            } else {
-                BcSmartspaceCard bcSmartspaceCard3 = lazyServerFlagLoader2.get() ? (BcSmartspaceCard) this.recycledLegacyCards.removeReturnOld(BcSmartSpaceUtil.getFeatureType(smartspaceTarget)) : null;
-                if (bcSmartspaceCard3 == null || (lazyServerFlagLoader.get() && !companion.useRecycledViewForNewTarget(smartspaceTarget, bcSmartspaceCard3.mTarget))) {
-                    int featureType = BcSmartSpaceUtil.getFeatureType(smartspaceTarget);
-                    LayoutInflater from2 = LayoutInflater.from(viewPager.getContext());
-                    int baseLegacyCardRes = companion.getBaseLegacyCardRes(featureType);
-                    if (baseLegacyCardRes == 0) {
-                        RecordingInputConnection$$ExternalSyntheticOutline0.m(featureType, "No legacy card can be created for feature type: ", "SsCardPagerAdapter");
-                    } else {
-                        bcSmartspaceCard2 = (BcSmartspaceCard) from2.inflate(baseLegacyCardRes, (ViewGroup) viewPager, false);
-                        bcSmartspaceCard2.mUiSurface = this.uiSurface;
-                        Integer num3 = this.nonRemoteViewsHorizontalPadding;
-                        if (num3 != null) {
-                            int intValue2 = num3.intValue();
-                            bcSmartspaceCard2.setPaddingRelative(intValue2, bcSmartspaceCard2.getPaddingTop(), intValue2, bcSmartspaceCard2.getPaddingBottom());
-                        }
-                        Integer num4 = (Integer) BcSmartSpaceUtil.FEATURE_TYPE_TO_SECONDARY_CARD_RESOURCE_MAP.get(Integer.valueOf(featureType));
-                        if (num4 != null) {
-                            bcSmartspaceCard2.setSecondaryCard((BcSmartspaceCardSecondary) from2.inflate(num4.intValue(), (ViewGroup) bcSmartspaceCard2, false));
-                        }
-                    }
-                    bcSmartspaceCard = bcSmartspaceCard2;
-                } else {
-                    bcSmartspaceCard = bcSmartspaceCard3;
-                }
-                i2 = i;
-                viewHolder = new ViewHolder(i2, bcSmartspaceCard, smartspaceTarget, null, null);
-                if (bcSmartspaceCard != null) {
-                    viewPager.addView(bcSmartspaceCard);
-                }
+            } catch (Throwable th) {
+                throw th;
             }
         }
-        onBindViewHolder(viewHolder);
-        this.viewHolders.put(i2, viewHolder);
-        return viewHolder;
-    }
-
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
-    @Override // androidx.viewpager.widget.PagerAdapter
-    public final boolean isViewFromObject(View view, Object obj) {
-        ViewHolder viewHolder = (ViewHolder) obj;
-        return view == viewHolder.legacyCard || view == viewHolder.card || view == viewHolder.remoteViewsCard;
+        this.mObservable.notifyChanged();
     }
 
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
@@ -523,12 +401,13 @@ public final class CardPagerAdapter extends PagerAdapter implements CardAdapter 
             BcSmartspaceDataPlugin bcSmartspaceDataPlugin2 = this.dataProvider;
             bcSmartspaceCard.bindData(smartspaceTarget, bcSmartspaceDataPlugin2 != null ? bcSmartspaceDataPlugin2.getEventNotifier() : null, bcSmartspaceCardLoggingInfo, this.smartspaceTargets.size() > 1);
             bcSmartspaceCard.setPrimaryTextColor(this.currentTextColor);
-            bcSmartspaceCard.setDozeAmount$1(this.dozeAmount);
+            bcSmartspaceCard.setDozeAmount(this.dozeAmount);
             return;
         }
         BaseTemplateData templateData = smartspaceTarget.getTemplateData();
         if (templateData == null) {
-            throw new IllegalStateException("Required value was null.");
+            Buffer$$ExternalSyntheticBUOutline0.m$1("Required value was null.");
+            return;
         }
         BcSmartspaceCardLoggerUtil.tryForcePrimaryFeatureTypeOrUpdateLogInfoFromTemplateData(bcSmartspaceCardLoggingInfo, templateData);
         BaseTemplateCard baseTemplateCard = viewHolder.card;
@@ -539,7 +418,7 @@ public final class CardPagerAdapter extends PagerAdapter implements CardAdapter 
         BcSmartspaceDataPlugin bcSmartspaceDataPlugin3 = this.dataProvider;
         baseTemplateCard.bindData(smartspaceTarget, bcSmartspaceDataPlugin3 != null ? bcSmartspaceDataPlugin3.getEventNotifier() : null, bcSmartspaceCardLoggingInfo, this.smartspaceTargets.size() > 1);
         baseTemplateCard.setPrimaryTextColor(this.currentTextColor);
-        baseTemplateCard.setDozeAmount$1(this.dozeAmount);
+        baseTemplateCard.setDozeAmount(this.dozeAmount);
     }
 
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
@@ -693,12 +572,12 @@ public final class CardPagerAdapter extends PagerAdapter implements CardAdapter 
                 BcSmartspaceCard bcSmartspaceCard = viewHolder.legacyCard;
                 if (bcSmartspaceCard != null) {
                     bcSmartspaceCard.setPrimaryTextColor(this.currentTextColor);
-                    bcSmartspaceCard.setDozeAmount$1(this.dozeAmount);
+                    bcSmartspaceCard.setDozeAmount(this.dozeAmount);
                 }
                 BaseTemplateCard baseTemplateCard = viewHolder.card;
                 if (baseTemplateCard != null) {
                     baseTemplateCard.setPrimaryTextColor(this.currentTextColor);
-                    baseTemplateCard.setDozeAmount$1(this.dozeAmount);
+                    baseTemplateCard.setDozeAmount(this.dozeAmount);
                 }
             }
         }
@@ -798,5 +677,9 @@ public final class CardPagerAdapter extends PagerAdapter implements CardAdapter 
     }
 
     public static /* synthetic */ void getUiSurface$annotations() {
+    }
+
+    @Override // com.google.android.systemui.smartspace.CardAdapter
+    public final void onBackgroundToggled(boolean z) {
     }
 }

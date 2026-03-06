@@ -11,7 +11,7 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInf
 import java.lang.invoke.VarHandle;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
 /* loaded from: classes2.dex */
 public final class BcSmartspaceRemoteViewsCard extends AppWidgetHostView implements SmartspaceCard {
     public BcSmartspaceDataPlugin.SmartspaceEventNotifier mEventNotifier;
@@ -31,6 +31,7 @@ public final class BcSmartspaceRemoteViewsCard extends AppWidgetHostView impleme
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.SmartspaceCard
     public final void bindData(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo, boolean z) {
+        updateAppWidget(null);
         this.mTarget = smartspaceTarget;
         this.mLoggingInfo = bcSmartspaceCardLoggingInfo;
         this.mEventNotifier = smartspaceEventNotifier;
@@ -87,7 +88,7 @@ public final class BcSmartspaceRemoteViewsCard extends AppWidgetHostView impleme
     }
 
     @Override // com.google.android.systemui.smartspace.SmartspaceCard
-    public final void setDozeAmount$1(float f) {
+    public final void setDozeAmount(float f) {
     }
 
     @Override // com.google.android.systemui.smartspace.SmartspaceCard

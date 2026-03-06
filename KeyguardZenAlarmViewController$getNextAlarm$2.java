@@ -9,8 +9,9 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
+import okio.Buffer$$ExternalSyntheticBUOutline0;
 
-/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
 /* loaded from: classes2.dex */
 final class KeyguardZenAlarmViewController$getNextAlarm$2 extends SuspendLambda implements Function2 {
     int label;
@@ -40,7 +41,8 @@ final class KeyguardZenAlarmViewController$getNextAlarm$2 extends SuspendLambda 
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
-            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            Buffer$$ExternalSyntheticBUOutline0.m$1("call to 'resume' before 'invoke' with coroutine");
+            return null;
         }
         ResultKt.throwOnFailure(obj);
         ZenModeControllerImpl zenModeControllerImpl = (ZenModeControllerImpl) this.this$0.zenModeController;

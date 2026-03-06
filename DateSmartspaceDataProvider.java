@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
 /* loaded from: classes2.dex */
 public final class DateSmartspaceDataProvider implements BcSmartspaceDataPlugin {
     public Set mAttachListeners;
@@ -18,7 +18,7 @@ public final class DateSmartspaceDataProvider implements BcSmartspaceDataPlugin 
     public AnonymousClass1 mStateChangeListener;
     public Set mViews;
 
-    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
     /* renamed from: com.google.android.systemui.smartspace.DateSmartspaceDataProvider$1, reason: invalid class name */
     public final class AnonymousClass1 implements View.OnAttachStateChangeListener {
         public /* synthetic */ DateSmartspaceDataProvider this$0;

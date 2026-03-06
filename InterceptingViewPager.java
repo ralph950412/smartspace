@@ -12,7 +12,7 @@ import com.android.wm.shell.R;
 import java.lang.invoke.VarHandle;
 import java.util.ArrayList;
 
-/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
 /* loaded from: classes2.dex */
 public class InterceptingViewPager extends ViewPager {
     public boolean mHasPerformedLongPress;
@@ -22,8 +22,21 @@ public class InterceptingViewPager extends ViewPager {
     public final InterceptingViewPager$$ExternalSyntheticLambda0 mSuperOnTouch;
 
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
-    public InterceptingViewPager(Context context, AttributeSet attributeSet) {
-        super(context, attributeSet);
+    public InterceptingViewPager(Context context) {
+        super(context);
+        this.mItems = new ArrayList();
+        this.mTempItem = new ViewPager.ItemInfo();
+        this.mTempRect = new Rect();
+        this.mRestoredCurItem = -1;
+        this.mFirstOffset = -3.4028235E38f;
+        this.mLastOffset = Float.MAX_VALUE;
+        this.mOffscreenPageLimit = 1;
+        this.mDragInGutterEnabled = true;
+        this.mActivePointerId = -1;
+        this.mFirstLayout = true;
+        this.mEndScrollRunnable = new ViewPager.AnonymousClass3(this);
+        this.mScrollState = 0;
+        initViewPager(context);
         InterceptingViewPager$$ExternalSyntheticLambda0 interceptingViewPager$$ExternalSyntheticLambda0 = new InterceptingViewPager$$ExternalSyntheticLambda0(0);
         interceptingViewPager$$ExternalSyntheticLambda0.f$0 = this;
         VarHandle.storeStoreFence();
@@ -101,8 +114,8 @@ public class InterceptingViewPager extends ViewPager {
         return handleTouchOverride(motionEvent, this.mSuperOnTouch);
     }
 
-    public InterceptingViewPager(Context context) {
-        super(context);
+    public InterceptingViewPager(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
         this.mItems = new ArrayList();
         this.mTempItem = new ViewPager.ItemInfo();
         this.mTempRect = new Rect();
@@ -113,7 +126,7 @@ public class InterceptingViewPager extends ViewPager {
         this.mDragInGutterEnabled = true;
         this.mActivePointerId = -1;
         this.mFirstLayout = true;
-        this.mEndScrollRunnable = new ViewPager.AnonymousClass3();
+        this.mEndScrollRunnable = new ViewPager.AnonymousClass3(this);
         this.mScrollState = 0;
         initViewPager(context);
         InterceptingViewPager$$ExternalSyntheticLambda0 interceptingViewPager$$ExternalSyntheticLambda0 = new InterceptingViewPager$$ExternalSyntheticLambda0(0);

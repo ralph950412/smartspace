@@ -50,7 +50,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
 /* loaded from: classes2.dex */
 public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -62,7 +62,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
     public ProgressBar mProgressBar;
     public final Map mUriToDrawable;
 
-    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
     public final class DrawableWithUri extends DrawableWrapper {
         public Path mClipPath;
         public ContentResolver mContentResolver;
@@ -96,7 +96,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
         }
     }
 
-    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
     public final class LatencyInstrumentContext {
         public LatencyTracker mLatencyTracker;
         public Set mUriSet;
@@ -111,7 +111,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
         }
     }
 
-    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
     public final class LoadUriTask extends AsyncTask {
         public LatencyInstrumentContext mInstrumentContext;
 
@@ -191,8 +191,15 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
     }
 
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
-    public BcSmartspaceCardDoorbell(Context context) {
-        this(context, null);
+    public BcSmartspaceCardDoorbell(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
+        this.mUriToDrawable = new HashMap();
+        this.mGifFrameDurationInMs = 200;
+        LatencyInstrumentContext latencyInstrumentContext = new LatencyInstrumentContext();
+        latencyInstrumentContext.mUriSet = new HashSet();
+        latencyInstrumentContext.mLatencyTracker = LatencyTracker.getInstance(context);
+        VarHandle.storeStoreFence();
+        this.mLatencyInstrumentContext = latencyInstrumentContext;
     }
 
     /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
@@ -414,15 +421,7 @@ public class BcSmartspaceCardDoorbell extends BcSmartspaceCardGenericImage {
         return true;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 2 */
-    public BcSmartspaceCardDoorbell(Context context, AttributeSet attributeSet) {
-        super(context, attributeSet);
-        this.mUriToDrawable = new HashMap();
-        this.mGifFrameDurationInMs = 200;
-        LatencyInstrumentContext latencyInstrumentContext = new LatencyInstrumentContext();
-        latencyInstrumentContext.mUriSet = new HashSet();
-        latencyInstrumentContext.mLatencyTracker = LatencyTracker.getInstance(context);
-        VarHandle.storeStoreFence();
-        this.mLatencyInstrumentContext = latencyInstrumentContext;
+    public BcSmartspaceCardDoorbell(Context context) {
+        this(context, null);
     }
 }

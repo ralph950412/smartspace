@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
 /* loaded from: classes2.dex */
 public final class BcSmartspaceDataProvider implements BcSmartspaceDataPlugin {
     public static final boolean DEBUG = Log.isLoggable(BcSmartspaceDataPlugin.TAG, 3);
@@ -29,7 +29,7 @@ public final class BcSmartspaceDataProvider implements BcSmartspaceDataPlugin {
     public final EventNotifierProxy mEventNotifier = new EventNotifierProxy();
     public BcSmartspaceConfigPlugin mConfigProvider = new DefaultBcSmartspaceConfigProvider();
 
-    /* compiled from: go/retraceme af8e0b46c0cb0ee2c99e9b6d0c434e5c0b686fd9230eaab7fb9a40e3a9d0cf6f */
+    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
     /* renamed from: com.google.android.systemui.smartspace.BcSmartspaceDataProvider$1, reason: invalid class name */
     public final class AnonymousClass1 implements View.OnAttachStateChangeListener {
         public /* synthetic */ BcSmartspaceDataProvider this$0;
