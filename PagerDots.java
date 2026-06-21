@@ -9,8 +9,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import com.android.wm.shell.R;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public final class PagerDots extends View {
     public final float activeDotSize;
     public int currentPageIndex;
@@ -24,7 +24,6 @@ public final class PagerDots extends View {
     public int primaryColor;
     public final RectF tempRectF;
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public PagerDots(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.numPages = -1;
@@ -33,9 +32,8 @@ public final class PagerDots extends View {
         float dimension = getResources().getDimension(R.dimen.page_indicator_dot_size);
         this.dotSize = dimension;
         this.dotMargin = getResources().getDimension(R.dimen.page_indicator_dot_margin);
-        float f = 2;
-        this.activeDotSize = dimension * f;
-        this.dotRadius = dimension / f;
+        this.activeDotSize = dimension * 2.0f;
+        this.dotRadius = dimension / 2.0f;
         this.tempRectF = new RectF();
         TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
         int color = obtainStyledAttributes.getColor(0, 0);
@@ -47,7 +45,15 @@ public final class PagerDots extends View {
         this.paint = paint;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
+    public static /* synthetic */ void getCurrentPageIndex$annotations() {
+    }
+
+    public static /* synthetic */ void getNumPages$annotations() {
+    }
+
+    public static /* synthetic */ void getPaint$annotations() {
+    }
+
     @Override // android.view.View
     public final void onDraw(Canvas canvas) {
         float f;
@@ -96,13 +102,11 @@ public final class PagerDots extends View {
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void onMeasure(int i, int i2) {
         setMeasuredDimension(getPaddingRight() + getPaddingLeft() + (View.MeasureSpec.getMode(i) == 1073741824 ? View.MeasureSpec.getSize(i) : (int) (((this.dotMargin + this.dotSize) * (this.numPages - 1)) + this.activeDotSize)), getPaddingBottom() + getPaddingTop() + (View.MeasureSpec.getMode(i2) == 1073741824 ? View.MeasureSpec.getSize(i2) : (int) this.dotSize));
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void setNumPages(int i, boolean z) {
         if (i == this.numPages) {
             return;
@@ -132,19 +136,12 @@ public final class PagerDots extends View {
         invalidate();
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void updateCurrentPageIndex(int i) {
         if (i == this.currentPageIndex) {
             return;
         }
         this.currentPageIndex = i;
         setContentDescription(getContext().getString(R.string.accessibility_smartspace_page, Integer.valueOf(this.currentPageIndex + 1), Integer.valueOf(this.numPages)));
-    }
-
-    public static /* synthetic */ void getNumPages$annotations() {
-    }
-
-    public static /* synthetic */ void getPaint$annotations() {
     }
 
     public PagerDots(Context context) {

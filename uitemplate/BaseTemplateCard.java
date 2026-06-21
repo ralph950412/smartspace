@@ -47,8 +47,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard {
     public Handler mBgHandler;
     public IcuDateTextView mDateView;
@@ -76,7 +76,6 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
     public String mUiSurface;
     public boolean mValidSecondaryCard;
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public BaseTemplateCard(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mSecondaryCard = null;
@@ -104,7 +103,6 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
         setDefaultFocusHighlightEnabled(false);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static boolean shouldTint(BaseTemplateData.SubItemInfo subItemInfo) {
         if (subItemInfo == null || subItemInfo.getIcon() == null) {
             return false;
@@ -112,7 +110,6 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
         return subItemInfo.getIcon().shouldTint();
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.SmartspaceCard
     public final void bindData(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo, boolean z) {
         DoubleShadowTextView doubleShadowTextView;
@@ -135,13 +132,6 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
         resetTextView(this.mSubtitleTextView);
         resetTextView(this.mSubtitleSupplementalView);
         resetTextView(this.mSupplementalLineTextView);
-        BcSmartspaceTemplateDataUtils.updateVisibility(this.mTitleTextView, 8);
-        BcSmartspaceTemplateDataUtils.updateVisibility(this.mSubtitleGroup, 8);
-        BcSmartspaceTemplateDataUtils.updateVisibility(this.mSubtitleAqiChipView, 8);
-        BcSmartspaceTemplateDataUtils.updateVisibility(this.mSubtitleTextView, 8);
-        BcSmartspaceTemplateDataUtils.updateVisibility(this.mSubtitleSupplementalView, 8);
-        BcSmartspaceTemplateDataUtils.updateVisibility(this.mSecondaryCardPane, 8);
-        BcSmartspaceTemplateDataUtils.updateVisibility(this.mExtrasGroup, 8);
         this.mTarget = smartspaceTarget;
         this.mTemplateData = smartspaceTarget.getTemplateData();
         this.mFeatureType = smartspaceTarget.getFeatureType();
@@ -164,6 +154,8 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
         ViewGroup viewGroup2 = this.mSecondaryCardPane;
         if (viewGroup2 != null) {
             BcSmartspaceTemplateDataUtils.updateVisibility(viewGroup2, (this.mDozeAmount == 1.0f || !this.mValidSecondaryCard) ? 8 : 0);
+        } else {
+            BcSmartspaceTemplateDataUtils.updateVisibility(viewGroup2, 8);
         }
         BaseTemplateData.SubItemInfo primaryItem = this.mTemplateData.getPrimaryItem();
         IcuDateTextView icuDateTextView2 = this.mDateView;
@@ -227,7 +219,6 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
         this.mTouchDelegateIsDirty = true;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final AccessibilityNodeInfo createAccessibilityNodeInfo() {
         AccessibilityNodeInfo createAccessibilityNodeInfo = super.createAccessibilityNodeInfo();
@@ -235,7 +226,6 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
         return createAccessibilityNodeInfo;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.SmartspaceCard
     public final BcSmartspaceCardLoggingInfo getLoggingInfo() {
         BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo = this.mLoggingInfo;
@@ -260,7 +250,11 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
         return bcSmartspaceCardLoggingInfo2;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
+    @Override // com.google.android.systemui.smartspace.SmartspaceCard
+    public final View getView() {
+        return this;
+    }
+
     @Override // android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
@@ -293,7 +287,6 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // androidx.constraintlayout.widget.ConstraintLayout, android.view.ViewGroup, android.view.View
     public final void onLayout(boolean z, int i, int i2, int i3, int i4) {
         super.onLayout(z, i, i2, i3, i4);
@@ -346,7 +339,6 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void resetTextView(DoubleShadowTextView doubleShadowTextView) {
         if (doubleShadowTextView == null) {
             return;
@@ -356,12 +348,11 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
         doubleShadowTextView.setClickable(false);
         doubleShadowTextView.setContentDescription(null);
         doubleShadowTextView.setText((CharSequence) null);
-        isRtl$1();
+        isRtl();
         Map map = BcSmartspaceTemplateDataUtils.TEMPLATE_TYPE_TO_SECONDARY_CARD_RES;
         doubleShadowTextView.setTranslationX(0.0f);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.SmartspaceCard
     public final void setDozeAmount(float f) {
         this.mDozeAmount = f;
@@ -384,11 +375,10 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
             this.mTextGroup.setTranslationX(0.0f);
             return;
         }
-        this.mTextGroup.setTranslationX(((PathInterpolator) Interpolators.EMPHASIZED).getInterpolation(this.mDozeAmount) * this.mSecondaryCardPane.getWidth() * (isRtl$1() ? 1 : -1));
+        this.mTextGroup.setTranslationX(((PathInterpolator) Interpolators.EMPHASIZED).getInterpolation(this.mDozeAmount) * this.mSecondaryCardPane.getWidth() * (isRtl() ? 1 : -1));
         this.mSecondaryCardPane.setAlpha(Math.max(0.0f, Math.min(1.0f, ((1.0f - this.mDozeAmount) * 9.0f) - 6.0f)));
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.SmartspaceCard
     public final void setPrimaryTextColor(int i) {
         this.mIconTintColor = i;
@@ -427,7 +417,6 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
         updateZenColors();
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.SmartspaceCard
     public final void setScreenOn(boolean z) {
         IcuDateTextView icuDateTextView = this.mDateView;
@@ -437,26 +426,6 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
-    public final void setSecondaryCard(BcSmartspaceCardSecondary bcSmartspaceCardSecondary) {
-        ViewGroup viewGroup = this.mSecondaryCardPane;
-        if (viewGroup == null) {
-            return;
-        }
-        this.mSecondaryCard = bcSmartspaceCardSecondary;
-        BcSmartspaceTemplateDataUtils.updateVisibility(viewGroup, 8);
-        this.mSecondaryCardPane.removeAllViews();
-        if (bcSmartspaceCardSecondary != null) {
-            ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(-2, getResources().getDimensionPixelSize(com.android.wm.shell.R.dimen.enhanced_smartspace_card_height));
-            layoutParams.setMarginStart(getResources().getDimensionPixelSize(com.android.wm.shell.R.dimen.enhanced_smartspace_secondary_card_start_margin));
-            layoutParams.startToStart = 0;
-            layoutParams.topToTop = 0;
-            layoutParams.bottomToBottom = 0;
-            this.mSecondaryCardPane.addView(bcSmartspaceCardSecondary, layoutParams);
-        }
-    }
-
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void setUpTextView(DoubleShadowTextView doubleShadowTextView, BaseTemplateData.SubItemInfo subItemInfo, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, boolean z) {
         BcSmartspaceSubcardLoggingInfo bcSmartspaceSubcardLoggingInfo;
         List list;
@@ -498,7 +467,7 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
             ContentDescriptionUtil.setFormattedContentDescription("SsBaseTemplateCard", doubleShadowTextView, SmartspaceUtils.isEmpty(text) ? "" : text.getText(), icon.getContentDescription());
             updateTextViewIconTint(doubleShadowTextView, icon.shouldTint());
             if (z) {
-                BcSmartspaceTemplateDataUtils.offsetTextViewForIcon(doubleShadowTextView, doubleShadowIconDrawable, isRtl$1());
+                BcSmartspaceTemplateDataUtils.offsetTextViewForIcon(doubleShadowTextView, doubleShadowIconDrawable, isRtl());
             }
         }
         BcSmartspaceTemplateDataUtils.updateVisibility(doubleShadowTextView, 0);
@@ -529,7 +498,6 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
         BcSmartSpaceUtil.setOnClickListener$1(doubleShadowTextView, smartspaceTarget, tapAction, smartspaceEventNotifier, "SsBaseTemplateCard", bcSmartspaceCardLoggingInfo, i);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void updateTextViewIconTint(DoubleShadowTextView doubleShadowTextView, boolean z) {
         for (Drawable drawable : doubleShadowTextView.getCompoundDrawablesRelative()) {
             if (drawable != null) {
@@ -542,7 +510,6 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void updateZenColors() {
         DoubleShadowTextView doubleShadowTextView = this.mSupplementalLineTextView;
         if (doubleShadowTextView != null) {
@@ -551,11 +518,6 @@ public class BaseTemplateCard extends ConstraintLayout implements SmartspaceCard
                 updateTextViewIconTint(this.mSupplementalLineTextView, shouldTint(this.mTemplateData.getSupplementalLineItem()));
             }
         }
-    }
-
-    @Override // com.google.android.systemui.smartspace.SmartspaceCard
-    public final View getView() {
-        return this;
     }
 
     public BaseTemplateCard(Context context) {

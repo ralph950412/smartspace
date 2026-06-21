@@ -15,8 +15,8 @@ import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public final class KeyguardZenAlarmViewController {
     public Drawable alarmImage;
     public AlarmManager alarmManager;
@@ -32,16 +32,14 @@ public final class KeyguardZenAlarmViewController {
     public ZenModeController zenModeController;
     public ZenModeInteractor zenModeInteractor;
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
+    public static /* synthetic */ void getSmartspaceViews$annotations() {
+    }
+
     public final Job showAlarm(Long l) {
         return BuildersKt.launch$default(this.applicationScope, null, null, new KeyguardZenAlarmViewController$showAlarm$1(l, this, null), 3);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void updateModeIcon(BcSmartspaceDataPlugin.SmartspaceView smartspaceView, ZenModeInfo zenModeInfo) {
         BuildersKt.launch$default(this.applicationScope, null, null, new KeyguardZenAlarmViewController$updateModeIcon$1(zenModeInfo, this, smartspaceView, null), 3);
-    }
-
-    public static /* synthetic */ void getSmartspaceViews$annotations() {
     }
 }

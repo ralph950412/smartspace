@@ -18,8 +18,8 @@ import java.lang.invoke.VarHandle;
 import java.util.Locale;
 import java.util.Objects;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public class IcuDateTextView extends DoubleShadowTextView {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AnonymousClass1 mAodSettingsObserver;
@@ -34,12 +34,11 @@ public class IcuDateTextView extends DoubleShadowTextView {
     public BcSmartspaceDataPlugin.TimeChangedDelegate mTimeChangedDelegate;
     public boolean mUpdatesOnAod;
 
-    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
+    /* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
     public final class DefaultTimeChangedDelegate implements BcSmartspaceDataPlugin.TimeChangedDelegate, Runnable {
         public Handler mHandler;
         public Runnable mTimeChangedCallback;
 
-        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.TimeChangedDelegate
         public final void register(Runnable runnable) {
             if (this.mTimeChangedCallback != null) {
@@ -49,7 +48,6 @@ public class IcuDateTextView extends DoubleShadowTextView {
             run();
         }
 
-        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // java.lang.Runnable
         public final void run() {
             Runnable runnable = this.mTimeChangedCallback;
@@ -62,7 +60,6 @@ public class IcuDateTextView extends DoubleShadowTextView {
             }
         }
 
-        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.TimeChangedDelegate
         public final void unregister() {
             this.mHandler.removeCallbacks(this);
@@ -70,13 +67,11 @@ public class IcuDateTextView extends DoubleShadowTextView {
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     /* JADX WARN: Type inference failed for: r2v1, types: [com.google.android.systemui.smartspace.IcuDateTextView$1] */
     /* JADX WARN: Type inference failed for: r2v2, types: [com.google.android.systemui.smartspace.IcuDateTextView$2] */
     public IcuDateTextView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet, 0);
         this.mAodSettingsObserver = new ContentObserver(new Handler()) { // from class: com.google.android.systemui.smartspace.IcuDateTextView.1
-            /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
             @Override // android.database.ContentObserver
             public final void onChange(boolean z) {
                 Context context2 = IcuDateTextView.this.getContext();
@@ -90,7 +85,6 @@ public class IcuDateTextView extends DoubleShadowTextView {
             }
         };
         this.mIntentReceiver = new BroadcastReceiver() { // from class: com.google.android.systemui.smartspace.IcuDateTextView.2
-            /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
                 boolean z = "android.intent.action.TIMEZONE_CHANGED".equals(intent.getAction()) || "android.intent.action.TIME_SET".equals(intent.getAction());
@@ -105,7 +99,6 @@ public class IcuDateTextView extends DoubleShadowTextView {
         this.mTimeChangedCallback = icuDateTextView$$ExternalSyntheticLambda0;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.widget.TextView, android.view.View
     public final void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -151,7 +144,6 @@ public class IcuDateTextView extends DoubleShadowTextView {
         onTimeChanged(true);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void onDetachedFromWindow() {
         super.onDetachedFromWindow();
@@ -183,7 +175,6 @@ public class IcuDateTextView extends DoubleShadowTextView {
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void onTimeChanged(boolean z) {
         if (this.mFormatter == null || z) {
             DateFormat instanceForSkeleton = DateFormat.getInstanceForSkeleton(getContext().getString(R.string.smartspace_icu_date_pattern), Locale.getDefault());
@@ -199,14 +190,12 @@ public class IcuDateTextView extends DoubleShadowTextView {
         setContentDescription(format);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.widget.TextView, android.view.View
     public final void onVisibilityAggregated(boolean z) {
         super.onVisibilityAggregated(z);
         rescheduleTicker();
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void rescheduleTicker() {
         if (this.mHandler == null) {
             return;

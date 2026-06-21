@@ -6,21 +6,19 @@ import com.android.systemui.util.InitializationChecker;
 import java.lang.invoke.VarHandle;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public final class KeyguardSmartspaceStartable implements CoreStartable {
     public final InitializationChecker initializationChecker;
     public final KeyguardMediaViewController mediaController;
     public final KeyguardZenAlarmViewController zenController;
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public KeyguardSmartspaceStartable(KeyguardZenAlarmViewController keyguardZenAlarmViewController, KeyguardMediaViewController keyguardMediaViewController, InitializationChecker initializationChecker) {
         this.zenController = keyguardZenAlarmViewController;
         this.mediaController = keyguardMediaViewController;
         this.initializationChecker = initializationChecker;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.CoreStartable
     public final void start() {
         if (this.initializationChecker.initializeComponents()) {
@@ -32,11 +30,7 @@ public final class KeyguardSmartspaceStartable implements CoreStartable {
             bcSmartspaceDataPlugin.addOnAttachStateChangeListener(keyguardZenAlarmViewController$init$1);
             BuildersKt.launch$default(keyguardZenAlarmViewController.applicationScope, null, null, new KeyguardZenAlarmViewController$updateNextAlarm$1(keyguardZenAlarmViewController, null), 3);
             KeyguardMediaViewController keyguardMediaViewController = this.mediaController;
-            BcSmartspaceDataPlugin bcSmartspaceDataPlugin2 = keyguardMediaViewController.plugin;
-            KeyguardMediaViewController$init$1 keyguardMediaViewController$init$1 = new KeyguardMediaViewController$init$1();
-            keyguardMediaViewController$init$1.this$0 = keyguardMediaViewController;
-            VarHandle.storeStoreFence();
-            bcSmartspaceDataPlugin2.addOnAttachStateChangeListener(keyguardMediaViewController$init$1);
+            keyguardMediaViewController.mediaManager.addCallback(keyguardMediaViewController.mediaListener);
         }
     }
 }

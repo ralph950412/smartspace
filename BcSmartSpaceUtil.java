@@ -26,13 +26,13 @@ import java.lang.invoke.VarHandle;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public abstract class BcSmartSpaceUtil {
     public static final Map FEATURE_TYPE_TO_SECONDARY_CARD_RESOURCE_MAP;
     public static FalsingManager sFalsingManager;
 
-    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
+    /* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
     /* renamed from: com.google.android.systemui.smartspace.BcSmartSpaceUtil$1, reason: invalid class name */
     public final class AnonymousClass1 implements RemoteViews.InteractionHandler {
         public /* synthetic */ SmartspaceAction val$action;
@@ -40,7 +40,6 @@ public abstract class BcSmartSpaceUtil {
         public /* synthetic */ BcSmartspaceCardLoggingInfo val$loggingInfo;
         public /* synthetic */ SmartspaceTarget val$target;
 
-        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         public final boolean onInteraction(View view, PendingIntent pendingIntent, RemoteViews.RemoteResponse remoteResponse) {
             BcSmartspaceDataPlugin.IntentStarter intentStarter = BcSmartSpaceUtil.getIntentStarter(this.val$eventNotifier, "BcSmartspaceRemoteViewsCard");
             if (pendingIntent != null) {
@@ -55,12 +54,11 @@ public abstract class BcSmartSpaceUtil {
         }
     }
 
-    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
+    /* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
     /* renamed from: com.google.android.systemui.smartspace.BcSmartSpaceUtil$2, reason: invalid class name */
     public final class AnonymousClass2 implements BcSmartspaceDataPlugin.IntentStarter {
         public /* synthetic */ String val$tag;
 
-        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.IntentStarter
         public final void startIntent(View view, Intent intent, boolean z) {
             try {
@@ -70,7 +68,6 @@ public abstract class BcSmartSpaceUtil {
             }
         }
 
-        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.IntentStarter
         public final void startPendingIntent(View view, PendingIntent pendingIntent, boolean z) {
             try {
@@ -81,14 +78,12 @@ public abstract class BcSmartSpaceUtil {
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     static {
         Integer valueOf = Integer.valueOf(R.layout.smartspace_card_generic_landscape_image);
         Integer valueOf2 = Integer.valueOf(R.layout.smartspace_card_doorbell);
         FEATURE_TYPE_TO_SECONDARY_CARD_RESOURCE_MAP = Map.ofEntries(Map.entry(-1, Integer.valueOf(R.layout.smartspace_card_combination)), Map.entry(-2, Integer.valueOf(R.layout.smartspace_card_combination_at_store)), Map.entry(3, valueOf), Map.entry(18, valueOf), Map.entry(4, Integer.valueOf(R.layout.smartspace_card_flight)), Map.entry(14, Integer.valueOf(R.layout.smartspace_card_loyalty)), Map.entry(13, Integer.valueOf(R.layout.smartspace_card_shopping_list)), Map.entry(9, Integer.valueOf(R.layout.smartspace_card_sports)), Map.entry(10, Integer.valueOf(R.layout.smartspace_card_weather_forecast)), Map.entry(30, valueOf2), Map.entry(20, valueOf2));
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static String getDimensionRatio(Bundle bundle) {
         if (!bundle.containsKey("imageRatioWidth") || !bundle.containsKey("imageRatioHeight")) {
             return null;
@@ -101,14 +96,12 @@ public abstract class BcSmartSpaceUtil {
         return i + ":" + i2;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static int getFeatureType(SmartspaceTarget smartspaceTarget) {
         List actionChips = smartspaceTarget.getActionChips();
         int featureType = smartspaceTarget.getFeatureType();
         return (actionChips == null || actionChips.isEmpty()) ? featureType : (featureType == 13 && actionChips.size() == 1) ? -2 : -1;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static Drawable getIconDrawableWithCustomSize(Icon icon, Context context, int i) {
         if (icon == null) {
             return null;
@@ -120,7 +113,6 @@ public abstract class BcSmartSpaceUtil {
         return bitmapDrawable;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static BcSmartspaceDataPlugin.IntentStarter getIntentStarter(BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, String str) {
         BcSmartspaceDataPlugin.IntentStarter intentStarter = smartspaceEventNotifier != null ? smartspaceEventNotifier.getIntentStarter() : null;
         if (intentStarter != null) {
@@ -132,7 +124,6 @@ public abstract class BcSmartSpaceUtil {
         return anonymousClass2;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static int getLoggingDisplaySurface(String str, float f) {
         boolean z;
@@ -177,12 +168,10 @@ public abstract class BcSmartSpaceUtil {
         return 0;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static Intent getOpenCalendarIntent() {
         return new Intent("android.intent.action.VIEW").setData(ContentUris.appendId(CalendarContract.CONTENT_URI.buildUpon().appendPath("time"), System.currentTimeMillis()).build()).addFlags(270532608);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static void setOnClickListener(View view, SmartspaceTarget smartspaceTarget, SmartspaceAction smartspaceAction, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, String str, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo, int i) {
         if (view == null || smartspaceAction == null) {
             Log.e(str, "No tap action can be set up");
@@ -208,7 +197,6 @@ public abstract class BcSmartSpaceUtil {
         view.setOnClickListener(bcSmartSpaceUtil$$ExternalSyntheticLambda1);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static void setOnClickListener$1(View view, SmartspaceTarget smartspaceTarget, TapAction tapAction, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, String str, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo, int i) {
         if (view == null || tapAction == null) {
             Log.e(str, "No tap action can be set up");

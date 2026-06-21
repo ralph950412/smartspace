@@ -10,20 +10,19 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public final class DateSmartspaceDataProvider implements BcSmartspaceDataPlugin {
     public Set mAttachListeners;
     public EventNotifierProxy mEventNotifier;
     public AnonymousClass1 mStateChangeListener;
     public Set mViews;
 
-    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
+    /* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
     /* renamed from: com.google.android.systemui.smartspace.DateSmartspaceDataProvider$1, reason: invalid class name */
     public final class AnonymousClass1 implements View.OnAttachStateChangeListener {
         public /* synthetic */ DateSmartspaceDataProvider this$0;
 
-        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // android.view.View.OnAttachStateChangeListener
         public final void onViewAttachedToWindow(View view) {
             this.this$0.mViews.add(view);
@@ -33,7 +32,6 @@ public final class DateSmartspaceDataProvider implements BcSmartspaceDataPlugin 
             }
         }
 
-        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // android.view.View.OnAttachStateChangeListener
         public final void onViewDetachedFromWindow(View view) {
             this.this$0.mViews.remove(view);
@@ -44,7 +42,6 @@ public final class DateSmartspaceDataProvider implements BcSmartspaceDataPlugin 
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
     public final void addOnAttachStateChangeListener(View.OnAttachStateChangeListener onAttachStateChangeListener) {
         this.mAttachListeners.add(onAttachStateChangeListener);
@@ -54,13 +51,11 @@ public final class DateSmartspaceDataProvider implements BcSmartspaceDataPlugin 
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
     public final BcSmartspaceDataPlugin.SmartspaceEventNotifier getEventNotifier() {
         return this.mEventNotifier;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     /* JADX DEBUG: Multi-variable search result rejected for r4v2, resolved type: android.view.View */
     /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
@@ -71,7 +66,6 @@ public final class DateSmartspaceDataProvider implements BcSmartspaceDataPlugin 
         return (BcSmartspaceDataPlugin.SmartspaceView) inflate;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     /* JADX DEBUG: Multi-variable search result rejected for r4v2, resolved type: android.view.View */
     /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
@@ -81,13 +75,11 @@ public final class DateSmartspaceDataProvider implements BcSmartspaceDataPlugin 
         return (BcSmartspaceDataPlugin.SmartspaceView) inflate;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
     public final void setEventDispatcher(BcSmartspaceDataPlugin.SmartspaceEventDispatcher smartspaceEventDispatcher) {
         this.mEventNotifier.eventDispatcher = smartspaceEventDispatcher;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin
     public final void setIntentStarter(BcSmartspaceDataPlugin.IntentStarter intentStarter) {
         this.mEventNotifier.intentStarterRef = intentStarter;

@@ -15,14 +15,13 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import okio.Buffer$$ExternalSyntheticBUOutline0;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 final class KeyguardZenAlarmViewController$showAlarm$1 extends SuspendLambda implements Function2 {
-    final /* synthetic */ Long $alarm;
+    public final /* synthetic */ Long $alarm;
     int label;
-    final /* synthetic */ KeyguardZenAlarmViewController this$0;
+    public final /* synthetic */ KeyguardZenAlarmViewController this$0;
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardZenAlarmViewController$showAlarm$1(Long l, KeyguardZenAlarmViewController keyguardZenAlarmViewController, Continuation continuation) {
         super(2, continuation);
@@ -30,21 +29,17 @@ final class KeyguardZenAlarmViewController$showAlarm$1 extends SuspendLambda imp
         this.this$0 = keyguardZenAlarmViewController;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Continuation create(Object obj, Continuation continuation) {
         return new KeyguardZenAlarmViewController$showAlarm$1(this.$alarm, this.this$0, continuation);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // kotlin.jvm.functions.Function2
     public final Object invoke(Object obj, Object obj2) {
         return ((KeyguardZenAlarmViewController$showAlarm$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00a4 A[LOOP:1: B:24:0x009e->B:26:0x00a4, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x003f  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x009e A[LOOP:1: B:24:0x0098->B:26:0x009e, LOOP_END] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -59,30 +54,27 @@ final class KeyguardZenAlarmViewController$showAlarm$1 extends SuspendLambda imp
             Long l = this.$alarm;
             if (l != null) {
                 longValue = l.longValue();
-                if (longValue > 0) {
-                    this.this$0.getClass();
-                    if (longValue <= System.currentTimeMillis() + 43200000) {
-                        String obj2 = DateFormat.format(DateFormat.is24HourFormat(this.this$0.context, ActivityManager.getCurrentUser()) ? "HH:mm" : "h:mm", longValue).toString();
-                        KeyguardZenAlarmViewController keyguardZenAlarmViewController = this.this$0;
-                        Iterator it2 = keyguardZenAlarmViewController.smartspaceViews.iterator();
-                        while (it2.hasNext()) {
-                            ((BcSmartspaceDataPlugin.SmartspaceView) it2.next()).setNextAlarm(keyguardZenAlarmViewController.alarmImage, obj2);
-                        }
-                        StateFlowImpl stateFlowImpl = this.this$0.zenModeInteractor.zenModeRepository.hasNextAlarm;
-                        Boolean bool = Boolean.TRUE;
-                        stateFlowImpl.getClass();
-                        stateFlowImpl.updateState(null, bool);
-                        return Unit.INSTANCE;
+                if (longValue > 0 || longValue > System.currentTimeMillis() + 43200000) {
+                    it = this.this$0.smartspaceViews.iterator();
+                    while (it.hasNext()) {
+                        ((BcSmartspaceDataPlugin.SmartspaceView) it.next()).setNextAlarm(null, null);
                     }
+                    StateFlowImpl stateFlowImpl = this.this$0.zenModeInteractor.zenModeRepository.hasNextAlarm;
+                    Boolean bool = Boolean.FALSE;
+                    stateFlowImpl.getClass();
+                    stateFlowImpl.updateState(null, bool);
+                } else {
+                    String obj2 = DateFormat.format(DateFormat.is24HourFormat(this.this$0.context, ActivityManager.getCurrentUser()) ? "HH:mm" : "h:mm", longValue).toString();
+                    KeyguardZenAlarmViewController keyguardZenAlarmViewController = this.this$0;
+                    Iterator it2 = keyguardZenAlarmViewController.smartspaceViews.iterator();
+                    while (it2.hasNext()) {
+                        ((BcSmartspaceDataPlugin.SmartspaceView) it2.next()).setNextAlarm(keyguardZenAlarmViewController.alarmImage, obj2);
+                    }
+                    StateFlowImpl stateFlowImpl2 = this.this$0.zenModeInteractor.zenModeRepository.hasNextAlarm;
+                    Boolean bool2 = Boolean.TRUE;
+                    stateFlowImpl2.getClass();
+                    stateFlowImpl2.updateState(null, bool2);
                 }
-                it = this.this$0.smartspaceViews.iterator();
-                while (it.hasNext()) {
-                    ((BcSmartspaceDataPlugin.SmartspaceView) it.next()).setNextAlarm(null, null);
-                }
-                StateFlowImpl stateFlowImpl2 = this.this$0.zenModeInteractor.zenModeRepository.hasNextAlarm;
-                Boolean bool2 = Boolean.FALSE;
-                stateFlowImpl2.getClass();
-                stateFlowImpl2.updateState(null, bool2);
                 return Unit.INSTANCE;
             }
             KeyguardZenAlarmViewController keyguardZenAlarmViewController2 = this.this$0;
@@ -104,10 +96,10 @@ final class KeyguardZenAlarmViewController$showAlarm$1 extends SuspendLambda imp
         it = this.this$0.smartspaceViews.iterator();
         while (it.hasNext()) {
         }
-        StateFlowImpl stateFlowImpl22 = this.this$0.zenModeInteractor.zenModeRepository.hasNextAlarm;
-        Boolean bool22 = Boolean.FALSE;
-        stateFlowImpl22.getClass();
-        stateFlowImpl22.updateState(null, bool22);
+        StateFlowImpl stateFlowImpl3 = this.this$0.zenModeInteractor.zenModeRepository.hasNextAlarm;
+        Boolean bool3 = Boolean.FALSE;
+        stateFlowImpl3.getClass();
+        stateFlowImpl3.updateState(null, bool3);
         return Unit.INSTANCE;
     }
 }

@@ -13,7 +13,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import androidx.compose.ui.tooling.ComposableInvoker$$ExternalSyntheticOutline0;
+import androidx.compose.foundation.text.input.TextFieldBuffer$$ExternalSyntheticOutline0;
 import com.android.internal.graphics.ColorUtils;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.android.systemui.plugins.FalsingManager;
@@ -23,8 +23,8 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInf
 import java.lang.invoke.VarHandle;
 import okio.Buffer$$ExternalSyntheticBUOutline0;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public class DateSmartspaceView extends LinearLayout implements BcSmartspaceDataPlugin.SmartspaceView {
     public static final boolean DEBUG = Log.isLoggable("DateSmartspaceView", 3);
     public final AnonymousClass1 mAodSettingsObserver;
@@ -45,7 +45,6 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
     public int mPrimaryTextColor;
     public String mUiSurface;
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     /* JADX WARN: Type inference failed for: r4v10, types: [com.google.android.systemui.smartspace.DateSmartspaceView$1] */
     public DateSmartspaceView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
@@ -55,7 +54,6 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         this.mDateAction = new SmartspaceAction.Builder("dateId", "Date").setIntent(BcSmartSpaceUtil.getOpenCalendarIntent()).build();
         this.mNextAlarmData = new BcNextAlarmData();
         this.mAodSettingsObserver = new ContentObserver(new Handler()) { // from class: com.google.android.systemui.smartspace.DateSmartspaceView.1
-            /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
             @Override // android.database.ContentObserver
             public final void onChange(boolean z) {
                 DateSmartspaceView dateSmartspaceView = DateSmartspaceView.this;
@@ -74,7 +72,6 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         this.mDndIconDrawable = new DoubleShadowIconDrawable(context);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.ViewGroup, android.view.View
     public final void onAttachedToWindow() {
         Handler handler;
@@ -118,7 +115,6 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         BcSmartSpaceUtil.setOnClickListener(icuDateTextView, smartspaceTarget, smartspaceAction, bcSmartspaceDataPlugin != null ? bcSmartspaceDataPlugin.getEventNotifier() : null, "DateSmartspaceView", this.mLoggingInfo, 0);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.ViewGroup, android.view.View
     public final void onDetachedFromWindow() {
         super.onDetachedFromWindow();
@@ -133,7 +129,6 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         handler.post(dateSmartspaceView$$ExternalSyntheticLambda0);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
@@ -142,20 +137,17 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         this.mDndImageView = (ImageView) findViewById(R.id.dnd_icon);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void registerDataProvider(BcSmartspaceDataPlugin bcSmartspaceDataPlugin) {
         this.mDataProvider = bcSmartspaceDataPlugin;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setBgHandler(Handler handler) {
         this.mBgHandler = handler;
         this.mDateView.mBgHandler = handler;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setDnd(Drawable drawable, String str) {
         if (drawable == null) {
@@ -169,7 +161,6 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         updateColorForExtras();
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setDozeAmount(float f) {
         int loggingDisplaySurface;
@@ -221,13 +212,11 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setFalsingManager(FalsingManager falsingManager) {
         BcSmartSpaceUtil.sFalsingManager = falsingManager;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setNextAlarm(Drawable drawable, String str) {
         BcNextAlarmData bcNextAlarmData = this.mNextAlarmData;
@@ -248,7 +237,7 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
             boolean isEmpty = TextUtils.isEmpty(null);
             String str2 = bcNextAlarmData2.mDescription;
             if (!isEmpty) {
-                str2 = ComposableInvoker$$ExternalSyntheticOutline0.m(str2, " · null");
+                str2 = TextFieldBuffer$$ExternalSyntheticOutline0.m(str2, " · null");
             }
             doubleShadowTextView2.setText(str2);
             DoubleShadowIconDrawable doubleShadowIconDrawable = this.mNextAlarmIconDrawable;
@@ -283,7 +272,6 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         updateColorForExtras();
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.widget.LinearLayout
     public final void setOrientation(int i) {
         super.setOrientation(i);
@@ -309,7 +297,6 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         setOnClickListener(null);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setPrimaryTextColor(int i) {
         this.mPrimaryTextColor = i;
@@ -319,7 +306,6 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         updateColorForExtras();
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setScreenOn(boolean z) {
         IcuDateTextView icuDateTextView = this.mDateView;
@@ -329,7 +315,6 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setTimeChangedDelegate(BcSmartspaceDataPlugin.TimeChangedDelegate timeChangedDelegate) {
         IcuDateTextView icuDateTextView = this.mDateView;
@@ -342,7 +327,6 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setUiSurface(String str) {
         if (isAttachedToWindow()) {
@@ -360,7 +344,6 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void updateColorForExtras() {
         DoubleShadowTextView doubleShadowTextView = this.mNextAlarmTextView;
         if (doubleShadowTextView != null) {

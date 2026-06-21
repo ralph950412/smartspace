@@ -3,13 +3,12 @@ package com.google.android.systemui.smartspace.logging;
 import androidx.collection.IntIntPair$$ExternalSyntheticOutline0;
 import java.util.Objects;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public final class BcSmartspaceCardMetadataLoggingInfo {
     public int mCardTypeId;
     public int mInstanceId;
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -21,12 +20,10 @@ public final class BcSmartspaceCardMetadataLoggingInfo {
         return this.mInstanceId == bcSmartspaceCardMetadataLoggingInfo.mInstanceId && this.mCardTypeId == bcSmartspaceCardMetadataLoggingInfo.mCardTypeId;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final int hashCode() {
         return Objects.hash(Integer.valueOf(this.mInstanceId), Integer.valueOf(this.mCardTypeId));
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final String toString() {
         StringBuilder sb = new StringBuilder("BcSmartspaceCardMetadataLoggingInfo{mInstanceId=");
         sb.append(this.mInstanceId);

@@ -16,8 +16,8 @@ import android.graphics.drawable.InsetDrawable;
 import com.android.internal.graphics.ColorUtils;
 import com.android.wm.shell.R;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public final class DoubleShadowIconDrawable extends Drawable {
     public final int mAmbientShadowRadius;
     public final int mCanvasSize;
@@ -29,7 +29,6 @@ public final class DoubleShadowIconDrawable extends Drawable {
     public final int mKeyShadowRadius;
     public boolean mShowShadow;
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public DoubleShadowIconDrawable(int i, int i2, Context context) {
         this.mShowShadow = true;
         this.mIconInsetSize = i2;
@@ -42,7 +41,6 @@ public final class DoubleShadowIconDrawable extends Drawable {
         setBounds(0, 0, i3, i3);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Drawable
     public final void draw(Canvas canvas) {
         RenderNode renderNode;
@@ -63,25 +61,21 @@ public final class DoubleShadowIconDrawable extends Drawable {
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Drawable
     public final int getIntrinsicHeight() {
         return this.mCanvasSize;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Drawable
     public final int getIntrinsicWidth() {
         return this.mCanvasSize;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Drawable
     public final int getOpacity() {
         return -2;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Drawable
     public final void setAlpha(int i) {
         InsetDrawable insetDrawable = this.mIconDrawable;
@@ -90,7 +84,6 @@ public final class DoubleShadowIconDrawable extends Drawable {
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Drawable
     public final void setColorFilter(ColorFilter colorFilter) {
         InsetDrawable insetDrawable = this.mIconDrawable;
@@ -99,7 +92,6 @@ public final class DoubleShadowIconDrawable extends Drawable {
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void setIcon(Drawable drawable) {
         RenderNode renderNode = null;
         if (drawable == null) {
@@ -118,12 +110,11 @@ public final class DoubleShadowIconDrawable extends Drawable {
             int argb = Color.argb(48, 0, 0, 0);
             PorterDuff.Mode mode = PorterDuff.Mode.MULTIPLY;
             PorterDuffColorFilter porterDuffColorFilter = new PorterDuffColorFilter(argb, mode);
-            float f = 0;
-            float f2 = i3;
+            float f = i3;
             Shader.TileMode tileMode = Shader.TileMode.CLAMP;
-            RenderEffect createColorFilterEffect = RenderEffect.createColorFilterEffect(porterDuffColorFilter, RenderEffect.createOffsetEffect(f, f, RenderEffect.createBlurEffect(f2, f2, tileMode)));
-            float f3 = this.mKeyShadowRadius;
-            RenderEffect createColorFilterEffect2 = RenderEffect.createColorFilterEffect(new PorterDuffColorFilter(Color.argb(72, 0, 0, 0), mode), RenderEffect.createOffsetEffect(this.mKeyShadowOffsetX, this.mKeyShadowOffsetY, RenderEffect.createBlurEffect(f3, f3, tileMode)));
+            RenderEffect createColorFilterEffect = RenderEffect.createColorFilterEffect(porterDuffColorFilter, RenderEffect.createOffsetEffect(0.0f, 0.0f, RenderEffect.createBlurEffect(f, f, tileMode)));
+            float f2 = this.mKeyShadowRadius;
+            RenderEffect createColorFilterEffect2 = RenderEffect.createColorFilterEffect(new PorterDuffColorFilter(Color.argb(72, 0, 0, 0), mode), RenderEffect.createOffsetEffect(this.mKeyShadowOffsetX, this.mKeyShadowOffsetY, RenderEffect.createBlurEffect(f2, f2, tileMode)));
             if (createColorFilterEffect != null && createColorFilterEffect2 != null) {
                 renderNode2.setRenderEffect(RenderEffect.createBlendModeEffect(createColorFilterEffect, createColorFilterEffect2, BlendMode.DARKEN));
                 renderNode = renderNode2;
@@ -132,7 +123,6 @@ public final class DoubleShadowIconDrawable extends Drawable {
         this.mDoubleShadowNode = renderNode;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Drawable
     public final void setTint(int i) {
         InsetDrawable insetDrawable = this.mIconDrawable;

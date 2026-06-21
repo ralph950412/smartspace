@@ -11,15 +11,13 @@ import java.lang.invoke.VarHandle;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public abstract class BcSmartspaceCardLoggerUtil {
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static boolean containsValidTemplateType(BaseTemplateData baseTemplateData) {
         return (baseTemplateData == null || baseTemplateData.getTemplateType() == 0 || baseTemplateData.getTemplateType() == 8) ? false : true;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static SmartspaceProto$SmartspaceCardDimensionalInfo createDimensionalLoggingInfo(BaseTemplateData baseTemplateData) {
         if (baseTemplateData == null || baseTemplateData.getPrimaryItem() == null || baseTemplateData.getPrimaryItem().getTapAction() == null) {
             return null;
@@ -46,7 +44,6 @@ public abstract class BcSmartspaceCardLoggerUtil {
         return smartspaceProto$SmartspaceCardDimensionalInfo;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static BcSmartspaceSubcardLoggingInfo createSubcardLoggingInfo(SmartspaceTarget smartspaceTarget) {
         if (smartspaceTarget.getBaseAction() == null || smartspaceTarget.getBaseAction().getExtras() == null || smartspaceTarget.getBaseAction().getExtras().isEmpty() || smartspaceTarget.getBaseAction().getExtras().getInt("subcardType", -1) == -1) {
             return null;
@@ -66,7 +63,6 @@ public abstract class BcSmartspaceCardLoggerUtil {
         return bcSmartspaceSubcardLoggingInfo;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static void createSubcardLoggingInfoHelper(List list, BaseTemplateData.SubItemInfo subItemInfo) {
         if (subItemInfo == null || subItemInfo.getLoggingInfo() == null) {
             return;
@@ -81,7 +77,6 @@ public abstract class BcSmartspaceCardLoggerUtil {
         list.add(bcSmartspaceCardMetadataLoggingInfo);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static void tryForcePrimaryFeatureTypeOrUpdateLogInfoFromTemplateData(BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo, BaseTemplateData baseTemplateData) {
         if (bcSmartspaceCardLoggingInfo.mFeatureType == 1) {
             bcSmartspaceCardLoggingInfo.mFeatureType = 39;

@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public final /* synthetic */ class SubImageTemplateCard$$ExternalSyntheticLambda0 implements Icon.OnDrawableLoadedListener {
     public /* synthetic */ SubImageTemplateCard f$0;
     public /* synthetic */ String f$1;
@@ -23,7 +23,6 @@ public final /* synthetic */ class SubImageTemplateCard$$ExternalSyntheticLambda
     public /* synthetic */ int f$6;
     public /* synthetic */ WeakReference f$7;
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.graphics.drawable.Icon.OnDrawableLoadedListener
     public final void onDrawableLoaded(Drawable drawable) {
         SubImageTemplateCard subImageTemplateCard = this.f$0;

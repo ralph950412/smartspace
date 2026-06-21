@@ -36,8 +36,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Handler mHandler;
@@ -45,7 +45,7 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
     public final int mImageHeight;
     public ImageView mImageView;
 
-    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
+    /* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
     public final class DrawableWrapper {
         public ContentResolver mContentResolver;
         public Drawable mDrawable;
@@ -54,9 +54,8 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
         public Uri mUri;
     }
 
-    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
+    /* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
     public final class LoadUriTask extends AsyncTask {
-        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // android.os.AsyncTask
         public final Object doInBackground(Object[] objArr) {
             DrawableWrapper[] drawableWrapperArr = (DrawableWrapper[]) objArr;
@@ -85,7 +84,6 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
             return drawableWrapper;
         }
 
-        /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
         @Override // android.os.AsyncTask
         public final void onPostExecute(Object obj) {
             DrawableWrapper drawableWrapper = (DrawableWrapper) obj;
@@ -93,7 +91,6 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public SubImageTemplateCard(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mIconDrawableCache = new HashMap();
@@ -101,14 +98,12 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
         this.mImageHeight = getResources().getDimensionPixelOffset(R.dimen.enhanced_smartspace_card_height);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
         this.mImageView = (ImageView) findViewById(R.id.image_view);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final void resetUi() {
         Map map = this.mIconDrawableCache;
@@ -124,7 +119,6 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
         this.mImageView.setBackgroundTintList(null);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final boolean setSmartspaceActions(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
         String sb;

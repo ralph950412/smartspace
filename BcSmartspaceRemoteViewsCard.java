@@ -11,30 +11,29 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInf
 import java.lang.invoke.VarHandle;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public final class BcSmartspaceRemoteViewsCard extends AppWidgetHostView implements SmartspaceCard {
-    public BcSmartspaceDataPlugin.SmartspaceEventNotifier mEventNotifier;
-    public BcSmartspaceCardLoggingInfo mLoggingInfo;
-    public SmartspaceTarget mTarget;
-    public String mUiSurface;
+    public BcSmartspaceCardLoggingInfo _loggingInfo;
+    public SmartspaceTarget _target;
+    public String _uiSurface;
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public BcSmartspaceRemoteViewsCard(Context context) {
         super(context);
         setOnLongClickListener(null);
-        if (Intrinsics.areEqual(this.mUiSurface, BcSmartspaceDataPlugin.UI_SURFACE_LOCK_SCREEN_AOD)) {
+        if (Intrinsics.areEqual(this._uiSurface, BcSmartspaceDataPlugin.UI_SURFACE_LOCK_SCREEN_AOD)) {
             super.setInteractionHandler(null);
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
+    public static /* synthetic */ void getRemoteViewInteractionHandler$annotations() {
+    }
+
     @Override // com.google.android.systemui.smartspace.SmartspaceCard
     public final void bindData(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo, boolean z) {
         updateAppWidget(null);
-        this.mTarget = smartspaceTarget;
-        this.mLoggingInfo = bcSmartspaceCardLoggingInfo;
-        this.mEventNotifier = smartspaceEventNotifier;
+        this._target = smartspaceTarget;
+        this._loggingInfo = bcSmartspaceCardLoggingInfo;
         updateAppWidget(smartspaceTarget.getRemoteViews());
         SmartspaceAction headerAction = smartspaceTarget.getHeaderAction();
         if (headerAction == null) {
@@ -42,8 +41,8 @@ public final class BcSmartspaceRemoteViewsCard extends AppWidgetHostView impleme
             super.setInteractionHandler(null);
             return;
         }
-        BcSmartSpaceUtil.setOnClickListener(this, smartspaceTarget, headerAction, this.mEventNotifier, "BcSmartspaceRemoteViewsCard", bcSmartspaceCardLoggingInfo, 0);
-        if (Intrinsics.areEqual(this.mUiSurface, BcSmartspaceDataPlugin.UI_SURFACE_LOCK_SCREEN_AOD)) {
+        BcSmartSpaceUtil.setOnClickListener(this, smartspaceTarget, headerAction, smartspaceEventNotifier, "BcSmartspaceRemoteViewsCard", bcSmartspaceCardLoggingInfo, 0);
+        if (Intrinsics.areEqual(this._uiSurface, BcSmartspaceDataPlugin.UI_SURFACE_LOCK_SCREEN_AOD)) {
             BcSmartSpaceUtil.AnonymousClass1 anonymousClass1 = new BcSmartSpaceUtil.AnonymousClass1();
             anonymousClass1.val$eventNotifier = smartspaceEventNotifier;
             anonymousClass1.val$loggingInfo = bcSmartspaceCardLoggingInfo;
@@ -54,15 +53,14 @@ public final class BcSmartspaceRemoteViewsCard extends AppWidgetHostView impleme
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.SmartspaceCard
     public final BcSmartspaceCardLoggingInfo getLoggingInfo() {
-        BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo = this.mLoggingInfo;
+        BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo = this._loggingInfo;
         if (bcSmartspaceCardLoggingInfo != null) {
             return bcSmartspaceCardLoggingInfo;
         }
-        int loggingDisplaySurface = BcSmartSpaceUtil.getLoggingDisplaySurface(this.mUiSurface, 0.0f);
-        SmartspaceTarget smartspaceTarget = this.mTarget;
+        int loggingDisplaySurface = BcSmartSpaceUtil.getLoggingDisplaySurface(this._uiSurface, 0.0f);
+        SmartspaceTarget smartspaceTarget = this._target;
         int featureType = smartspaceTarget != null ? smartspaceTarget.getFeatureType() : 0;
         getContext().getPackageManager();
         BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo2 = new BcSmartspaceCardLoggingInfo();
@@ -77,9 +75,6 @@ public final class BcSmartspaceRemoteViewsCard extends AppWidgetHostView impleme
         bcSmartspaceCardLoggingInfo2.mDimensionalInfo = null;
         VarHandle.storeStoreFence();
         return bcSmartspaceCardLoggingInfo2;
-    }
-
-    public static /* synthetic */ void getRemoteViewInteractionHandler$annotations() {
     }
 
     @Override // com.google.android.systemui.smartspace.SmartspaceCard

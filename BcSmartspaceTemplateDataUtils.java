@@ -10,12 +10,11 @@ import android.widget.TextView;
 import com.android.wm.shell.R;
 import java.util.Map;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public abstract class BcSmartspaceTemplateDataUtils {
     public static final Map TEMPLATE_TYPE_TO_SECONDARY_CARD_RES = Map.ofEntries(Map.entry(2, Integer.valueOf(R.layout.smartspace_sub_image_template_card)), Map.entry(3, Integer.valueOf(R.layout.smartspace_sub_list_template_card)), Map.entry(7, Integer.valueOf(R.layout.smartspace_sub_card_template_card)), Map.entry(5, Integer.valueOf(R.layout.smartspace_head_to_head_template_card)), Map.entry(6, Integer.valueOf(R.layout.smartspace_combined_cards_template_card)), Map.entry(4, Integer.valueOf(R.layout.smartspace_carousel_template_card)));
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static void offsetTextViewForIcon(TextView textView, DoubleShadowIconDrawable doubleShadowIconDrawable, boolean z) {
         if (doubleShadowIconDrawable == null) {
             textView.setTranslationX(0.0f);
@@ -24,7 +23,6 @@ public abstract class BcSmartspaceTemplateDataUtils {
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static void setIcon(ImageView imageView, Icon icon) {
         if (imageView == null) {
             Log.w("BcSmartspaceTemplateDataUtils", "Cannot set. The image view is null");
@@ -40,7 +38,6 @@ public abstract class BcSmartspaceTemplateDataUtils {
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static void setText(TextView textView, Text text) {
         if (textView == null) {
             Log.w("BcSmartspaceTemplateDataUtils", "Cannot set. The text view is null");
@@ -56,7 +53,6 @@ public abstract class BcSmartspaceTemplateDataUtils {
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public static void updateVisibility(View view, int i) {
         if (view == null || view.getVisibility() == i) {
             return;

@@ -31,8 +31,8 @@ import java.lang.invoke.VarHandle;
 import java.util.List;
 import okio.Buffer$$ExternalSyntheticBUOutline0;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceDataPlugin.SmartspaceTargetListener, BcSmartspaceDataPlugin.SmartspaceView {
     public static final boolean DEBUG = Log.isLoggable("WeatherSmartspaceView", 3);
     public final AnonymousClass1 mAodSettingsObserver;
@@ -50,7 +50,6 @@ public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceD
     public String mUiSurface;
     public DoubleShadowTextView mView;
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     /* JADX WARN: Type inference failed for: r6v2, types: [com.google.android.systemui.smartspace.WeatherSmartspaceView$1] */
     public WeatherSmartspaceView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
@@ -58,7 +57,6 @@ public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceD
         this.mDozeAmount = 0.0f;
         this.mLoggingInfo = null;
         this.mAodSettingsObserver = new ContentObserver(new Handler()) { // from class: com.google.android.systemui.smartspace.WeatherSmartspaceView.1
-            /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
             @Override // android.database.ContentObserver
             public final void onChange(boolean z) {
                 WeatherSmartspaceView weatherSmartspaceView = WeatherSmartspaceView.this;
@@ -88,7 +86,6 @@ public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceD
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.ViewGroup, android.view.View
     public final void onAttachedToWindow() {
         Handler handler;
@@ -115,7 +112,6 @@ public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceD
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.ViewGroup, android.view.View
     public final void onDetachedFromWindow() {
         super.onDetachedFromWindow();
@@ -134,14 +130,12 @@ public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceD
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
         this.mView = (DoubleShadowTextView) findViewById(R.id.weather_text_view);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     /* JADX WARN: Removed duplicated region for block: B:47:0x017f  */
     /* JADX WARN: Removed duplicated region for block: B:49:? A[RETURN, SYNTHETIC] */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceTargetListener
@@ -239,7 +233,6 @@ public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceD
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void registerDataProvider(BcSmartspaceDataPlugin bcSmartspaceDataPlugin) {
         BcSmartspaceDataPlugin bcSmartspaceDataPlugin2 = this.mDataProvider;
@@ -252,13 +245,11 @@ public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceD
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setBgHandler(Handler handler) {
         this.mBgHandler = handler;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setDozeAmount(float f) {
         int loggingDisplaySurface;
@@ -291,20 +282,17 @@ public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceD
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setFalsingManager(FalsingManager falsingManager) {
         BcSmartSpaceUtil.sFalsingManager = falsingManager;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void setOnClickListener(View.OnClickListener onClickListener) {
         super.setOnClickListener(onClickListener);
         this.mOnClickListener = onClickListener;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setPrimaryTextColor(int i) {
         this.mPrimaryTextColor = i;
@@ -312,7 +300,6 @@ public class WeatherSmartspaceView extends LinearLayout implements BcSmartspaceD
         TextUtils.equals(this.mUiSurface, BcSmartspaceDataPlugin.UI_SURFACE_DREAM);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceView
     public final void setUiSurface(String str) {
         if (isAttachedToWindow()) {

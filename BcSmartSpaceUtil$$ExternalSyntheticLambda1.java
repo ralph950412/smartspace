@@ -11,8 +11,8 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLogger;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceSubcardLoggingInfo;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public final /* synthetic */ class BcSmartSpaceUtil$$ExternalSyntheticLambda1 implements View.OnClickListener {
     public /* synthetic */ BcSmartspaceCardLoggingInfo f$0;
     public /* synthetic */ int f$1;
@@ -24,7 +24,6 @@ public final /* synthetic */ class BcSmartSpaceUtil$$ExternalSyntheticLambda1 im
     public /* synthetic */ String f$8;
     public /* synthetic */ SmartspaceTarget f$9;
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View.OnClickListener
     public final void onClick(View view) {
         BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo = this.f$0;

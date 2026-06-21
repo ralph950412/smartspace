@@ -1,25 +1,51 @@
 package com.google.android.systemui.smartspace;
 
+import android.app.smartspace.SmartspaceAction;
+import android.app.smartspace.SmartspaceTarget;
+import android.app.smartspace.SmartspaceTargetEvent;
 import android.view.View;
+import com.android.systemui.plugins.BcSmartspaceDataPlugin;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public final /* synthetic */ class BcSmartspaceView$$ExternalSyntheticLambda1 implements Runnable {
     public /* synthetic */ BcSmartspaceView f$0;
     public /* synthetic */ boolean f$1;
-    public /* synthetic */ int f$2;
     public /* synthetic */ View f$3;
-    public /* synthetic */ int f$4;
+    public /* synthetic */ Runnable f$5;
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // java.lang.Runnable
     public final void run() {
         BcSmartspaceView bcSmartspaceView = this.f$0;
         boolean z = this.f$1;
-        int i = this.f$2;
-        View view = this.f$3;
-        int i2 = this.f$4;
-        boolean z2 = BcSmartspaceView.DEBUG;
-        bcSmartspaceView.setTargets(z, i, view, i2);
+        Runnable runnable = this.f$5;
+        int size = bcSmartspaceView.mAdapter.smartspaceTargets.size();
+        PagerDots pagerDots = bcSmartspaceView.mPagerDots;
+        if (pagerDots != null) {
+            pagerDots.setNumPages(size, z);
+        }
+        for (int i = 0; i < size; i++) {
+            SmartspaceTarget targetAtPosition = bcSmartspaceView.mAdapter.getTargetAtPosition(i);
+            if (!bcSmartspaceView.mLastReceivedTargets.contains(targetAtPosition.getSmartspaceTargetId())) {
+                bcSmartspaceView.logSmartspaceEvent(targetAtPosition, i, BcSmartspaceEvent.SMARTSPACE_CARD_RECEIVED);
+                SmartspaceTargetEvent.Builder builder = new SmartspaceTargetEvent.Builder(8);
+                builder.setSmartspaceTarget(targetAtPosition);
+                SmartspaceAction baseAction = targetAtPosition.getBaseAction();
+                if (baseAction != null) {
+                    builder.setSmartspaceActionId(baseAction.getId());
+                }
+                BcSmartspaceDataPlugin bcSmartspaceDataPlugin = bcSmartspaceView.mDataProvider;
+                if (bcSmartspaceDataPlugin != null) {
+                    bcSmartspaceDataPlugin.getEventNotifier().notifySmartspaceEvent(builder.build());
+                }
+            }
+        }
+        bcSmartspaceView.mLastReceivedTargets.clear();
+        bcSmartspaceView.mLastReceivedTargets.addAll((Collection) bcSmartspaceView.mAdapter.smartspaceTargets.stream().map(new BcSmartspaceView$$ExternalSyntheticLambda7()).collect(Collectors.toList()));
+        if (runnable != null) {
+            runnable.run();
+        }
     }
 }

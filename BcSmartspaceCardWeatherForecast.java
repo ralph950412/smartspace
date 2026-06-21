@@ -18,22 +18,20 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInf
 import java.lang.invoke.VarHandle;
 import java.util.Locale;
 
-/* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
-/* loaded from: classes2.dex */
+/* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
+/* loaded from: classes3.dex */
 public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
     public static final /* synthetic */ int $r8$clinit = 0;
 
-    /* compiled from: go/retraceme b71a7f1f70117f8c58f90def809cf7784fe36a4a686923e2526fc7de282d885a */
+    /* compiled from: go/retraceme 109b9d95419d40ed7f94ba06f2e494aa100aa2b80b21457e78a8af5d54598634 */
     public interface ItemUpdateFunction {
         void update(View view, int i);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public BcSmartspaceCardWeatherForecast(Context context) {
         super(context);
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
@@ -67,7 +65,6 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
         }
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final boolean setSmartspaceActions(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
         boolean z;
@@ -117,7 +114,6 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
         return true;
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // com.google.android.systemui.smartspace.BcSmartspaceCardSecondary
     public final void setTextColor(int i) {
         BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2 bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2 = new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2(0);
@@ -130,7 +126,6 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
         updateFields(bcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda22, 4, R.id.timestamp, "timestamp");
     }
 
-    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     public final void updateFields(ItemUpdateFunction itemUpdateFunction, int i, int i2, String str) {
         if (getChildCount() < 4) {
             Log.w("BcSmartspaceCardWeatherForecast", String.format(Locale.US, MouseWheelScrollingLogic$$ExternalSyntheticOutline0.m("Missing %d ", str, " view(s) to update."), Integer.valueOf(4 - getChildCount())));
